@@ -9,7 +9,7 @@ import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
-
+    // commit test
     @Override
     public void start(Stage stage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("/project/pharmacyv1/Dashboard.fxml"));
