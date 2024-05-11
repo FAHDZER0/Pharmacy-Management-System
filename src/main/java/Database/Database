@@ -1,0 +1,264 @@
+#Xampp DB Creator#
+DROP TABLE IF EXISTS Sell;
+DROP TABLE IF EXISTS Distribute;
+DROP TABLE IF EXISTS Supply;
+DROP TABLE IF EXISTS Buy;
+DROP TABLE IF EXISTS Market;
+DROP TABLE IF EXISTS Purchase;
+DROP TABLE IF EXISTS Provide;
+DROP TABLE IF EXISTS Order_;
+DROP TABLE IF EXISTS Arrange;
+DROP TABLE IF EXISTS Deal_With;
+DROP TABLE IF EXISTS Help;
+DROP TABLE IF EXISTS Cosmetics;
+DROP TABLE IF EXISTS Stocks;
+DROP TABLE IF EXISTS Medications;
+DROP TABLE IF EXISTS Transactions;
+DROP TABLE IF EXISTS Services;
+DROP TABLE IF EXISTS Retrieves;
+DROP TABLE IF EXISTS Suppliers_Phone;
+DROP TABLE IF EXISTS Suppliers_Address;
+DROP TABLE IF EXISTS Suppliers_Email;
+DROP TABLE IF EXISTS Suppliers;
+DROP TABLE IF EXISTS Customers_Phone;
+DROP TABLE IF EXISTS Customers_Address;
+DROP TABLE IF EXISTS Customers_Email;
+DROP TABLE IF EXISTS Customers_Insurance_Info;
+DROP TABLE IF EXISTS Customers;
+DROP TABLE IF EXISTS Staff_phone;
+DROP TABLE IF EXISTS Staff_Address;
+DROP TABLE IF EXISTS Staff_Email;
+DROP TABLE IF EXISTS Staff_Scientific_Degree;
+DROP TABLE IF EXISTS Staff;
+
+CREATE TABLE Staff (
+    St_ID INT PRIMARY KEY AUTO_INCREMENT,
+    St_Name VARCHAR(255),
+	St_SSN VARCHAR(20),
+	St_Gender CHAR(7),
+    St_Date_Of_Birth DATE,
+	St_Role VARCHAR(30),
+    St_Hire_Date DATE NOT NULL,
+	St_Position VARCHAR(50),
+    St_Salary DECIMAL(10, 3)
+);
+CREATE TABLE Staff_Scientific_Degree(
+    St_S_ID INT ,
+	St_S_Scientific_Degree VARCHAR(60),
+	PRIMARY KEY(St_S_ID, St_S_Scientific_Degree),
+	FOREIGN KEY(St_S_ID) REFERENCES Staff(St_ID)
+);
+CREATE TABLE Staff_Email(
+   St_E_ID INT,
+   St_E_Email VARCHAR(255),
+   PRIMARY KEY(St_E_ID, St_E_Email),
+   FOREIGN KEY(St_E_ID) REFERENCES Staff(St_ID)
+);
+CREATE TABLE Staff_Address(
+   St_A_ID INT,
+   St_A_Address VARCHAR(255),
+   PRIMARY KEY(St_A_ID, St_A_Address),
+   FOREIGN KEY(St_A_ID) REFERENCES Staff(St_ID)
+);
+CREATE TABLE Staff_phone(
+   St_P_ID INT,
+   St_P_Phone VARCHAR(20),
+   PRIMARY KEY(St_P_ID, St_P_Phone),
+   FOREIGN KEY(St_P_ID) REFERENCES Staff(St_ID)
+);
+
+CREATE TABLE Customers (
+    C_ID INT PRIMARY KEY AUTO_INCREMENT,
+    C_Name VARCHAR(255) NOT NULL,
+	C_SSN VARCHAR(20),
+	C_Gender CHAR(10),
+    C_Date_Of_Birth DATE
+);
+CREATE TABLE Customers_Insurance_Info(
+    C_I_ID INT,
+	C_I_Insurance_Information VARCHAR(30),
+	PRIMARY KEY(C_I_ID, C_I_Insurance_Information),
+    FOREIGN KEY(C_I_ID) REFERENCES Customers(C_ID)
+);
+CREATE TABLE Customers_Email(
+    C_E_ID INT,
+	C_E_Email VARCHAR(30),
+	PRIMARY KEY(C_E_ID, C_E_Email),
+    FOREIGN KEY(C_E_ID) REFERENCES Customers(C_ID)
+);
+CREATE TABLE Customers_Address(
+    C_A_ID INT,
+	C_A_Address VARCHAR(30),
+	PRIMARY KEY(C_A_ID, C_A_Address),
+    FOREIGN KEY(C_A_ID) REFERENCES Customers(C_ID)
+);
+CREATE TABLE Customers_Phone(
+    C_P_ID INT,
+	C_P_Phone INT,
+	PRIMARY KEY(C_P_ID, C_P_Phone),
+    FOREIGN KEY(C_P_ID) REFERENCES Customers(C_ID)
+);
+CREATE TABLE Suppliers (
+    Su_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Su_Name CHAR(20),
+    Su_Products_Supplied VARCHAR(255)
+);
+CREATE TABLE Suppliers_Email (
+    Su_E_ID INT ,
+    Su_E_Email VARCHAR(50),
+	PRIMARY KEY(Su_E_ID, Su_E_Email),
+    FOREIGN KEY(Su_E_ID) REFERENCES Suppliers(Su_ID)
+);
+CREATE TABLE Suppliers_Address(
+    Su_A_ID INT ,
+    Su_A_Address VARCHAR(50),
+	PRIMARY KEY(Su_A_ID, Su_A_Address),
+    FOREIGN KEY(Su_A_ID) REFERENCES Suppliers(Su_ID)
+);
+CREATE TABLE Suppliers_Phone(
+    Su_P_ID INT ,
+    Su_P_Phone INT,
+	PRIMARY KEY(Su_P_ID, Su_P_Phone),
+    FOREIGN KEY(Su_P_ID) REFERENCES Suppliers(Su_ID)
+);
+
+CREATE TABLE Retrieves (
+    R_ID INT PRIMARY KEY AUTO_INCREMENT,
+    R_Name VARCHAR(255),
+    R_Type VARCHAR(100),
+    R_Date DATE,
+	R_SU_ID INT,
+	FOREIGN KEY(R_SU_ID) REFERENCES Suppliers(Su_ID)
+);
+CREATE TABLE Services(
+    Se_ID INT PRIMARY KEY AUTO_INCREMENT,
+    Se_Name CHAR(30),
+	Se_Duration INT,
+	Se_Type VARCHAR(90),
+	Se_Location VARCHAR(40),
+    Se_Cost DECIMAL(9, 3)
+);
+CREATE TABLE Transactions (
+    T_ID INT PRIMARY KEY AUTO_INCREMENT,
+    T_Type VARCHAR(70) NOT NULL,
+    T_Payment_Type VARCHAR(30),
+    T_Medications_ID INT,
+    T_Quantity INT,
+	T_Time TIME,
+	T_Date DATE,
+    T_Total_Amount DECIMAL(13, 3),
+	T_C_ID INT,
+	T_ST_ID INT,
+	FOREIGN KEY(T_C_ID) REFERENCES Customers(C_ID),
+	FOREIGN KEY(T_ST_ID) REFERENCES Staff(St_ID)
+);
+CREATE TABLE Medications (
+    M_ID INT PRIMARY KEY AUTO_INCREMENT,
+    M_Name VARCHAR(100),
+    M_Manufacturer VARCHAR(30),
+    M_Price DECIMAL(15, 2),
+    M_Quantity INT,
+    M_ExpiryDate DATE,
+    M_Description VARCHAR(60)
+);
+CREATE TABLE Stocks (
+    S_Item_ID INT PRIMARY KEY AUTO_INCREMENT,
+	S_BatchSerial_No INT,
+	S_Supplier_Info VARCHAR(255) NOT NULL,
+	S_Quantity INT,
+	S_ReorderPoint INT,
+	S_Purchase_Date DATE,
+    S_Purchase_Price DECIMAL(10, 2),
+    S_Location VARCHAR(30),
+	S_ST_ID INT,
+	S_M_ID INT,
+	FOREIGN KEY(S_ST_ID) REFERENCES Staff(St_ID),
+	FOREIGN KEY(S_M_ID) REFERENCES Medications(M_ID)
+);
+CREATE TABLE Cosmetics (
+    Co_Code INT PRIMARY KEY AUTO_INCREMENT,
+    Co_Name VARCHAR(100),
+	Co_Type VARCHAR(100),
+	Co_Quantity INT,
+    Co_Price DECIMAL(10, 2),
+	Co_Expire_Date DATE,
+    Co_Company_Name VARCHAR(100)
+);
+CREATE TABLE Help(
+   C_ID INT,
+   St_ID INT,
+   PRIMARY KEY(C_ID, St_ID),
+   FOREIGN KEY(C_ID) REFERENCES Customers(C_ID),
+   FOREIGN KEY(St_ID) REFERENCES Staff(St_ID)
+);
+CREATE TABLE Deal_With(
+   Su_ID INT,
+   St_ID INT,
+   PRIMARY KEY(Su_ID, St_ID),
+   FOREIGN KEY(Su_ID) REFERENCES Suppliers(Su_ID
+),
+   FOREIGN KEY(St_ID) REFERENCES Staff(St_ID)
+);
+CREATE TABLE Arrange(
+  R_ID INT,
+  St_ID INT,
+  PRIMARY KEY(R_ID, St_ID),
+  FOREIGN KEY(R_ID) REFERENCES Retrieves(R_ID),
+  FOREIGN KEY(St_ID) REFERENCES Staff(St_ID)
+);
+CREATE TABLE  Order_(
+  Se_ID INT,
+  C_ID INT,
+  PRIMARY KEY(Se_ID, C_ID),
+  FOREIGN KEY(Se_ID) REFERENCES Services(Se_ID),
+  FOREIGN KEY(C_ID) REFERENCES Customers(C_ID)
+);
+CREATE TABLE Provide(
+  Se_ID INT,
+  St_ID INT,
+  PRIMARY KEY(Se_ID, St_ID),
+  FOREIGN KEY(Se_ID) REFERENCES Services(Se_ID),
+  FOREIGN KEY(St_ID) REFERENCES Staff(St_ID)
+);
+CREATE TABLE  Purchase(
+  M_ID INT,
+  C_ID INT,
+  PRIMARY KEY(M_ID, C_ID),
+  FOREIGN KEY(M_ID) REFERENCES Medications(M_ID),
+  FOREIGN KEY(C_ID) REFERENCES Customers(C_ID)
+);
+CREATE TABLE Market(
+  M_ID INT,
+  St_ID INT,
+  PRIMARY KEY(M_ID, St_ID),
+  FOREIGN KEY(M_ID) REFERENCES Medications(M_ID),
+  FOREIGN KEY(St_ID) REFERENCES Staff(St_ID)
+);
+CREATE TABLE  Buy(
+  Co_Code INT,
+  C_ID INT,
+  PRIMARY KEY(Co_Code, C_ID),
+  FOREIGN KEY(Co_Code) REFERENCES Cosmetics(Co_Code),
+  FOREIGN KEY(C_ID) REFERENCES Customers(C_ID)
+);
+CREATE TABLE Supply(
+  Su_ID INT,
+  M_ID INT,
+  PRIMARY KEY(Su_ID, M_ID),
+  FOREIGN KEY(Su_ID) REFERENCES Suppliers(Su_ID),
+  FOREIGN KEY(M_ID) REFERENCES Medications(M_ID)
+);
+CREATE TABLE Distribute(
+  Su_ID INT,
+  Co_Code INT,
+  PRIMARY KEY(Su_ID, Co_Code),
+  FOREIGN KEY(Su_ID) REFERENCES Suppliers(Su_ID),
+  FOREIGN KEY(Co_Code) REFERENCES Cosmetics(Co_Code)
+);
+CREATE TABLE Sell(
+  St_ID INT,
+  Co_Code INT,
+  PRIMARY KEY(St_ID, Co_Code),
+  FOREIGN KEY(St_ID) REFERENCES Staff(St_ID),
+  FOREIGN KEY(Co_Code) REFERENCES Cosmetics(Co_Code)
+);

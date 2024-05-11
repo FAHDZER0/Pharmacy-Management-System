@@ -1,0 +1,181 @@
+-- Drop tables if they exist
+DROP TABLE IF EXISTS PurchaseReturnDetails;
+DROP TABLE IF EXISTS PurchaseReturns;
+DROP TABLE IF EXISTS SalesReturnDetails;
+DROP TABLE IF EXISTS SalesReturns;
+DROP TABLE IF EXISTS SalesInvoiceDetails;
+DROP TABLE IF EXISTS SalesInvoices;
+DROP TABLE IF EXISTS PurchaseInvoiceDetails;
+DROP TABLE IF EXISTS PurchaseInvoices;
+DROP TABLE IF EXISTS Stock;
+DROP TABLE IF EXISTS Employees;
+DROP TABLE IF EXISTS Suppliers;
+DROP TABLE IF EXISTS Products;
+DROP TABLE IF EXISTS Medications;
+DROP TABLE IF EXISTS Customers;
+
+-- Create Customers table
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    CustomerName VARCHAR(100),
+    CurrentBalance DECIMAL(10, 2),
+    PharmacyAssociation VARCHAR(100),
+    CustomerAddress VARCHAR(255),
+    PersonalPhoneNumber VARCHAR(20),
+    HealthInsuranceNumber VARCHAR(20),
+    CustomerDebt DECIMAL(10, 2)
+);
+
+-- Create Medications table
+CREATE TABLE Medications (
+    MedicationID INT PRIMARY KEY,
+    MedicationBarcode VARCHAR(50),
+    ArabicName VARCHAR(100),
+    EnglishName VARCHAR(100),
+    InternationalCode VARCHAR(50),
+    ActiveIngredient VARCHAR(100),
+    Manufacturer VARCHAR(100),
+    ExpiryDate DATE,
+    Unit VARCHAR(50),
+    Quantity INT,
+    SellingPrice DECIMAL(10, 2),
+    PurchasePrice DECIMAL(10, 2),
+    ReorderLevel INT,
+    MedicationType VARCHAR(100)
+);
+
+-- Create Products table
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY,
+    ProductBarcode VARCHAR(50),
+    ArabicName VARCHAR(100),
+    EnglishName VARCHAR(100),
+    SellingPrice DECIMAL(10, 2),
+    PurchasePrice DECIMAL(10, 2),
+    Quantity INT,
+    Manufacturer VARCHAR(100),
+    ProductType VARCHAR(100),
+    ExpiryDate DATE,
+    ReorderLevel INT
+);
+
+-- Create Suppliers table
+CREATE TABLE Suppliers (
+    SupplierID INT PRIMARY KEY,
+    SupplierName VARCHAR(100),
+    SupplierPhone VARCHAR(20),
+    SupplierAddress VARCHAR(255),
+    CurrentBalance DECIMAL(10, 2),
+    MaximumLimit DECIMAL(10, 2),
+    SupplierEmail VARCHAR(100),
+    ParentCompany VARCHAR(100),
+    SupplierDebt DECIMAL(10, 2)
+);
+
+-- Create Employees table
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    EmployeeName VARCHAR(100),
+    EmployeePhone VARCHAR(20),
+    EmployeeAddress VARCHAR(255),
+    JobTitle VARCHAR(100),
+    DateOfBirth DATE,
+    EmploymentStartDate DATE,
+    Salary DECIMAL(10, 2),
+    HealthInsuranceNumber VARCHAR(20),
+    EducationalDegree VARCHAR(100),
+    MilitaryStatus VARCHAR(50)
+);
+
+-- Create Stock table
+CREATE TABLE Stock (
+    StockID INT PRIMARY KEY,
+    StockType VARCHAR(50),
+    Location VARCHAR(100),
+    ReorderPoint INT,
+    QuantityInStock INT
+);
+
+-- Create PurchaseInvoices table
+CREATE TABLE PurchaseInvoices (
+    PurchaseInvoiceID INT PRIMARY KEY,
+    PurchaseDate DATE,
+    SupplierID INT,
+    TotalCost DECIMAL(10, 2),
+    FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID)
+);
+
+-- Create PurchaseInvoiceDetails table
+CREATE TABLE PurchaseInvoiceDetails (
+    PurchaseInvoiceDetailID INT PRIMARY KEY,
+    PurchaseInvoiceID INT,
+    ProductType VARCHAR(50),
+    Quantity INT,
+    ExpiryDate DATE,
+    FOREIGN KEY (PurchaseInvoiceID) REFERENCES PurchaseInvoices(PurchaseInvoiceID)
+);
+
+-- Create SalesInvoices table
+CREATE TABLE SalesInvoices (
+    SalesInvoiceID INT PRIMARY KEY,
+    CustomerID INT,
+    TotalSaleAmount DECIMAL(10, 2),
+    SaleStatus VARCHAR(50),
+    SalesDate DATE,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+
+-- Create SalesInvoiceDetails table
+CREATE TABLE SalesInvoiceDetails (
+    SalesInvoiceDetailID INT PRIMARY KEY,
+    SalesInvoiceID INT,
+    ProductType VARCHAR(50),
+    QuantitySold INT,
+    FOREIGN KEY (SalesInvoiceID) REFERENCES SalesInvoices(SalesInvoiceID)
+);
+
+-- Create SalesReturns table
+CREATE TABLE SalesReturns (
+    SalesReturnID INT PRIMARY KEY,
+    CustomerID INT,
+    SalesInvoiceID INT,
+    ReturnDate DATE,
+    TotalReturnAmount DECIMAL(10, 2),
+    Notes TEXT,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID),
+    FOREIGN KEY (SalesInvoiceID) REFERENCES SalesInvoices(SalesInvoiceID)
+);
+
+-- Create SalesReturnDetails table
+CREATE TABLE SalesReturnDetails (
+    SalesReturnDetailID INT PRIMARY KEY,
+    SalesReturnID INT,
+    SalesInvoiceDetailID INT,
+    ReturnDate DATE,
+    RefundedAmount DECIMAL(10, 2),
+    QuantityReturned INT,
+    FOREIGN KEY (SalesReturnID) REFERENCES SalesReturns(SalesReturnID),
+    FOREIGN KEY (SalesInvoiceDetailID) REFERENCES SalesInvoiceDetails(SalesInvoiceDetailID)
+);
+
+-- Create PurchaseReturns table
+CREATE TABLE PurchaseReturns (
+    PurchaseReturnID INT PRIMARY KEY,
+    SupplierID INT,
+    PurchaseInvoiceID INT,
+    ReturnDate DATE,
+    TotalReturnAmount DECIMAL(10, 2),
+    Notes TEXT,
+    FOREIGN KEY (SupplierID) REFERENCES Suppliers(SupplierID),
+    FOREIGN KEY (PurchaseInvoiceID) REFERENCES PurchaseInvoices(PurchaseInvoiceID)
+);
+
+-- Create PurchaseReturnDetails table
+CREATE TABLE PurchaseReturnDetails (
+    PurchaseReturnDetailID INT PRIMARY KEY,
+    PurchaseReturnID INT,
+    ProductType VARCHAR(50),
+    QuantityReturned INT,
+    RefundedAmount DECIMAL(10, 2),
+    FOREIGN KEY (PurchaseReturnID) REFERENCES PurchaseReturns(PurchaseReturnID)
+);

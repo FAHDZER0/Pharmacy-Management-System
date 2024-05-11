@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="1244.0" prefWidth="1478.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.pharmacyv1.Categories.ReportAbouTManifuctrurerCampaniesController">
+   <center>
+      <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="Categories1Title" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Report About Manufacturer Companies - تقرير عن انواع الشركات المصنعة" textAlignment="CENTER">
+               <font>
+                  <Font name="System Bold" size="50.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="200.0" />
+            <SplitPane dividerPositions="0.4223901098901099" prefHeight="1292.0" prefWidth="1458.0">
+               <items>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="0.0" spacing="15.0">
+                           <children>
+                              <Button fx:id="PrintButton" mnemonicParsing="false" prefHeight="51.0" prefWidth="110.0" text="Print">
+                                 <font>
+                                    <Font name="System Bold" size="18.0" />
+                                 </font>
+                              </Button>
+                              <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
+                              <ComboBox fx:id="choice1" prefHeight="35.0" prefWidth="316.0" stylesheets="@../find.css">
+                                 <HBox.margin>
+                                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                 </HBox.margin>
+                              </ComboBox>
+                           </children>
+                        </HBox>
+                        <TableView fx:id="ItemListTableView" editable="true" prefHeight="1130.0" prefWidth="838.0" />
+                     </children>
+                  </VBox>
+                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <PieChart fx:id="ManufacturerPiechart" prefHeight="838.0" prefWidth="838.0" />
+                     </children>
+                  </VBox>
+               </items>
+            </SplitPane>
+         </children>
+         <BorderPane.margin>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </BorderPane.margin>
+      </VBox>
+   </center>
+</BorderPane>
