@@ -20,12 +20,6 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.show();
 
-//        Parent root = FXMLLoader.load(getClass().getResource("/project/pharmacyv1/Login.fxml"));
-//        Scene scene = new Scene(root);
-//        stage.setScene(scene);
-//        stage.initStyle(StageStyle.UNDECORATED);
-//        stage.show();
-
     }
 
     public static void main(String[] args) {

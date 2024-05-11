@@ -20,7 +20,7 @@
     </right>
     <center>
         <AnchorPane prefHeight="500.0" prefWidth="304.0" BorderPane.alignment="CENTER">
-            <Button fx:id="LoginButton" layoutX="95.0" layoutY="306.0" mnemonicParsing="false" onAction="#LoginButtonAction" prefHeight="35.0" prefWidth="214.0" style="-fx-background-color: linear-gradient(to bottom right, #044F02, E3CE0A); -fx-background-radius: 10;" text="Login" textFill="#fffdfd">
+            <Button fx:id="LoginButton" layoutX="95.0" layoutY="306.0" mnemonicParsing="false" onAction="#LoginButtonAction" prefHeight="35.0" prefWidth="214.0" style="-fx-background-color: linear-gradient(to bottom right, #044F02, #E3CE0A); -fx-background-radius: 10;" text="Login" textFill="#fffdfd">
             <font>
                <Font name="System Bold" size="17.0" />
             </font></Button>
@@ -40,7 +40,7 @@
                     <Font name="Arial" size="26.0" />
                 </font>
             </Label>
-            <Button mnemonicParsing="false" onAction="#CloseButtonAction" style="-fx-background-color: hidden;">
+            <Button mnemonicParsing="false" onAction="#CloseButtonAction" style="-fx-background-color: transparent;">
                 <graphic>
                     <ImageView fitHeight="56.0" fitWidth="81.0" pickOnBounds="true" preserveRatio="true">
                         <Image url="@../../Images/logo.png" />

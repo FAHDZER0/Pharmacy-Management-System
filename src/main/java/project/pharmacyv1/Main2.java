@@ -11,15 +11,6 @@ public class Main2 extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("/project/pharmacyv1/Dashboard.fxml"));
-//        Scene scene = new Scene(root,1330,740);
-//        stage.setMinWidth(1510);
-//        stage.setMinHeight(780);
-//        stage.setTitle("Pharmacy Management System");
-//        stage.setMaximized(true);
-//        stage.setScene(scene);
-//        stage.show();
-
         Parent root = FXMLLoader.load(getClass().getResource("/project/pharmacyv1/Login.fxml"));
         Scene scene = new Scene(root);
         stage.setScene(scene);
