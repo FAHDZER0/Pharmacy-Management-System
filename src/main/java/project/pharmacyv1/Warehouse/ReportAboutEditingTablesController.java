@@ -45,10 +45,10 @@ public class ReportAboutEditingTablesController {
         ObservableList<Map<String, Object>> data = FXCollections.observableArrayList();
 
         // Read the data from the "Log" text file
-        Path path = Paths.get("src/main/java/Database/Log");
+        Path path = Paths.get("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log");
         try (Stream<String> lines = Files.lines(path)) {
             lines.forEach(line -> {
-                Pattern pattern = Pattern.compile("User (.*?) edited item (.*?) at (.*?)$");
+                Pattern pattern = Pattern.compile("User (.*?) edited (.*?) at (.*?)$");
                 Matcher matcher = pattern.matcher(line);
                 if (matcher.find()) {
                     Map<String, Object> row = new HashMap<>();
@@ -94,10 +94,10 @@ public class ReportAboutEditingTablesController {
         Map<String, Integer> employeeEditCounts = new HashMap<>();
 
         // Read the data from the "Log" text file
-        Path path = Paths.get("src/main/java/Database/Log");
+        Path path = Paths.get("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log");
         try (Stream<String> lines = Files.lines(path)) {
             lines.forEach(line -> {
-                Pattern pattern = Pattern.compile("User (.*?) edited item (.*?) at (.*?)$");
+                Pattern pattern = Pattern.compile("User (.*?) edited (.*?) at (.*?)$");
                 Matcher matcher = pattern.matcher(line);
                 if (matcher.find()) {
                     // Get the employee name

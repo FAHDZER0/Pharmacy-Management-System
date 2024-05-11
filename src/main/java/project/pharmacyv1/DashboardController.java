@@ -663,7 +663,7 @@ public class DashboardController {
         db.isLogedIn = false;
         //write in Log file that user "name" logged in at "time"
         try {
-            FileWriter writer = new FileWriter("src/main/java/Database/Log", true);
+            FileWriter writer = new FileWriter("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log", true);
             Date date = new Date();
             writer.write("User " + db.logedInUser + " logged out at " + date + "\n");
             writer.close();
