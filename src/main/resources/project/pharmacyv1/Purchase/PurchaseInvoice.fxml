@@ -101,12 +101,12 @@
                                                             <Insets right="20.0" />
                                                          </padding>
                                                       </Label>
-                                                      <TextField onMouseClicked="#doublClick" prefHeight="25.0" prefWidth="58.0">
+                                                      <TextField fx:id="SupplierCodeTextField" onMouseClicked="#doublClick" prefHeight="25.0" prefWidth="58.0">
                                                          <HBox.margin>
                                                             <Insets right="5.0" />
                                                          </HBox.margin>
                                                       </TextField>
-                                                      <Label prefHeight="28.0" prefWidth="192.0" style="-fx-border-color: grey; -fx-background-color: lightgrey;">
+                                                      <Label fx:id="SupplierNameLabel" prefHeight="28.0" prefWidth="192.0" style="-fx-border-color: grey; -fx-background-color: lightgrey;">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>
@@ -264,9 +264,6 @@
                                     <TableColumn prefWidth="102.0" text="Discount Percentage" />
                                     <TableColumn prefWidth="102.0" text="Discount Percebtage" />
                                  </columns>
-                                 <columnResizePolicy>
-                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                                 </columnResizePolicy>
                               </TableView>
                                     </children></VBox>
                             </content>
