@@ -117,7 +117,7 @@
                                                             <Insets right="5.0" />
                                                          </HBox.margin>
                                                       </Label>
-                                                      <Label prefHeight="28.0" prefWidth="89.0" style="-fx-border-color: grey; -fx-background-color: lightgrey;">
+                                                      <Label fx:id="SupplierParentCompany" prefHeight="28.0" prefWidth="129.0" style="-fx-border-color: grey; -fx-background-color: lightgrey;">
                                                          <font>
                                                             <Font name="System Bold" size="14.0" />
                                                          </font>

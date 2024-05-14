@@ -82,12 +82,13 @@ public class FindSupplier_PopUpController {
 
                 // getting the selected row from the table view and passing it to the parent controller
                 Map<String, Object> selectedRow = SuppliersTableView.getSelectionModel().getSelectedItem();
-                if (selectedRow != null) {
-                        PIC.setSupplier(selectedRow);
-                        confirm.getScene().getWindow().hide();
-                }
+                PIC.setSupplier(selectedRow);
+                confirm.getScene().getWindow().hide();
         }
 
+        public void setPurchaseInvoiceController(PurchaseInvoiceController PIC) {
+                this.PIC = PIC;
+        }
 
         public void initialize() {
                 RefreshButtonAction();
