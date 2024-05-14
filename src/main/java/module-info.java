@@ -6,9 +6,10 @@ module project.pharmacyv1 {
     requires TrayTester;
     requires jdk.compiler;
 
-
-    opens project.pharmacyv1 to javafx.fxml;
+    exports project.pharmacyv1.Customers to javafx.fxml;
+    opens project.pharmacyv1.Customers to javafx.fxml;
     exports project.pharmacyv1;
+    opens project.pharmacyv1 to javafx.fxml; // Add this line
     exports project.pharmacyv1.Categories;
     opens project.pharmacyv1.Categories to javafx.fxml;
     exports project.pharmacyv1.Purchase;

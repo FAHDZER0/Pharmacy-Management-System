@@ -115,9 +115,9 @@ public class AddCategoriesController {
 
     public void initialize() {
 
-    List<Map<String, Object>> allItems = db.SelectQuery("medications");
-    int lastItemId = allItems.isEmpty() ? 0 : Integer.parseInt(allItems.get(allItems.size() - 1).get("MedicationID").toString());
-    ItemCode.setText(Integer.toString(lastItemId + 1));
+        List<Map<String, Object>> allItems = db.SelectQuery("medications");
+        int lastItemId = allItems.isEmpty() ? 0 : Integer.parseInt(allItems.get(allItems.size() - 1).get("MedicationID").toString());
+        ItemCode.setText(Integer.toString(lastItemId + 1));
     }
 
 }

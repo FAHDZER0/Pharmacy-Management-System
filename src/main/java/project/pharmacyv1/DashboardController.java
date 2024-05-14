@@ -68,7 +68,7 @@ public class DashboardController {
     @FXML
     private Button SalesInvoice_side;
     @FXML
-    private Button Customers_side;
+    private Button ListOfCustomer_side;
     @FXML
     private Button cashSupplay_side;
 
@@ -228,14 +228,16 @@ public class DashboardController {
 
         if (MenuItemName.equalsIgnoreCase("SalesInvoice") || MenuItemName.equalsIgnoreCase("FindItem_PopUp") ){
             MenuItemName = "Sales/" + MenuItemName;
-        } else if (MenuItemName.equals("PurchaseInvoice")) {
+        } else if (MenuItemName.equalsIgnoreCase("PurchaseInvoice")) {
             MenuItemName = "Purchase/" + MenuItemName;
-        } else if (MenuItemName.equals("SuppliersList") || MenuItemName.equalsIgnoreCase("FindSupplier_PopUp") || MenuItemName.equalsIgnoreCase("ReportAboutSuppliers") || MenuItemName.equalsIgnoreCase("EditSupplierPrice")){
+        } else if (MenuItemName.equalsIgnoreCase("SuppliersList") || MenuItemName.equalsIgnoreCase("FindSupplier_PopUp") || MenuItemName.equalsIgnoreCase("ReportAboutSuppliers") || MenuItemName.equalsIgnoreCase("EditSupplierPrice")){
             MenuItemName = "Suppliers/" + MenuItemName;
-        } else if (MenuItemName.equals("ListOfItem") || MenuItemName.equalsIgnoreCase("ListOfProducts") || MenuItemName.equals("ModifyItemSName") || MenuItemName.equals("ReportAbouTManifuctrurerCampanies")) {
+        } else if (MenuItemName.equalsIgnoreCase("ListOfItem") || MenuItemName.equalsIgnoreCase("ListOfProducts") || MenuItemName.equals("ModifyItemSName") || MenuItemName.equals("ReportAbouTManifuctrurerCampanies")) {
             MenuItemName = "Categories/" + MenuItemName;
-        } else if(MenuItemName.equals("EditCountQuantity") || MenuItemName.equalsIgnoreCase("InnerWarehouse") || MenuItemName.equalsIgnoreCase("ReportAboutEditingTables") || MenuItemName.equalsIgnoreCase("ReportAboutQuantityOfMedicineinStockExp") || MenuItemName.equalsIgnoreCase("ReportAboutExpiredItemsinStrock")){
+        } else if(MenuItemName.equalsIgnoreCase("EditCountQuantity") || MenuItemName.equalsIgnoreCase("InnerWarehouse") || MenuItemName.equalsIgnoreCase("ReportAboutEditingTables") || MenuItemName.equalsIgnoreCase("ReportAboutQuantityOfMedicineinStockExp") || MenuItemName.equalsIgnoreCase("ReportAboutExpiredItemsinStrock")){
             MenuItemName = "Warehouses/" + MenuItemName;
+        } else if(MenuItemName.equalsIgnoreCase("ListOfCustomer")){
+            MenuItemName = "Customer/" + MenuItemName;
         }
 
         removeFromCenter();
@@ -342,7 +344,7 @@ public class DashboardController {
     @FXML
     private MenuItem Purchase6;
     @FXML
-    private MenuItem Customer1;
+    private MenuItem ListOfCustomer;
     @FXML
     private MenuItem Customer2;
     @FXML
@@ -447,7 +449,7 @@ public class DashboardController {
             ListOfItem_side.setTooltip(createCustomTooltip("الأصناف"));
             PurchaseInvoice_side.setTooltip(createCustomTooltip("فاتورة شراء"));
             SalesInvoice_side.setTooltip(createCustomTooltip("فاتورة بيع"));
-            Customers_side.setTooltip(createCustomTooltip("العملاء"));
+            ListOfCustomer_side.setTooltip(createCustomTooltip("العملاء"));
             cashSupplay_side.setTooltip(createCustomTooltip("توريد نقدية"));
             Language = "ar";
 
@@ -460,7 +462,7 @@ public class DashboardController {
             ListOfItem_side.setTooltip(createCustomTooltip("Categories"));
             PurchaseInvoice_side.setTooltip(createCustomTooltip("Purchase Invoice"));
             SalesInvoice_side.setTooltip(createCustomTooltip("Sales Invoice"));
-            Customers_side.setTooltip(createCustomTooltip("Customers"));
+            ListOfCustomer_side.setTooltip(createCustomTooltip("Customers"));
             cashSupplay_side.setTooltip(createCustomTooltip("Cash Supply"));
             Language = "en";
         }
@@ -506,7 +508,7 @@ public class DashboardController {
         Purchase4.setText(LS.il8n("purchase4",language));
         Purchase5.setText(LS.il8n("purchase5",language));
         Purchase6.setText(LS.il8n("purchase6",language));
-        Customer1.setText(LS.il8n("customer1",language));
+        ListOfCustomer.setText(LS.il8n("customer1",language));
         Customer2.setText(LS.il8n("customer2",language));
         Customer5.setText(LS.il8n("customer5",language));
         SalesInvoice.setText(LS.il8n("sales1",language));
@@ -614,7 +616,7 @@ public class DashboardController {
         ListOfItem_side.setTooltip(createCustomTooltip("Categories"));
         PurchaseInvoice_side.setTooltip(createCustomTooltip("Purchase Invoice"));
         SalesInvoice_side.setTooltip(createCustomTooltip("Sales Invoice"));
-        Customers_side.setTooltip(createCustomTooltip("Customers"));
+        ListOfCustomer_side.setTooltip(createCustomTooltip("Customers"));
         cashSupplay_side.setTooltip(createCustomTooltip("Cash Supply"));
 
         // Set hover effect for all buttons
@@ -632,7 +634,7 @@ public class DashboardController {
         setSideHoverEffect(Deficiencies_side);
         setSideHoverEffect(PurchaseInvoice_side);
         setSideHoverEffect(SalesInvoice_side);
-        setSideHoverEffect(Customers_side);
+        setSideHoverEffect(ListOfCustomer_side);
         setSideHoverEffect(cashSupplay_side);
         setSideHoverEffect(ListOfItem_side);
 

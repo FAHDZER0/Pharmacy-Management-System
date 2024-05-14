@@ -85,7 +85,7 @@
       </MenuButton>
       <MenuButton fx:id="CustomersMain" mnemonicParsing="false" style="-fx-background-color: transparent;" text="Customers">
         <items>
-          <MenuItem fx:id="Customer1" mnemonicParsing="false" text="Customer List (regular clients or companies)- قائمة العملاء(شركة اوعميل عادى)" />
+          <MenuItem fx:id="ListOfCustomer" mnemonicParsing="false" onAction="#setInCenter" text="Customer List (regular clients or companies)- قائمة العملاء(شركة اوعميل عادى)" />
           <MenuItem fx:id="Customer2" mnemonicParsing="false" text="Report by Customers - (تقرير بالعملاء)" />
           <MenuItem fx:id="Customer5" mnemonicParsing="false" text="Customer Account Statement - كشف حساب عميل" />
         </items>
@@ -111,7 +111,7 @@
       <MenuButton fx:id="GeneralAccountsMain" mnemonicParsing="false" style="-fx-background-color: transparent;" text="General Accounts">
         <items>
           <MenuItem fx:id="accounts2" mnemonicParsing="false" text="Create a cashier drawer - انشاء درج كاشير" />
-          <MenuItem fx:id="accounts3" disable="true" mnemonicParsing="false" text="Create a treasury - انشاء خزينة" />
+          <MenuItem fx:id="accounts3" mnemonicParsing="false" text="Create a treasury - انشاء خزينة" />
           <MenuItem fx:id="accounts4" disable="true" mnemonicParsing="false" text="Create a credit card account - انشاء حساب بطاقة ائتمان" />
           <SeparatorMenuItem mnemonicParsing="false" />
           <MenuItem fx:id="accounts5" disable="true" mnemonicParsing="false" text="Debit and credit accounts - حسابات الخصم و الاضافة" />
@@ -123,10 +123,10 @@
           <MenuItem fx:id="accounts10" disable="true" mnemonicParsing="false" text="Bank accounts report - تقرير حسابات بنكية" />
           <SeparatorMenuItem mnemonicParsing="false" />
           <MenuItem fx:id="accounts11" disable="true" mnemonicParsing="false" text="Account movement monthly - حركة الحساب شهري" />
-          <MenuItem fx:id="accounts12" disable="true" mnemonicParsing="false" text="A detailed monthly account movement report - تقرير حركة الحساب شهري تفصيلي" />
+          <MenuItem fx:id="accounts12" mnemonicParsing="false" text="A detailed monthly account movement report - تقرير حركة الحساب شهري تفصيلي" />
           <SeparatorMenuItem mnemonicParsing="false" />
           <MenuItem fx:id="accounts13" disable="true" mnemonicParsing="false" text="Daily restrictions report - تقرير القيود اليومية" />
-          <MenuItem fx:id="accounts14" disable="true" mnemonicParsing="false" text="Income List - قائمة الدخل" />
+          <MenuItem fx:id="accounts14" mnemonicParsing="false" text="Income List - قائمة الدخل" />
           <MenuItem fx:id="accounts15" disable="true" mnemonicParsing="false" text="Summary of the organization's financial position - ملخص الموقف المالي للمؤسسة" />
           <SeparatorMenuItem mnemonicParsing="false" />
           <MenuItem fx:id="accounts16" mnemonicParsing="false" text="Exchange cash - صرف نقدية" />
@@ -406,7 +406,7 @@
           </ImageView>
         </graphic>
       </Button>
-      <Button fx:id="Customers_side" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="ListOfCustomer_side" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setInCenter" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
         <font>
           <Font size="11.0" />
         </font>
