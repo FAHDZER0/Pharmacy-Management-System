@@ -13,15 +13,14 @@
     import javafx.fxml.FXML;
     import javafx.fxml.FXMLLoader;
     import javafx.scene.Scene;
-    import javafx.scene.control.Label;
-    import javafx.scene.control.TableColumn;
-    import javafx.scene.control.TableView;
-    import javafx.scene.control.TextField;
+    import javafx.scene.control.*;
     import javafx.scene.input.MouseButton;
     import javafx.scene.input.MouseEvent;
     import javafx.scene.layout.VBox;
+    import javafx.scene.text.Font;
     import javafx.stage.Modality;
     import javafx.stage.Stage;
+    import javafx.util.Duration;
     import project.pharmacyv1.DashboardController;
     import project.pharmacyv1.LogWriter;
 
@@ -68,6 +67,23 @@
 
     @FXML
     private Label InvoiceTotalValue;
+
+    @FXML
+    public Button newInvoiceButton;
+    @FXML
+    public Button SaveButton;
+    @FXML
+    public Button invoiceCommentButton;
+    @FXML
+    public Button AddItemButton;
+    @FXML
+    public Button NewItemButton ;
+    @FXML
+    public Button NewRowButton;
+    @FXML
+    public Button DeleteRowButton;
+    @FXML
+    public Button incompleteInvoiceButton;
 
     DB db = new DB();
     LogWriter log = new LogWriter();
@@ -238,6 +254,13 @@
         }
     }
 
+    private Tooltip createCustomTooltip(String text) {
+            Tooltip tooltip = new Tooltip(text);
+            tooltip.setFont(new Font("Arial", 15));
+            tooltip.setShowDelay(Duration.millis(100));
+            return tooltip;
+        }
+
     @FXML
     public void saveSalesInvoice(){
         System.out.println("Saving Sales Invoice");
@@ -282,9 +305,28 @@
 
         if(DC.Language.equals("en")){
             SalesInvoice.setText(LS.il8n("SalesTitle","en"));
+            newInvoiceButton.setTooltip(createCustomTooltip("New Invoice"));
+            AddItemButton.setTooltip(createCustomTooltip("Add Item"));
+            NewItemButton.setTooltip(createCustomTooltip("New Item"));
+            NewRowButton.setTooltip(createCustomTooltip("New Row"));
+            DeleteRowButton.setTooltip(createCustomTooltip("Delete Row"));
+            SaveButton.setTooltip(createCustomTooltip("Save Invoice"));
+            incompleteInvoiceButton.setTooltip(createCustomTooltip("Incomplete Invoice"));
+            invoiceCommentButton.setTooltip(createCustomTooltip("Invoice Comment"));
+
         } else if(DC.Language.equals("ar")){
             SalesInvoice.setText(LS.il8n("SalesTitle","ar"));
+            newInvoiceButton.setTooltip(createCustomTooltip("فاتورة جديدة"));
+            AddItemButton.setTooltip(createCustomTooltip("إضافة عنصر"));
+            NewItemButton.setTooltip(createCustomTooltip("عنصر جديد"));
+            NewRowButton.setTooltip(createCustomTooltip("صف جديد"));
+            DeleteRowButton.setTooltip(createCustomTooltip("حذف صف"));
+            SaveButton.setTooltip(createCustomTooltip("حفظ فاتورة"));
+            incompleteInvoiceButton.setTooltip(createCustomTooltip("فاتورة غير مكتملة"));
+            invoiceCommentButton.setTooltip(createCustomTooltip("فاتورة معلقة"));
+
         }
+
     }
 
     // Listener for changes in the text property of CustomerPhone
