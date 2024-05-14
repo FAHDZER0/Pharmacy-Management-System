@@ -110,30 +110,29 @@
       </MenuButton>
       <MenuButton fx:id="GeneralAccountsMain" mnemonicParsing="false" style="-fx-background-color: transparent;" text="General Accounts">
         <items>
-          <MenuItem fx:id="accounts1" mnemonicParsing="false" text="Accounts tree - شجرة الحسابات" />
           <MenuItem fx:id="accounts2" mnemonicParsing="false" text="Create a cashier drawer - انشاء درج كاشير" />
-          <MenuItem fx:id="accounts3" mnemonicParsing="false" text="Create a treasury - انشاء خزينة" />
-          <MenuItem fx:id="accounts4" mnemonicParsing="false" text="Create a credit card account - انشاء حساب بطاقة ائتمان" />
+          <MenuItem fx:id="accounts3" disable="true" mnemonicParsing="false" text="Create a treasury - انشاء خزينة" />
+          <MenuItem fx:id="accounts4" disable="true" mnemonicParsing="false" text="Create a credit card account - انشاء حساب بطاقة ائتمان" />
           <SeparatorMenuItem mnemonicParsing="false" />
-          <MenuItem fx:id="accounts5" mnemonicParsing="false" text="Debit and credit accounts - حسابات الخصم و الاضافة" />
-          <MenuItem fx:id="accounts6" mnemonicParsing="false" text="Record About Debit and credit accounts - تقرير حسابات الخصم و الاضافة" />
+          <MenuItem fx:id="accounts5" disable="true" mnemonicParsing="false" text="Debit and credit accounts - حسابات الخصم و الاضافة" />
+          <MenuItem fx:id="accounts6" disable="true" mnemonicParsing="false" text="Record About Debit and credit accounts - تقرير حسابات الخصم و الاضافة" />
           <SeparatorMenuItem mnemonicParsing="false" />
-          <MenuItem fx:id="accounts7" mnemonicParsing="false" text="Available cash - النقدية المتاحة" />
-          <MenuItem fx:id="accounts8" mnemonicParsing="false" text="Cashiers listing report - تقرير أدراج الكاشيرات" />
-          <MenuItem fx:id="accounts9" mnemonicParsing="false" text="Cabinets report - تقرير الخزائن" />
-          <MenuItem fx:id="accounts10" mnemonicParsing="false" text="Bank accounts report - تقرير حسابات بنكية" />
+          <MenuItem fx:id="accounts7" disable="true" mnemonicParsing="false" text="Available cash - النقدية المتاحة" />
+          <MenuItem fx:id="accounts8" disable="true" mnemonicParsing="false" text="Cashiers listing report - تقرير أدراج الكاشيرات" />
+          <MenuItem fx:id="accounts9" disable="true" mnemonicParsing="false" text="Cabinets report - تقرير الخزائن" />
+          <MenuItem fx:id="accounts10" disable="true" mnemonicParsing="false" text="Bank accounts report - تقرير حسابات بنكية" />
           <SeparatorMenuItem mnemonicParsing="false" />
-          <MenuItem fx:id="accounts11" mnemonicParsing="false" text="Account movement monthly - حركة الحساب شهري" />
-          <MenuItem fx:id="accounts12" mnemonicParsing="false" text="A detailed monthly account movement report - تقرير حركة الحساب شهري تفصيلي" />
+          <MenuItem fx:id="accounts11" disable="true" mnemonicParsing="false" text="Account movement monthly - حركة الحساب شهري" />
+          <MenuItem fx:id="accounts12" disable="true" mnemonicParsing="false" text="A detailed monthly account movement report - تقرير حركة الحساب شهري تفصيلي" />
           <SeparatorMenuItem mnemonicParsing="false" />
-          <MenuItem fx:id="accounts13" mnemonicParsing="false" text="Daily restrictions report - تقرير القيود اليومية" />
-          <MenuItem fx:id="accounts14" mnemonicParsing="false" text="Income List - قائمة الدخل" />
-          <MenuItem fx:id="accounts15" mnemonicParsing="false" text="Summary of the organization's financial position - ملخص الموقف المالي للمؤسسة" />
+          <MenuItem fx:id="accounts13" disable="true" mnemonicParsing="false" text="Daily restrictions report - تقرير القيود اليومية" />
+          <MenuItem fx:id="accounts14" disable="true" mnemonicParsing="false" text="Income List - قائمة الدخل" />
+          <MenuItem fx:id="accounts15" disable="true" mnemonicParsing="false" text="Summary of the organization's financial position - ملخص الموقف المالي للمؤسسة" />
           <SeparatorMenuItem mnemonicParsing="false" />
           <MenuItem fx:id="accounts16" mnemonicParsing="false" text="Exchange cash - صرف نقدية" />
           <MenuItem fx:id="accounts17" mnemonicParsing="false" text="Supply of cash - توريد نقدية" />
-          <MenuItem fx:id="accounts18" mnemonicParsing="false" text="Cash disbursement report - تقرير المصروفات النقدية" />
-          <MenuItem fx:id="accounts19" mnemonicParsing="false" text="Cash supplies report - تقرير التوريدات النقديه " />        </items>
+          <MenuItem fx:id="accounts18" disable="true" mnemonicParsing="false" text="Cash disbursement report - تقرير المصروفات النقدية" />
+          <MenuItem fx:id="accounts19" disable="true" mnemonicParsing="false" text="Cash supplies report - تقرير التوريدات النقديه " />        </items>
         <font>
           <Font name="System Bold" size="13.0" />
         </font>
@@ -357,7 +356,7 @@
         </padding>
       </Separator>
 
-      <Button fx:id="Deficiencies_side" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #00cc00; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="Deficiencies_side" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
         <font>
           <Font size="11.0" />
         </font>
@@ -367,7 +366,7 @@
           </ImageView>
         </graphic>
       </Button>
-      <Button fx:id="ListOfItem_side" alignment="CENTER" layoutX="20.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setInCenter" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #00cc00; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="ListOfItem_side" alignment="CENTER" layoutX="20.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setInCenter" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
         <font>
           <Font size="11.0" />
         </font>
@@ -377,7 +376,7 @@
           </ImageView>
         </graphic>
       </Button>
-      <Button fx:id="PurchaseInvoice_side" alignment="CENTER" layoutX="20.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setInCenter" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #00cc00; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="PurchaseInvoice_side" alignment="CENTER" layoutX="20.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setInCenter" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
         <font>
           <Font size="11.0" />
         </font>
@@ -387,7 +386,7 @@
           </ImageView>
         </graphic>
       </Button>
-      <Button fx:id="SalesInvoice_side" alignment="CENTER" layoutX="20.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setInCenter" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #00cc00; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="SalesInvoice_side" alignment="CENTER" layoutX="20.0" layoutY="235.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setInCenter" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
         <font>
           <Font size="11.0" />
         </font>
@@ -397,7 +396,7 @@
           </ImageView>
         </graphic>
       </Button>
-      <Button fx:id="cashSupplay_side" alignment="CENTER" layoutX="20.0" layoutY="335.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #00cc00; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="cashSupplay_side" alignment="CENTER" layoutX="20.0" layoutY="335.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
         <font>
           <Font size="11.0" />
         </font>
@@ -407,7 +406,7 @@
           </ImageView>
         </graphic>
       </Button>
-      <Button fx:id="Customers_side" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #00cc00; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+      <Button fx:id="Customers_side" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
         <font>
           <Font size="11.0" />
         </font>

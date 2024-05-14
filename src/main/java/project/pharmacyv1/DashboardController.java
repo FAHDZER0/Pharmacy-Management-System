@@ -515,7 +515,6 @@ public class DashboardController {
         sales5.setText(LS.il8n("sales5",language));
         sales7.setText(LS.il8n("sales7",language));
         sales8.setText(LS.il8n("sales8",language));
-        accounts1.setText(LS.il8n("accounts1",language));
         accounts2.setText(LS.il8n("accounts2",language));
         accounts3.setText(LS.il8n("accounts3",language));
         accounts4.setText(LS.il8n("accounts4",language));

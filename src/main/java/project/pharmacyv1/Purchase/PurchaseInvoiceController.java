@@ -10,7 +10,6 @@ import java.util.ResourceBundle;
 import Config.LanguageSetter;
 import Database.DB;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,8 +19,10 @@ import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
 import project.pharmacyv1.DashboardController;
 import project.pharmacyv1.Suppliers.FindSupplier_PopUpController;
@@ -45,6 +46,25 @@ public class PurchaseInvoiceController implements Initializable {
     public Label SupplierParentCompany;
     @FXML
     public TableView<Map<String, Object>> PurchaseInvoiceTable;
+    @FXML
+    private Button AddItemButton;
+    @FXML
+    private Button NewItemButton;
+    @FXML
+    private Button NewRowButton;
+    @FXML
+    private Button PrintButton;
+    @FXML
+    private Button DeleteRowButton;
+    @FXML
+    private Button SaveButton;
+    @FXML
+    private Button incompleteInvoiceButton;
+    @FXML
+    private Button invoiceCommentButton;
+    @FXML
+    private Button newInvoiceButton;
+
 
     DB db = new DB();
 
@@ -106,7 +126,7 @@ public class PurchaseInvoiceController implements Initializable {
     }
 
     @FXML
-    public void NewShortcutAction() {
+    public void addItemShortcutAction() {
         tabPane.getSelectionModel().select(Invoice_Items);
         openFindItemPopup();
     }
@@ -134,12 +154,40 @@ public class PurchaseInvoiceController implements Initializable {
         }
     }
 
+    //this method is for displaying the commented Invoices in a separate stage
+    @FXML
+    public void CommentedInvoices() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/Purchase/CommentedInvoices.fxml"));
+            VBox root1 = (VBox) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Commented Invoices");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            CommentedInvoicesController controller = fxmlLoader.getController();
+            controller.setPurchaseInvoiceController(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // this method is for Invoice Commenting so the user can continue the invoice later
+
+
     @FXML
     private Label PurchaseTitle;
 
     @FXML
     public void setSupplier(Map<String, Object> Supplier){
         SupplierCodeTextField.setText(Supplier.get("SupplierID").toString());
+    }
+
+    private Tooltip createCustomTooltip(String text) {
+        Tooltip tooltip = new Tooltip(text);
+        tooltip.setFont(new Font("Arial", 15));
+        tooltip.setShowDelay(Duration.millis(100));
+        return tooltip;
     }
 
     @Override
@@ -172,8 +220,28 @@ public class PurchaseInvoiceController implements Initializable {
 
         if(DC.Language.equals("en")){
             PurchaseTitle.setText(LS.il8n("PurchaseTitle","en"));
+            newInvoiceButton.setTooltip(createCustomTooltip("New Invoice"));
+            AddItemButton.setTooltip(createCustomTooltip("Add Item"));
+            NewItemButton.setTooltip(createCustomTooltip("New Item"));
+            NewRowButton.setTooltip(createCustomTooltip("New Row"));
+            PrintButton.setTooltip(createCustomTooltip("Print"));
+            DeleteRowButton.setTooltip(createCustomTooltip("Delete Row"));
+            SaveButton.setTooltip(createCustomTooltip("Save Invoice"));
+            incompleteInvoiceButton.setTooltip(createCustomTooltip("Incomplete Invoice"));
+            invoiceCommentButton.setTooltip(createCustomTooltip("Invoice Comment"));
+
         } else if(DC.Language.equals("ar")){
             PurchaseTitle.setText(LS.il8n("PurchaseTitle","ar"));
+            newInvoiceButton.setTooltip(createCustomTooltip("فاتورة جديدة"));
+            AddItemButton.setTooltip(createCustomTooltip("إضافة عنصر"));
+            NewItemButton.setTooltip(createCustomTooltip("عنصر جديد"));
+            NewRowButton.setTooltip(createCustomTooltip("صف جديد"));
+            PrintButton.setTooltip(createCustomTooltip("طباعة"));
+            DeleteRowButton.setTooltip(createCustomTooltip("حذف صف"));
+            SaveButton.setTooltip(createCustomTooltip("حفظ فاتورة"));
+            incompleteInvoiceButton.setTooltip(createCustomTooltip("فاتورة غير مكتملة"));
+            invoiceCommentButton.setTooltip(createCustomTooltip("فاتورة معلقة"));
+
         }
 
         choice211.getItems().add("Cash");
@@ -182,5 +250,7 @@ public class PurchaseInvoiceController implements Initializable {
         choice211.getItems().add("Visa");
         choice211.getItems().add("Other");
         choice211.getSelectionModel().select(0);
+
+
     }
 }
