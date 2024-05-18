@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 public class Main extends Application {
 
@@ -17,6 +16,7 @@ public class Main extends Application {
         stage.setMinHeight(780);
         stage.setTitle("Pharmacy Management System");
         stage.setMaximized(true);
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
 

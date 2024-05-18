@@ -14,6 +14,9 @@ public class DB {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/pharmacyv1?zeroDateTimeBehavior=CONVERT_TO_NULL";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "";
+//    private static final String JDBC_URL = "jdbc:mysql://mysql-1f24e996-fahdahmed132-a849.h.aivencloud.com:17858/defaultdb?sslmode=require";
+//    private static final String USERNAME = "avnadmin";
+//    private static final String PASSWORD = "AVNS_2uCizTOWsxwddX2mOTk";
 
     static public String logedInUser = null;
     static public String logedInID = null;

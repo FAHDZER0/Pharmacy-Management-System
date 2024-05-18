@@ -1,20 +1,17 @@
 package project.pharmacyv1;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.text.NumberFormat;
-import java.text.ParseException;
-import java.util.Date;
-
 import Config.LanguageSetter;
 import Database.DB;
+import Database.DatabaseMigrator;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,10 +19,20 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.net.UnknownHostException;
+import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.text.ParseException;
+import java.util.Date;
 
 public class DashboardController {
 
@@ -647,20 +654,6 @@ public class DashboardController {
     //  Exit Function
     @FXML
     public void Logout() {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/project/pharmacyv1/Login.fxml"));
-            Scene scene = new Scene(root);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UNDECORATED);
-            stage.show();
-            LogWriter logWriter = new LogWriter();
-            logWriter.Logout();
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle error
-        }
-
         db.isLogedIn = false;
         //write in Log file that user "name" logged in at "time"
         try {
@@ -672,8 +665,99 @@ public class DashboardController {
             System.out.println("An error occurred while writing to the file.");
             e.printStackTrace();
         }
+
         Stage stage = (Stage) Logout.getScene().getWindow();
-        stage.close();
+        VBox vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
+        ProgressIndicator progressBar = new ProgressIndicator();
+
+        Label label = new Label("Logging out...");
+        vbox.getChildren().addAll(progressBar, label);
+        stage.setResizable(true);
+        stage.setScene(new Scene(vbox, 300, 200));
+
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+        Label loadingLabel = new Label("Loading Database...");
+        VBox vbox2 = new VBox(progressIndicator, loadingLabel);
+        vbox2.setAlignment(Pos.CENTER);
+
+        Task<Void> loadDatabaseTask = createDatabaseLoadTask(loadingLabel);
+        progressIndicator.progressProperty().bind(loadDatabaseTask.progressProperty());
+        new Thread(loadDatabaseTask).start();
+
+        stage.setScene(new Scene(vbox2));
+
+        stage.setMaximized(false);
+        stage.setWidth(300);
+        stage.setHeight(200);
+
+        stage.setTitle("Loading Database...");
+        stage.setMinWidth(300);
+        stage.setMinHeight(200);
+        stage.centerOnScreen();
+
+
+        loadDatabaseTask.setOnSucceeded(e -> {
+            if (loadDatabaseTask.getException() == null) {
+                stage.close();
+                try {
+                    Parent root = FXMLLoader.load(getClass().getResource("/project/pharmacyv1/Login.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage2 = new Stage();
+                    stage2.setScene(scene);
+                    stage2.initStyle(StageStyle.UNDECORATED);
+                    stage2.show();
+                    LogWriter logWriter = new LogWriter();
+                    logWriter.Logout();
+                } catch (IOException e2) {
+                    e2.printStackTrace();
+                    // Handle error
+                }
+
+            }
+        });
+
+
+    }
+
+    private Task<Void> createDatabaseLoadTask(Label loadingLabel) {
+        return new Task<>() {
+            @Override
+            protected Void call() throws SQLException {
+                DatabaseMigrator databaseMigrator = new DatabaseMigrator();
+
+                if (databaseMigrator.isSourceDatabaseConnected() && databaseMigrator.isTargetDatabaseConnected()) {
+                    String[] tableNames = {"customers", "employees", "medications", "products", "salesinvoices", "suppliers", "salesreturns", "stock", "purchaseinvoices", "purchasereturns", "purchasereturndetails", "purchaseinvoicedetails", "salesinvoicedetails", "salesreturndetails"};
+                    String[] tableNames2 = {"salesreturndetails" , "purchasereturndetails" , "purchasereturns" , "purchaseinvoicedetails" , "purchaseinvoices" , "salesreturns" , "salesinvoicedetails", "salesinvoices" , "customers", "employees", "medications", "products", "suppliers", "stock"};
+
+                    // Delete data from tables
+                    for (int i = 0; i < tableNames2.length; i++) {
+                        databaseMigrator.deleteDataFromOnlineTable(tableNames2[i]);
+                        updateProgress(i + 1, tableNames2.length);
+                        Platform.runLater(() -> {
+                            loadingLabel.setText("Deleting data from tables...");
+                        });
+                    }
+
+                    // Migrate data to tables
+                    for (int i = 0; i < tableNames.length; i++) {
+                        databaseMigrator.migrateToOnlineTable(tableNames[i]);
+                        updateProgress(i + 1, tableNames.length);
+                        Platform.runLater(() -> {
+                            loadingLabel.setText("Migrating data to tables...");
+                        });
+                    }
+                } else {
+                    try {
+                        throw new UnknownHostException("Cannot connect to one or both databases.");
+                    } catch (UnknownHostException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+
+                return null;
+            }
+        };
     }
 
 

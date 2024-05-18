@@ -5,6 +5,7 @@ module project.pharmacyv1 {
     requires java.management;
     requires TrayTester;
     requires jdk.compiler;
+    requires java.rmi;
 
     exports project.pharmacyv1.Customers to javafx.fxml;
     opens project.pharmacyv1.Customers to javafx.fxml;
@@ -20,4 +21,6 @@ module project.pharmacyv1 {
     opens project.pharmacyv1.Suppliers to javafx.fxml;
     exports project.pharmacyv1.Warehouse;
     opens project.pharmacyv1.Warehouse to javafx.fxml;
+    exports Database;
+    opens Database to javafx.fxml;
 }
