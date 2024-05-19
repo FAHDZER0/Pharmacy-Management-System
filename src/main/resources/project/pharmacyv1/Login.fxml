@@ -12,15 +12,15 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.pharmacyv1.LoginController">
     <right>
-        <AnchorPane prefHeight="500.0" prefWidth="302.0" style="-fx-background-color: F2D640;" BorderPane.alignment="CENTER">
-            <ImageView fitHeight="253.0" fitWidth="258.0" layoutX="25.0" layoutY="104.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../Images/Login_pic_2.png" />
+        <AnchorPane prefHeight="500.0" prefWidth="302.0" style="-fx-background-color: #9dcde1;" BorderPane.alignment="CENTER">
+            <ImageView fitHeight="253.0" fitWidth="256.0" layoutX="25.0" layoutY="90.0" pickOnBounds="true" preserveRatio="true">
+                <Image url="@../../Images/loginright2.png" />
             </ImageView>
         </AnchorPane>
     </right>
     <center>
         <AnchorPane prefHeight="500.0" prefWidth="304.0" BorderPane.alignment="CENTER">
-            <Button fx:id="LoginButton" layoutX="95.0" layoutY="306.0" mnemonicParsing="false" onAction="#LoginButtonAction" prefHeight="35.0" prefWidth="214.0" style="-fx-background-color: linear-gradient(to bottom right, #044F02, #E3CE0A); -fx-background-radius: 10;" text="Login" textFill="#fffdfd">
+            <Button fx:id="LoginButton" layoutX="95.0" layoutY="306.0" mnemonicParsing="false" onAction="#LoginButtonAction" prefHeight="35.0" prefWidth="214.0" style="-fx-background-color: linear-gradient(to bottom right,  #547784,  #FDDE9F); -fx-background-radius: 10;" text="Login" textFill="#fffdfd">
             <font>
                <Font name="System Bold" size="17.0" />
             </font></Button>
@@ -33,7 +33,7 @@
                <Font size="17.0" />
             </font></PasswordField>
             <ImageView fitHeight="113.0" fitWidth="122.0" layoutX="153.0" pickOnBounds="true" preserveRatio="true">
-                <Image url="@../../Images/Login_Pic.png" />
+                <Image url="@../../Images/rightlogin2.png" />
             </ImageView>
             <Label layoutX="155.0" layoutY="91.0" text="Welcome">
                 <font>

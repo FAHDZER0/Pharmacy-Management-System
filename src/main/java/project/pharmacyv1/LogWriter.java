@@ -8,11 +8,13 @@ import java.util.Date;
 
 public class LogWriter {
 
+    String filename = "F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log";
+
     public void LoginSuccess(String name, String time) {
         System.out.println("User " + name + " logged in at " + time);
         LoginController LC = new LoginController();
         try {
-            FileWriter writer = new FileWriter("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log", true);
+            FileWriter writer = new FileWriter(filename, true);
             writer.write("User " + name + " logged in at " + time + "\n");
             writer.close();
         } catch (IOException e) {
@@ -26,7 +28,7 @@ public class LogWriter {
         System.out.println("User " + name + " failed to log in at " + time);
         LoginController LC = new LoginController();
         try {
-            FileWriter writer = new FileWriter("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log", true);
+            FileWriter writer = new FileWriter(filename, true);
             writer.write("User " + name + " failed to log in at " + time + "\n");
             writer.close();
         } catch (IOException e) {
@@ -41,7 +43,7 @@ public class LogWriter {
         System.out.println("User " + name + " logged out at " + time);
         LoginController LC = new LoginController();
         try {
-            FileWriter writer = new FileWriter("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log", true);
+            FileWriter writer = new FileWriter(filename, true);
             writer.write("User " + name + " logged out at " + time + "\n");
             writer.close();
         } catch (IOException e) {
@@ -54,7 +56,7 @@ public class LogWriter {
         String time = new Date().toString();
         System.out.println("User " + name + " added " + item + " at " + time);
         try {
-            FileWriter writer = new FileWriter("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log", true);
+            FileWriter writer = new FileWriter(filename, true);
             writer.write("User " + name + " added " + item + " at " + time + "\n");
             writer.close();
         } catch (IOException e) {
@@ -67,7 +69,7 @@ public class LogWriter {
         String time = new Date().toString();
         System.out.println("User " + name + " removed " + item + " at " + time);
         try {
-            FileWriter writer = new FileWriter("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log", true);
+            FileWriter writer = new FileWriter(filename, true);
             writer.write("User " + name + " removed " + item + " at " + time + "\n");
             writer.close();
         } catch (IOException e) {
@@ -80,7 +82,7 @@ public class LogWriter {
         String time = new Date().toString();
         System.out.println("User " + name + " edited " + item + " at " + time);
         try {
-            FileWriter writer = new FileWriter("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log", true);
+            FileWriter writer = new FileWriter(filename, true);
             writer.write("User " + name + " edited " + item + " at " + time + "\n");
             writer.close();
         } catch (IOException e) {
@@ -93,7 +95,7 @@ public class LogWriter {
         String time = new Date().toString();
         System.out.println("User " + name + " Sales Invoice ID " + id + " at " + time);
         try {
-            FileWriter writer = new FileWriter("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log", true);
+            FileWriter writer = new FileWriter(filename, true);
             writer.write("User " + name + " Sales Invoice ID " + id + " at " + time + "\n");
             writer.close();
         } catch (IOException e) {

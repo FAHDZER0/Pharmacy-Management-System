@@ -39,7 +39,7 @@ public class PDFprinterController {
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
             // Add header image
-            PDImageXObject pdImage = PDImageXObject.createFromFile("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\Images\\Login_pic_2.png", document);
+            PDImageXObject pdImage = PDImageXObject.createFromFile("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\Images\\loginright2.png", document);
             contentStream.drawImage(pdImage, 450, 730, 50, 50); // Adjust as per your image size
 
             // Add pharmacy information
@@ -171,7 +171,7 @@ public class PDFprinterController {
             contentStream.beginText();
             contentStream.setFont(new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD), 12);
             contentStream.newLineAtOffset(70, yPosition);
-            contentStream.showText("Discount Percentage:");
+            contentStream.showText("Discount Amount:");
             contentStream.newLineAtOffset(150, 0);
             contentStream.showText(discountPercentage);
             contentStream.endText();

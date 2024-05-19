@@ -153,6 +153,10 @@ public class DB {
             ResultSet resultSet = preparedStatement.executeQuery();
             resultSet.next();
             totalQuantity = resultSet.getInt(1);
+            PreparedStatement preparedStatement2 = connection.prepareStatement("SELECT SUM(Quantity) FROM products WHERE ExpiryDate < CURRENT_DATE()");
+            ResultSet resultSet2 = preparedStatement2.executeQuery();
+            resultSet2.next();
+            totalQuantity += resultSet2.getInt(1);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }

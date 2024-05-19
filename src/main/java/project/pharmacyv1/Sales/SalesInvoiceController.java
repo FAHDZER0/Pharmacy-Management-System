@@ -22,6 +22,7 @@
     import javafx.util.Duration;
     import project.pharmacyv1.DashboardController;
     import project.pharmacyv1.LogWriter;
+    import project.pharmacyv1.Sales.CommentedInvoicesController;
 
     public class SalesInvoiceController {
 
@@ -64,11 +65,7 @@
     @FXML
     public Button NewItemButton ;
     @FXML
-    public Button NewRowButton;
-    @FXML
     public Button DeleteRowButton;
-    @FXML
-    public Button incompleteInvoiceButton;
     @FXML
     public ToggleGroup patmentMethod;
     @FXML
@@ -284,6 +281,11 @@
         Map<String, Object> data = new HashMap<>();
         data.put("CustomerID", CustomerCode.getText());
         data.put("TotalSaleAmount", InvoiceTotalValue.getText());
+        if (((RadioButton) patmentMethod.getSelectedToggle()).getText().equalsIgnoreCase("Onhold")) {
+            data.put("SaleStatus", "On hold");
+        } else {
+            data.put("SaleStatus", "Complete");
+        }
         data.put("SaleStatus", "Complete");
         data.put("SalesDate", date );
         data.put("DiscountAmount", DiscountAmount.getText());
@@ -305,6 +307,7 @@
             data.put("ItemID", item.get("ItemID"));
             data.put("SellingPrice", item.get("SellingPrice"));
             data.put("Unit", item.get("Unit"));
+            data.put("ItemName",item.get("EnglishName"));
             db.InsertQuery("salesinvoicedetails", data);
         }
 
@@ -325,9 +328,9 @@
         } else if (alert.getResult() == ButtonType.CANCEL){
             // If the user presses Cancel, do nothing
             System.out.println("Cancel");
-            NewInvoice();
         }
 
+        NewInvoice();
     }
 
     @FXML
@@ -360,13 +363,49 @@
         String CustomerNumber = invoice.get(0).get("CustomerID").toString();
         String CustomerName = db.SelectQuery("customers", "CustomerID", CustomerNumber).get(0).get("CustomerName").toString();
         String CustomerAddress = db.SelectQuery("customers", "CustomerID", CustomerNumber).get(0).get("CustomerAddress").toString();
-        String InvoiceNotes = invoice.get(0).get("Notes").toString();
+        String InvoiceNotes = invoice.get(0).get("notes").toString();
         String InvoiceTotal = invoice.get(0).get("TotalSaleAmount").toString();
         String discountPercentage = invoice.get(0).get("DiscountAmount").toString();
         String finaltotalPrice = invoice.get(0).get("TotalSaleAmount").toString();
 
         PDFprinterController pdf = new PDFprinterController();
-        pdf.PrintSalesIntoPDF(orderType ,ChasierName, String.valueOf(InvoiceNumber), CustomerNumber , CustomerName , CustomerAddress , InvoiceNotes , Sales1BigTable.getItems() ,InvoiceTotal , discountPercentage , "20" , finaltotalPrice  );
+
+        // Create a list to store the items in the invoice
+        List<PDFprinterController.InvoiceItem> items = new ArrayList<>();
+
+        // Fetch the sales invoice details from the database
+        ObservableList<Map<String, Object>> salesInvoiceDetails = db.SelectQuery("salesinvoicedetails", "SalesInvoiceID", String.valueOf(InvoiceNumber));
+
+        // Convert each Map<String, Object> in salesInvoiceDetails to a PDFprinterController.InvoiceItem and add it to the list
+        for (Map<String, Object> itemMap : salesInvoiceDetails) {
+            String itemName = itemMap.get("ItemName").toString();
+            String itemPrice = itemMap.get("SellingPrice").toString();
+            String itemQuantity = String.valueOf(itemMap.get("Quantity"));
+            String itemTotal = String.valueOf(Double.parseDouble(itemPrice) * Double.parseDouble(itemQuantity));
+
+            PDFprinterController.InvoiceItem invoiceItem = new PDFprinterController.InvoiceItem(itemName, itemPrice, itemQuantity, itemTotal);
+            items.add(invoiceItem);
+        }
+
+        pdf.PrintSalesIntoPDF(orderType ,ChasierName, String.valueOf(InvoiceNumber), CustomerNumber , CustomerName , CustomerAddress , InvoiceNotes , items ,InvoiceTotal , discountPercentage , "20" , finaltotalPrice  );
+    }
+
+    //this method is for displaying the commented Invoices in a separate stage
+    @FXML
+    public void CommentedInvoices() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/Sales/CommentedInvoices.fxml"));
+            VBox root1 = (VBox) fxmlLoader.load();
+            Stage stage = new Stage();
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Commented Invoices");
+            stage.setScene(new Scene(root1));
+            stage.show();
+            CommentedInvoicesController controller = fxmlLoader.getController();
+            controller.setSalesInvoiceController(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -422,22 +461,17 @@
             newInvoiceButton.setTooltip(createCustomTooltip("New Invoice"));
             AddItemButton.setTooltip(createCustomTooltip("Add Item"));
             NewItemButton.setTooltip(createCustomTooltip("New Item"));
-            NewRowButton.setTooltip(createCustomTooltip("New Row"));
             DeleteRowButton.setTooltip(createCustomTooltip("Delete Row"));
             SaveButton.setTooltip(createCustomTooltip("Save Invoice"));
-            incompleteInvoiceButton.setTooltip(createCustomTooltip("Incomplete Invoice"));
-            invoiceCommentButton.setTooltip(createCustomTooltip("Invoice Comment"));
+            invoiceCommentButton.setTooltip(createCustomTooltip("Commented Invoices"));
 
         } else if(DC.Language.equals("ar")){
             SalesInvoice.setText(LS.il8n("SalesTitle","ar"));
             newInvoiceButton.setTooltip(createCustomTooltip("فاتورة جديدة"));
             AddItemButton.setTooltip(createCustomTooltip("إضافة عنصر"));
-            NewItemButton.setTooltip(createCustomTooltip("عنصر جديد"));
-            NewRowButton.setTooltip(createCustomTooltip("صف جديد"));
             DeleteRowButton.setTooltip(createCustomTooltip("حذف صف"));
             SaveButton.setTooltip(createCustomTooltip("حفظ فاتورة"));
-            incompleteInvoiceButton.setTooltip(createCustomTooltip("فاتورة غير مكتملة"));
-            invoiceCommentButton.setTooltip(createCustomTooltip("فاتورة معلقة"));
+            invoiceCommentButton.setTooltip(createCustomTooltip("فواتير معلقة"));
 
         }
 
@@ -446,9 +480,7 @@
         setSideHoverEffect(invoiceCommentButton);
         setSideHoverEffect(AddItemButton);
         setSideHoverEffect(NewItemButton);
-        setSideHoverEffect(NewRowButton);
         setSideHoverEffect(DeleteRowButton);
-        setSideHoverEffect(incompleteInvoiceButton);
 
 
     }
