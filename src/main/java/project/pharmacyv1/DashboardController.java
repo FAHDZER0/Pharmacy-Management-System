@@ -257,13 +257,13 @@ public class DashboardController {
 
     private void setSideHoverEffect(Control control){
         control.setOnMouseEntered(event -> {
-            control.setStyle("-fx-background-color: #00ff00; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;");
+            control.setStyle("-fx-background-color:  #a1d6e2; -fx-background-radius: 100px; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-border-width: 3px;");
         });
 
         control.setOnMouseExited(event -> {
             // If the button is not currently pressed, keep it blue and big
             if (control != currentButton) {
-                control.setStyle("-fx-background-color: #00cc00; -fx-background-radius: 100px; -fx-border-color: green; -fx-border-radius: 100px; -fx-border-width: 3px;");
+                control.setStyle("-fx-background-color:  #1996aa; -fx-background-radius: 100px; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-border-width: 3px;");
             }
         });
 

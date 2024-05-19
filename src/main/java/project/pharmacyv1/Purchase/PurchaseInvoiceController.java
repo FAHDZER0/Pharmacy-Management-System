@@ -65,8 +65,24 @@ public class PurchaseInvoiceController implements Initializable {
     @FXML
     private Button newInvoiceButton;
 
+    private Button currentButton; //Reference to the currently pressed button
+
 
     DB db = new DB();
+
+    private void setSideHoverEffect(Control control){
+        control.setOnMouseEntered(event -> {
+            control.setStyle("-fx-background-color:  #a1d6e2; -fx-background-radius: 100px; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-border-width: 3px;");
+        });
+
+        control.setOnMouseExited(event -> {
+            // If the button is not currently pressed, keep it blue and big
+            if (control != currentButton) {
+                control.setStyle("-fx-background-color:  #1996aa; -fx-background-radius: 100px; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-border-width: 3px;");
+            }
+        });
+
+    }
 
     public void setPurchaseTable(Map<String, Object> data) {
         List<String> orderedKeys = Arrays.asList("ItemBarcode", "ItemID", "EnglishName", "ArabicName", "ItemType", "Unit", "Quantity", "ExpiryDate", "Bonus", "SellingPrice", "TaxPercentage", "TaxValue", "DiscountPercentage", "DiscountValue");
@@ -243,6 +259,16 @@ public class PurchaseInvoiceController implements Initializable {
             invoiceCommentButton.setTooltip(createCustomTooltip("فاتورة معلقة"));
 
         }
+
+        setSideHoverEffect(newInvoiceButton);
+        setSideHoverEffect(AddItemButton);
+        setSideHoverEffect(NewItemButton);
+        setSideHoverEffect(NewRowButton);
+        setSideHoverEffect(PrintButton);
+        setSideHoverEffect(DeleteRowButton);
+        setSideHoverEffect(SaveButton);
+        setSideHoverEffect(incompleteInvoiceButton);
+        setSideHoverEffect(invoiceCommentButton);
 
         choice211.getItems().add("Cash");
         choice211.getItems().add("Credit");

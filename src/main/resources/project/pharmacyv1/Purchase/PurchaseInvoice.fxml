@@ -22,7 +22,7 @@
 <BorderPane prefWidth="1264.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.pharmacyv1.Purchase.PurchaseInvoiceController">
     <center>
 
-        <VBox alignment="TOP_CENTER" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+        <VBox alignment="TOP_CENTER" style="-fx-background-color: #f1f1f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
             <children>
                 <Label fx:id="PurchaseTitle" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Purchase Invoice - فاتورة مشتريات" textAlignment="CENTER">
                     <font>
@@ -539,9 +539,9 @@
         </VBox>
     </center>
    <right>
-        <VBox alignment="TOP_CENTER" prefHeight="918.0" prefWidth="114.0" spacing="10.0" style="-fx-background-color: orange;" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="918.0" prefWidth="114.0" spacing="10.0" style="-fx-background-color: #a1d6e2;" BorderPane.alignment="CENTER">
             <children>
-                <Button fx:id="newInvoiceButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+                <Button fx:id="newInvoiceButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -559,7 +559,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
                 </Button>
-            <Button fx:id="SaveButton" alignment="CENTER" contentDisplay="TOP" layoutX="22.0" layoutY="20.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="SaveButton" alignment="CENTER" contentDisplay="TOP" layoutX="22.0" layoutY="20.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -574,7 +574,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="invoiceCommentButton" alignment="CENTER" contentDisplay="TOP" layoutX="22.0" layoutY="120.0" mnemonicParsing="false" onAction="#CommentedInvoices" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="invoiceCommentButton" alignment="CENTER" contentDisplay="TOP" layoutX="22.0" layoutY="120.0" mnemonicParsing="false" onAction="#CommentedInvoices" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -589,7 +589,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-                <Button fx:id="PrintButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="220.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+                <Button fx:id="PrintButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="220.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                     <font>
                         <Font size="14.0" />
                     </font>
@@ -607,7 +607,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
                 </Button>
-            <Button fx:id="AddItemButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="521.0" mnemonicParsing="false" onAction="#addItemShortcutAction" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="AddItemButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="521.0" mnemonicParsing="false" onAction="#addItemShortcutAction" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -622,7 +622,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="NewItemButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="721.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="NewItemButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="721.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -637,7 +637,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="NewRowButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="849.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="NewRowButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="849.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -652,7 +652,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="DeleteRowButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="321.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="DeleteRowButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="321.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -667,7 +667,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="incompleteInvoiceButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="821.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="incompleteInvoiceButton" alignment="CENTER" contentDisplay="CENTER" layoutX="22.0" layoutY="821.0" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>

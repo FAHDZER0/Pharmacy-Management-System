@@ -1,11 +1,10 @@
     package project.pharmacyv1.Sales;
 
     import java.io.IOException;
-    import java.util.Arrays;
-    import java.util.List;
-    import java.util.Map;
+    import java.util.*;
 
     import Config.LanguageSetter;
+    import Config.PDFprinterController;
     import Database.DB;
     import javafx.beans.property.SimpleObjectProperty;
     import javafx.beans.value.ChangeListener;
@@ -28,46 +27,32 @@
 
     @FXML
     public TableView Sales1BigTable;
-
     @FXML
     private TextField NoOfItem ;
-
     @FXML
     private TextField TotalBeforeDisc ;
-
     @FXML
     private TextField CustomerPhone;
-
     @FXML
     private TextField CustomerCode;
-
     @FXML
     private Label CustomerName;
-
     @FXML
     private TextField CustomerBalance ;
-
     @FXML
     private TextField DiscountPrecent ;
-
     @FXML
     private TextField DiscountAmount ;
-
     @FXML
     private TextField Notes ;
-
     @FXML
     private Label SalesInvoice;
-
     @FXML
     private Label InvoiceCostLabel;
-
     @FXML
     private Label invoiceProfitValue;
-
     @FXML
     private Label InvoiceTotalValue;
-
     @FXML
     public Button newInvoiceButton;
     @FXML
@@ -84,6 +69,18 @@
     public Button DeleteRowButton;
     @FXML
     public Button incompleteInvoiceButton;
+    @FXML
+    public ToggleGroup patmentMethod;
+    @FXML
+    public RadioButton cash;
+    @FXML
+    public RadioButton Visa;
+    @FXML
+    public RadioButton Credit;
+    @FXML
+    public RadioButton Onhold;
+    @FXML
+    public RadioButton HomeDelivery;
 
     DB db = new DB();
     LogWriter log = new LogWriter();
@@ -119,6 +116,22 @@
     double totalprofit = 0;
     double currentProfit = 0;
 
+    private Button currentButton; //Reference to the currently pressed button
+
+
+    private void setSideHoverEffect(Control control){
+        control.setOnMouseEntered(event -> {
+            control.setStyle("-fx-background-color:  #a1d6e2; -fx-background-radius: 100px; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-border-width: 3px;");
+        });
+
+        control.setOnMouseExited(event -> {
+            // If the button is not currently pressed, keep it blue and big
+            if (control != currentButton) {
+                control.setStyle("-fx-background-color:  #1996aa; -fx-background-radius: 100px; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-border-width: 3px;");
+            }
+        });
+
+    }
 
     public void setSales1BigTable(Map<String, Object> data) {
         // Calculate currentProfit
@@ -244,7 +257,7 @@
         }else{
             Map<String, Object> customer = data.get(0);
             CustomerName.setText(customer.get("CustomerName").toString());
-            CustomerBalance.setText(customer.get("CurrentBalance").toString());
+            CustomerBalance.setText(customer.get("CustomerDebt").toString());
             CustomerPhone.setText(customer.get("PersonalPhoneNumber").toString());
             CustomerName.styleProperty().setValue("-fx-text-fill: black; -fx-font-weight: bold; -fx-font-size: 16; -fx-border-color: black; -fx-border-width: 1px; -fx-background-color: #f4f4f4;");
             CustomerBalance.styleProperty().setValue("-fx-text-fill: black; -fx-font-weight: bold;");
@@ -263,12 +276,113 @@
 
     @FXML
     public void saveSalesInvoice(){
-        System.out.println("Saving Sales Invoice");
-        //getting the data from the row and saving it to the database
-        //salesinvoices has these columns SalesInvoiceID , CustomerID , TotalSaleAmount , SaleStatus , SalesDate
+        // Save the invoice to the database
+        // the columns are SalesInvoiceID , CustomerID , TotalSaleAmount , SaleStatus , SalesDate , DiscountAmount , TotalProfit and Notes in the salesinvoices table
 
-        log.SoldItem(db.logedInUser, "SalesInvoiceID");
+        Date date = new Date();
 
+        Map<String, Object> data = new HashMap<>();
+        data.put("CustomerID", CustomerCode.getText());
+        data.put("TotalSaleAmount", InvoiceTotalValue.getText());
+        data.put("SaleStatus", "Complete");
+        data.put("SalesDate", date );
+        data.put("DiscountAmount", DiscountAmount.getText());
+        data.put("TotalProfit", invoiceProfitValue.getText());
+        data.put("Notes", Notes.getText());
+        data.put("PaymentMethod", ((RadioButton) patmentMethod.getSelectedToggle()).getText());
+        data.put("CashairName", db.logedInUser);
+
+        int salesInvoiceID = db.InsertQuery("salesinvoices", data);
+
+        System.out.println(Sales1BigTable.getItems().size());
+        // Insert the sales invoice details
+        for (int i = 0; i < Sales1BigTable.getItems().size(); i++) {
+            Map<String, Object> item = (Map<String, Object>) Sales1BigTable.getItems().get(i);
+            data = new HashMap<>();
+            data.put("SalesInvoiceID", salesInvoiceID);
+            data.put("ProductType", item.get("ItemType"));
+            data.put("Quantity", item.get("Amount"));
+            data.put("ItemID", item.get("ItemID"));
+            data.put("SellingPrice", item.get("SellingPrice"));
+            data.put("Unit", item.get("Unit"));
+            db.InsertQuery("salesinvoicedetails", data);
+        }
+
+        // Log the selling of the items
+        log.SoldItem(db.logedInUser, String.valueOf(salesInvoiceID));
+
+        //showing a message to ask the employee if he wants to print the invoice
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Print Invoice");
+        alert.setHeaderText("Do you want to print the invoice?");
+        alert.setContentText("Choose your option.");
+        alert.showAndWait();
+
+        // If the user presses OK, print the invoice
+        if (alert.getResult() == ButtonType.OK) {
+            printInvoice(salesInvoiceID);
+            System.out.println("Printing the invoice");
+        } else if (alert.getResult() == ButtonType.CANCEL){
+            // If the user presses Cancel, do nothing
+            System.out.println("Cancel");
+            NewInvoice();
+        }
+
+    }
+
+    @FXML
+    public void printInvoice(int InvoiceNumber){
+        // Print the invoice
+
+        ObservableList<Map<String, Object>> invoice = db.SelectQuery("salesinvoices", "SalesInvoiceID", String.valueOf(InvoiceNumber));
+
+        String orderType = "";
+
+        switch (((RadioButton) patmentMethod.getSelectedToggle()).getText()) {
+            case "Cash":
+                orderType = "In place";
+                break;
+            case "Visa":
+                orderType = "In place";
+                break;
+            case "Credit":
+                orderType = "In place";
+                break;
+            case "Onhold":
+                orderType = "On hold";
+                break;
+            case "Home Delivery":
+                orderType = "Home delivery";
+                break;
+        }
+
+        String ChasierName = invoice.get(0).get("CashairName").toString();
+        String CustomerNumber = invoice.get(0).get("CustomerID").toString();
+        String CustomerName = db.SelectQuery("customers", "CustomerID", CustomerNumber).get(0).get("CustomerName").toString();
+        String CustomerAddress = db.SelectQuery("customers", "CustomerID", CustomerNumber).get(0).get("CustomerAddress").toString();
+        String InvoiceNotes = invoice.get(0).get("Notes").toString();
+        String InvoiceTotal = invoice.get(0).get("TotalSaleAmount").toString();
+        String discountPercentage = invoice.get(0).get("DiscountAmount").toString();
+        String finaltotalPrice = invoice.get(0).get("TotalSaleAmount").toString();
+
+        PDFprinterController pdf = new PDFprinterController();
+        pdf.PrintSalesIntoPDF(orderType ,ChasierName, String.valueOf(InvoiceNumber), CustomerNumber , CustomerName , CustomerAddress , InvoiceNotes , Sales1BigTable.getItems() ,InvoiceTotal , discountPercentage , "20" , finaltotalPrice  );
+    }
+
+    @FXML
+    public void NewInvoice(){
+        Sales1BigTable.getItems().clear();
+        NoOfItem.setText("0");
+        TotalBeforeDisc.setText("0");
+        CustomerPhone.setText("");
+        CustomerCode.setText("0");
+        DiscountPrecent.setText(String.valueOf(0));
+        DiscountAmount.setText(String.valueOf(0));
+        Notes.setText("");
+        InvoiceCostLabel.setText("0");
+        invoiceProfitValue.setText("0");
+        InvoiceTotalValue.setText("0");
+        patmentMethod.selectToggle(cash);
     }
 
     public void initialize() {
@@ -326,6 +440,16 @@
             invoiceCommentButton.setTooltip(createCustomTooltip("فاتورة معلقة"));
 
         }
+
+        setSideHoverEffect(newInvoiceButton);
+        setSideHoverEffect(SaveButton);
+        setSideHoverEffect(invoiceCommentButton);
+        setSideHoverEffect(AddItemButton);
+        setSideHoverEffect(NewItemButton);
+        setSideHoverEffect(NewRowButton);
+        setSideHoverEffect(DeleteRowButton);
+        setSideHoverEffect(incompleteInvoiceButton);
+
 
     }
 

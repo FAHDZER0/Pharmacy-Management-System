@@ -24,7 +24,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.pharmacyv1.Sales.SalesInvoiceController">
     <center>
 
-        <VBox alignment="TOP_CENTER" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+        <VBox alignment="TOP_CENTER" style="-fx-background-color: #f1f1f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
             <children>
                 <Label fx:id="SalesInvoice" text="Sales Invoice - فاتورة البيع">
                     <font>
@@ -41,7 +41,7 @@
                                         <Font name="System Bold" size="13.0" />
                                     </font>
                                 </Label>
-                                <RadioButton mnemonicParsing="false" selected="true" text="Cash">
+                                <RadioButton fx:id="cash" mnemonicParsing="false" selected="true" text="Cash">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
@@ -49,22 +49,22 @@
                                         <ToggleGroup fx:id="patmentMethod" />
                                     </toggleGroup>
                                 </RadioButton>
-                                <RadioButton mnemonicParsing="false" text="Visa" toggleGroup="$patmentMethod">
+                                <RadioButton fx:id="Visa" mnemonicParsing="false" text="Visa" toggleGroup="$patmentMethod">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </RadioButton>
-                                <RadioButton layoutX="16.0" layoutY="65.0" mnemonicParsing="false" text="Credit" toggleGroup="$patmentMethod">
+                                <RadioButton fx:id="Credit" layoutX="16.0" layoutY="65.0" mnemonicParsing="false" text="Credit" toggleGroup="$patmentMethod">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </RadioButton>
-                                <RadioButton layoutX="16.0" layoutY="185.0" mnemonicParsing="false" text="On Hold" toggleGroup="$patmentMethod">
+                                <RadioButton fx:id="Onhold" layoutX="16.0" layoutY="185.0" mnemonicParsing="false" text="On Hold" toggleGroup="$patmentMethod">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </RadioButton>
-                                <RadioButton layoutX="16.0" layoutY="215.0" mnemonicParsing="false" text="Home Delivery" toggleGroup="$patmentMethod">
+                                <RadioButton fx:id="HomeDelivery" layoutX="16.0" layoutY="215.0" mnemonicParsing="false" text="Home Delivery" toggleGroup="$patmentMethod">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
@@ -366,9 +366,9 @@
         </VBox>
     </center>
    <right>
-        <VBox alignment="TOP_CENTER" prefHeight="918.0" prefWidth="114.0" spacing="10.0" style="-fx-background-color: orange;" BorderPane.alignment="CENTER">
+        <VBox alignment="TOP_CENTER" prefHeight="918.0" prefWidth="114.0" spacing="10.0" style="-fx-background-color: #a1d6e2;" BorderPane.alignment="CENTER">
             <children>
-            <Button fx:id="newInvoiceButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="newInvoiceButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#NewInvoice" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -383,7 +383,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="SaveButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="SaveButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" onAction="#saveSalesInvoice" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -398,7 +398,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="invoiceCommentButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="invoiceCommentButton" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -413,7 +413,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="AddItemButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="AddItemButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -428,7 +428,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="NewItemButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="NewItemButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -443,7 +443,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="NewRowButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="NewRowButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -458,7 +458,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="DeleteRowButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="DeleteRowButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -473,7 +473,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="incompleteInvoiceButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #059228; -fx-border-color: green; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="incompleteInvoiceButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>

@@ -75,28 +75,36 @@ public class ReportAbouTManifuctrurerCampaniesController {
             //setting the pie chart data
             ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
             db.SelectQuery("medications").forEach(row -> {
-                int quantity = Integer.parseInt(row.get("Quantity").toString());
-                String label = row.get("EnglishName").toString();
-                if (displayAsPercentage) {
-                    double totalQuantity = db.SelectQuerySum("medications", "Quantity");
-                    double percentage = (quantity / totalQuantity) * 100;
-                    label += " (" + String.format("%.2f", percentage) + "%)";
-                } else {
-                    label += " (" + quantity + ")";
+                Object quantityObj = row.get("Quantity");
+                Object labelObj = row.get("EnglishName");
+                if (quantityObj != null && labelObj != null) {
+                    int quantity = Integer.parseInt(quantityObj.toString());
+                    String label = labelObj.toString();
+                    if (displayAsPercentage) {
+                        double totalQuantity = db.SelectQuerySum("medications", "Quantity");
+                        double percentage = (quantity / totalQuantity) * 100;
+                        label += " (" + String.format("%.2f", percentage) + "%)";
+                    } else {
+                        label += " (" + quantity + ")";
+                    }
+                    pieChartData.add(new PieChart.Data(label, quantity));
                 }
-                pieChartData.add(new PieChart.Data(label, quantity));
             });
             db.SelectQuery("products").forEach(row -> {
-                int quantity = Integer.parseInt(row.get("Quantity").toString());
-                String label = row.get("EnglishName").toString();
-                if (displayAsPercentage) {
-                    double totalQuantity = db.SelectQuerySum("products", "Quantity");
-                    double percentage = (quantity / totalQuantity) * 100;
-                    label += " (" + String.format("%.2f", percentage) + "%)";
-                } else {
-                    label += " (" + quantity + ")";
+                Object quantityObj = row.get("Quantity");
+                Object labelObj = row.get("EnglishName");
+                if (quantityObj != null && labelObj != null) {
+                    int quantity = Integer.parseInt(quantityObj.toString());
+                    String label = labelObj.toString();
+                    if (displayAsPercentage) {
+                        double totalQuantity = db.SelectQuerySum("products", "Quantity");
+                        double percentage = (quantity / totalQuantity) * 100;
+                        label += " (" + String.format("%.2f", percentage) + "%)";
+                    } else {
+                        label += " (" + quantity + ")";
+                    }
+                    pieChartData.add(new PieChart.Data(label, quantity));
                 }
-                pieChartData.add(new PieChart.Data(label, quantity));
             });
             ManufacturerPiechart.setData(pieChartData);
             displayAsPercentage = !displayAsPercentage;

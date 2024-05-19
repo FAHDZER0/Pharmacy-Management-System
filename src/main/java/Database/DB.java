@@ -238,8 +238,9 @@ public class DB {
         return stocks;
     }
 
-    //This method is used to execute insert queries
-    public void InsertQuery(String TableName, Map<String, Object> ColumnValue) {
+    //This method is used to execute insert queries and return the generated ID
+    public int InsertQuery(String TableName, Map<String, Object> ColumnValue) {
+        int generatedId = -1; // Default value if there was an error
         try {
             Connection connection = getConnection();
             StringBuilder columns = new StringBuilder();
@@ -250,21 +251,27 @@ public class DB {
             }
             columns.deleteCharAt(columns.length() - 1);
             values.deleteCharAt(values.length() - 1);
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " + TableName + " (" + columns + ") VALUES (" + values + ")");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " + TableName + " (" + columns + ") VALUES (" + values + ")", Statement.RETURN_GENERATED_KEYS);
             int index = 1;
             for (Object value : ColumnValue.values()) {
                 preparedStatement.setObject(index++, value);
             }
             preparedStatement.executeUpdate();
 
+            // Retrieve the generated key (ID)
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getInt(1);
+            }
+
             // sout the success message
-            System.out.println("Data inserted successfully");
+            System.out.println("Data inserted successfully. Generated ID is " + generatedId);
             // alert to the user that the data has been inserted successfully
             tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
             AnimationType type = AnimationType.POPUP;
             tray.setAnimationType(type);
             tray.setTitle("Success");
-            tray.setMessage("Medication Added Successfully");
+            tray.setMessage("Medication Added Successfully. Generated ID is " + generatedId);
             tray.setNotificationType(NotificationType.SUCCESS);
             tray.showAndDismiss(javafx.util.Duration.seconds(2));
         } catch (SQLException e) {
@@ -277,6 +284,7 @@ public class DB {
 
             System.out.println(e.getMessage());
         }
+        return generatedId;
     }
 
     //This method is used to execute update queries
