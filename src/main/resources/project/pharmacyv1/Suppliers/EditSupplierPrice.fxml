@@ -50,7 +50,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="1128.0" spacing="10.0" style="-fx-border-color: Grey; -fx-border-width: 0.5px;">
                <children>
                   <Region layoutX="126.0" layoutY="21.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#EditSelectedRow" text="Save Edit">
+                  <Button fx:id="saveedit" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#EditSelectedRow" text="Save Edit">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>

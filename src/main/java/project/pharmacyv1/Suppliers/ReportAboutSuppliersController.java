@@ -1,6 +1,7 @@
 package project.pharmacyv1.Suppliers;
 
 import Config.LanguageSetter;
+import Config.PDFprinterController;
 import Database.DB;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
@@ -23,6 +24,12 @@ public class ReportAboutSuppliersController {
     private TableView<Map<String, Object>> SuppliersTableView;
     @FXML
     private TextField name_codeTextField;
+    @FXML
+    private Button printsupplierinfo;
+    @FXML
+    private Label entercode;
+
+
 
     DB db = new DB();
     LogWriter log = new LogWriter();
@@ -43,6 +50,12 @@ public class ReportAboutSuppliersController {
         }
 
         fillTable(SuppliersTableView, data);
+    }
+
+    public void printsupplierinfo() {
+        PDFprinterController pdf = new PDFprinterController();
+        pdf.printTableIntoPDF(SuppliersTableView.getItems() , true);
+
     }
 
     public void fillTable(TableView<Map<String, Object>> tableView, ObservableList<Map<String, Object>> dataList) {
@@ -72,8 +85,12 @@ public class ReportAboutSuppliersController {
 
         if(DC.Language.equals("en")){
             Suppliers1Title.setText(LS.il8n("supplier2","en"));
+            printsupplierinfo.setText("Print Supplier Info");
+            entercode.setText("Enter Supplier Code");
         } else if(DC.Language.equals("ar")){
             Suppliers1Title.setText(LS.il8n("supplier2","ar"));
+            printsupplierinfo.setText("طباعة بيانات المورد");
+            entercode.setText("ادخل كود المورد");
         }
 
     }

@@ -202,13 +202,15 @@ public class ReportAboutExpiredItemsinStrockController {
 
         if(DC.Language.equals("en")){
             Warehouse4Title.setText(LS.il8n("Warehouse7","en"));
+            choice1.setItems(FXCollections.observableArrayList("Product English Name", "Product Arabic Name" ,"Manufacturing Company"));
+            choice2.setItems(FXCollections.observableArrayList("Medication English Name", "Medication Arabic Name" ,"Manufacturing Company","Active Ingredient"));
         } else if(DC.Language.equals("ar")){
             Warehouse4Title.setText(LS.il8n("Warehouse7","ar"));
+            choice1.setItems(FXCollections.observableArrayList("اسم المنتج بالانجليزي", "اسم المنتج بالعربي" ,"الشركة المصنعة"));
+            choice2.setItems(FXCollections.observableArrayList("اسم الدواء بالانجليزي", "اسم الدواء بالعربي" ,"الشركة المصنعة","المادة الفعالة"));
         }
 
-        choice1.setItems(FXCollections.observableArrayList("Product English Name", "Product Arabic Name" ,"Manufacturing Company"));
         choice1.getSelectionModel().select(0);
-        choice2.setItems(FXCollections.observableArrayList("Medication English Name", "Medication Arabic Name" ,"Manufacturing Company","Active Ingredient"));
         choice2.getSelectionModel().select(0);
 
     }

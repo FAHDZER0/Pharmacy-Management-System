@@ -40,6 +40,10 @@ public class EditCountQuantityController {
     private Label MedicationTotal;
     @FXML
     private Label ProductTotal;
+    @FXML
+    private Button saveedit1;
+    @FXML
+    private Button saveedit2;
 
     DB db = new DB();
     LogWriter LW = new LogWriter();
@@ -282,10 +286,14 @@ public class EditCountQuantityController {
             Warehouse3Title.setText(LS.il8n("Warehouse3","en"));
             choice1.setItems(FXCollections.observableArrayList("Product English Name", "Product Arabic Name" ,"Manufacturing Company"));
             choice2.setItems(FXCollections.observableArrayList("Medication English Name", "Medication Arabic Name" ,"Manufacturing Company","Active Ingredient"));
+            saveedit1.setText("Save Edit");
+            saveedit2.setText("Save Edit");
         } else if(DC.Language.equals("ar")){
             Warehouse3Title.setText(LS.il8n("Warehouse3","ar"));
             choice1.setItems(FXCollections.observableArrayList("اسم المنتج بالانجليزي", "اسم المنتج بالعربي" ,"شركة التصنيع"));
             choice2.setItems(FXCollections.observableArrayList("اسم الدواء بالانجليزي", "اسم الدواء بالعربي" ,"شركة التصنيع","المادة الفعالة"));
+            saveedit1.setText("حفظ التعديل");
+            saveedit2.setText("حفظ التعديل");
         }
 
         choice1.getSelectionModel().select(0);

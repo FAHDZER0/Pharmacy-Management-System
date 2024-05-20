@@ -1,6 +1,7 @@
 package project.pharmacyv1.Warehouse;
 
 import Config.LanguageSetter;
+import Config.PDFprinterController;
 import Database.DB;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -124,8 +125,10 @@ public class ReportAboutEditingTablesController {
         Barchart.setData(barChartData);
     }
     // printing the report onto a pdf file
+    @FXML
     public void PrintButtonAction() {
-
+        PDFprinterController pdfPrinter = new PDFprinterController();
+        pdfPrinter.printTableIntoPDF(ItemListTableView.getItems() , false);
     }
 
     public void initialize() {
@@ -150,8 +153,10 @@ public class ReportAboutEditingTablesController {
 
         if(DC.Language.equals("en")){
             Warehouse1Title.setText(LS.il8n("Warehouse4","en"));
+            PrintButton.setText("Print");
         } else if(DC.Language.equals("ar")){
             Warehouse1Title.setText(LS.il8n("Warehouse4","ar"));
+            PrintButton.setText("طباعة");
         }
 
     }

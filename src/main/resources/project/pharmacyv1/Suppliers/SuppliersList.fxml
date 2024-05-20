@@ -30,13 +30,13 @@
                 <Separator prefWidth="200.0" />
                 <TabPane fx:id="tabPane" style="-fx-border-color: grey;" tabClosingPolicy="UNAVAILABLE" VBox.vgrow="ALWAYS">
                     <tabs>
-                        <Tab text="Search - البحث">
+                        <Tab fx:id="tab1" text="Search - البحث">
                             <content>
                                 <VBox prefHeight="200.0" prefWidth="100.0">
                                     <children>
                               <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="1242.0">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="155.0" text="Enter Code ">
+                                    <Label fx:id="entercode" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="155.0" text="Enter Code ">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -67,7 +67,7 @@
                                 </VBox>
                             </content>
                         </Tab>
-                        <Tab text="Add and Edit - الإضافة و التعديل">
+                        <Tab fx:id="tab2" text="Add and Edit - الإضافة و التعديل">
                      <content>
                         <AnchorPane prefHeight="200.0" prefWidth="200.0" />
                      </content>
@@ -77,12 +77,12 @@
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
                                     <Region prefHeight="100.0" prefWidth="239.0" />
-                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="96.0" text="Add and Edit Supplier's Information" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                    <Label fx:id="title" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="96.0" text="Add and Edit Supplier's Information" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                        <font>
                                           <Font name="System Bold" size="30.0" />
                                        </font>
                                     </Label>
-                                    <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" text="Print Supplier's Info">
+                                    <Button fx:id="print" mnemonicParsing="false" onAction="#printsupplierinfo" prefHeight="35.0" prefWidth="180.0" text="Print Supplier's Info">
                                        <font>
                                           <Font name="System Bold" size="16.0" />
                                        </font>
@@ -95,7 +95,7 @@
                                        <children>
                                           <HBox alignment="CENTER_LEFT">
                                              <children>
-                                                <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="215.0" text="Supplier's Code" textAlignment="CENTER">
+                                                <Label fx:id="supcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="215.0" text="Supplier's Code" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
@@ -117,7 +117,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="1242.0">
                                              <children>
-                                                <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="215.0" text="Supplier Name" textAlignment="CENTER">
+                                                <Label fx:id="suppname" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="215.0" text="Supplier Name" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
@@ -139,7 +139,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER" layoutX="10.0" layoutY="100.0">
                                              <children>
-                                                <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="215.0" text="Supplier Email" textAlignment="CENTER">
+                                                <Label fx:id="supemail" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="215.0" text="Supplier Email" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
@@ -161,7 +161,7 @@
                                                    </font>
                                                 </Label>
                                                 <Region prefHeight="21.0" prefWidth="185.0" />
-                                                <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="215.0" text="Parent Company" textAlignment="CENTER">
+                                                <Label fx:id="parentcompany" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="215.0" text="Parent Company" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
@@ -183,7 +183,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="100.0">
                                              <children>
-                                                <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="213.0" text="Phone" textAlignment="CENTER">
+                                                <Label fx:id="phone" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="213.0" text="Phone" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
@@ -202,7 +202,7 @@
                                                    </font>
                                                 </Label>
                                                 <Region prefHeight="45.0" prefWidth="137.0" />
-                                                <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="177.0" text="Current Balance" textAlignment="CENTER">
+                                                <Label fx:id="currentbalance" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="177.0" text="Current Balance" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
@@ -230,7 +230,7 @@
                                           </HBox>
                                           <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="100.0">
                                              <children>
-                                                <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="210.0" text="Address" textAlignment="CENTER">
+                                                <Label fx:id="address" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="210.0" text="Address" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
@@ -249,7 +249,7 @@
                                                    </font>
                                                 </Label>
                                                 <Region prefHeight="45.0" prefWidth="185.0" />
-                                                <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="194.0" text="Transaction limit" textAlignment="CENTER">
+                                                <Label fx:id="translimit" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="194.0" text="Transaction limit" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
@@ -274,7 +274,7 @@
                                           </HBox>
                                           <HBox layoutX="10.0" layoutY="623.0">
                                              <children>
-                                                <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="145.0" text="Returns Policy" textAlignment="CENTER">
+                                                <Label fx:id="returnpolicy" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="145.0" text="Returns Policy" textAlignment="CENTER">
                                                    <font>
                                                       <Font name="System Bold" size="20.0" />
                                                    </font>
@@ -295,7 +295,7 @@
                                                 <Region prefHeight="381.0" prefWidth="128.0" HBox.hgrow="ALWAYS" />
                                                 <HBox>
                                                    <children>
-                                                      <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="123.0" text="Notes" textAlignment="CENTER">
+                                                      <Label fx:id="notes" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="123.0" text="Notes" textAlignment="CENTER">
                                                          <font>
                                                             <Font name="System Bold" size="20.0" />
                                                          </font>

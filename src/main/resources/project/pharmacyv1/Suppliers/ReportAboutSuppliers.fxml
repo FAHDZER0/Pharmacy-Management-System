@@ -28,7 +28,7 @@
                         <children>
                   <HBox alignment="CENTER_LEFT" prefHeight="48.0" prefWidth="1242.0">
                      <children>
-                        <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="155.0" text="Enter Code ">
+                        <Label fx:id="entercode" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="155.0" text="Enter Code ">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -42,7 +42,7 @@
                            </font>
                         </TextField>
                         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <Button mnemonicParsing="false" prefHeight="35.0" prefWidth="180.0" text="Print Suppliers' Info">
+                        <Button fx:id="printsupplierinfo" mnemonicParsing="false" onAction="#printsupplierinfo" prefHeight="35.0" prefWidth="180.0" text="Print Suppliers' Info">
                            <font>
                               <Font name="System Bold" size="16.0" />
                            </font>

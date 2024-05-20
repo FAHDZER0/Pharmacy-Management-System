@@ -118,7 +118,7 @@ public class ReportAbouTManifuctrurerCampaniesController {
     public void PrintButtonAction() {
 
         PDFprinterController pdfPrinter = new PDFprinterController();
-        pdfPrinter.printTableIntoPDF(ItemListTableView.getItems());
+        pdfPrinter.printTableIntoPDF(ItemListTableView.getItems() ,false );
     }
 
     public void initialize() {

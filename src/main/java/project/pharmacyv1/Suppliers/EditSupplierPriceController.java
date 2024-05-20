@@ -29,6 +29,8 @@ public class EditSupplierPriceController {
     private TableView<Map<String, Object>> ItemListTableView;
     @FXML
     private TextField SearchTextField;
+    @FXML
+    private Button saveedit;
 
     DB db = new DB();
     LogWriter log = new LogWriter();
@@ -151,11 +153,16 @@ public class EditSupplierPriceController {
 
         if(DC.Language.equals("en")){
             Categories3Title.setText(LS.il8n("supplier3","en"));
+            choice1.setItems(FXCollections.observableArrayList("MedicationID" , "SupplierID", "ParentCompany"));
+            saveedit.setText("Save Edit");
         } else if(DC.Language.equals("ar")){
             Categories3Title.setText(LS.il8n("supplier3","ar"));
+            choice1.setItems(FXCollections.observableArrayList("كود الدواء" , "كود المورد", "الشركة الام"));
+            saveedit.setText("حفظ التعديل");
+
+
         }
 
-        choice1.setItems(FXCollections.observableArrayList("MedicationID" , "SupplierID", "ParentCompany"));
         choice1.getSelectionModel().select(0);
 
     }

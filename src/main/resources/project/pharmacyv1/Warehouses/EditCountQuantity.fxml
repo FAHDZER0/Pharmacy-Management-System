@@ -79,13 +79,13 @@
                 </VBox>
             <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="1128.0" spacing="10.0" style="-fx-border-color: Grey; -fx-border-width: 0.5px;">
                <children>
-                  <Button layoutX="1146.0" layoutY="21.0" mnemonicParsing="false" onAction="#EditSelectedRow" text="Save Edit">
+                  <Button fx:id="saveedit2" layoutX="1146.0" layoutY="21.0" mnemonicParsing="false" onAction="#EditSelectedRow" text="Save Edit">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Button>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#EditSelectedRow1" text="Save Edit">
+                  <Button fx:id="saveedit1" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#EditSelectedRow1" text="Save Edit">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>

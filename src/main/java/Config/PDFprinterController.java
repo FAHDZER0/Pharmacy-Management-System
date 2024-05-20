@@ -231,9 +231,17 @@ public class PDFprinterController {
         }
     }
 
-    public void printTableIntoPDF(ObservableList<Map<String, Object>> dataList) {
+    public void printTableIntoPDF(ObservableList<Map<String, Object>> dataList , Boolean Landascape) {
         try (PDDocument document = new PDDocument()) {
-            PDPage page = new PDPage(PDRectangle.A4);
+
+            PDPage page ;
+
+            if (Landascape){
+                page = new PDPage(new PDRectangle(1200, 612)); // Standard A4 size
+            }else{
+                page = new PDPage(PDRectangle.A4);
+            }
+
             document.addPage(page);
 
 
@@ -281,8 +289,8 @@ public class PDFprinterController {
                 contentStream.newLineAtOffset(margin, yPosition);
                 for (Object value : data.values()) {
                     String text = value != null ? value.toString() : "";
-                    text = processText(text);
-                    contentStream.showText(String.format("%-20s", text));
+                    text = text.replace("\n", " "); // Replace newline characters with spaces
+                    contentStream.showText(text + "    ");
                 }
                 contentStream.endText();
             }
@@ -321,4 +329,64 @@ public class PDFprinterController {
         return text;
     }
 
+    public void printSupplierInfo(ObservableList<Map<String, Object>> dataList) {
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+
+            // Load the font
+            PDType0Font font = PDType0Font.load(document, new File("F:\\Pharmacy Backup\\Pharmacy-Management-System\\Lib\\alfont_com_arial-1.ttf"));
+
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            // Add header image
+            PDImageXObject pdImage = PDImageXObject.createFromFile("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\Images\\loginright2.png", document);
+            contentStream.drawImage(pdImage, 470, 770, 50, 50); // Adjust as per your image size
+
+            // Define the table structure
+            float margin = 50;
+            float imageheight = 50;
+            float yStart = page.getMediaBox().getHeight() - margin - imageheight;
+            float yPosition = yStart;
+
+            // Define the space between rows
+            float rowSpacing = 20;
+
+            // Write data vertically
+            contentStream.setFont(font, 12);
+            for (Map<String, Object> data : dataList) {
+                for (Map.Entry<String, Object> entry : data.entrySet()) {
+                    contentStream.beginText();
+                    contentStream.newLineAtOffset(margin, yPosition);
+                    String text = entry.getKey() + ": " + (entry.getValue() != null ? entry.getValue().toString() : "");
+                    text = processText(text);
+                    text = text.replace("\n", " "); // Replace newline characters with spaces
+                    contentStream.showText(text);
+                    contentStream.endText();
+                    yPosition -= rowSpacing;
+                }
+                yPosition -= rowSpacing; // Extra space between different data entries
+            }
+
+            contentStream.close();
+
+            // Generate a unique filename by appending a timestamp
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+            LocalDateTime now = LocalDateTime.now();
+            String fileName = "supplier_info_" + dtf.format(now);
+
+            document.save("Pharmacy-Management-System/PDFs/Supplier Info/" + fileName + ".pdf");
+            System.out.println("PDF created successfully");
+
+            TrayNotification tray = new TrayNotification();
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.setTitle("Success");
+            tray.setMessage("PDF created successfully");
+            tray.setNotificationType(NotificationType.SUCCESS);
+            tray.showAndDismiss(javafx.util.Duration.seconds(2));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

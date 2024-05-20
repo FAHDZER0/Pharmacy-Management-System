@@ -1,6 +1,7 @@
 package project.pharmacyv1.Suppliers;
 
 import Config.LanguageSetter;
+import Config.PDFprinterController;
 import Database.DB;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ObservableList;
@@ -55,6 +56,37 @@ public class SuppliersListController {
     private Button NewButton;
     @FXML
     private TabPane tabPane;
+    @FXML
+    private Label entercode;
+    @FXML
+    private Tab tab1;
+    @FXML
+    private Tab tab2;
+    @FXML
+    private Button print;
+    @FXML
+    private Label suppname;
+    @FXML
+    private Label parentcompany;
+    @FXML
+    private Label supcode;
+    @FXML
+    private Label phone;
+    @FXML
+    private Label currentbalance;
+    @FXML
+    private Label address;
+    @FXML
+    private Label translimit;
+    @FXML
+    private Label notes;
+    @FXML
+    private Label returnpolicy;
+    @FXML
+    private Label title;
+    @FXML
+    private Label supemail;
+
 
     DB db = new DB();
     LogWriter log = new LogWriter();
@@ -247,6 +279,14 @@ public class SuppliersListController {
         fillTable(SuppliersTableView, data);
     }
 
+    @FXML
+    public void printsupplierinfo(){
+        PDFprinterController pdf = new PDFprinterController();
+        //collect all the supplier info and create a observable list to send it to the pdf printer
+        ObservableList<Map<String, Object>> data = (ObservableList<Map<String, Object>>) db.SelectQuery("suppliers" , "SupplierID" , SupplierCode.getText());
+        pdf.printSupplierInfo(data);
+    }
+
     public void fillTable(TableView<Map<String, Object>> tableView, ObservableList<Map<String, Object>> dataList) {
         // Clear existing columns
         tableView.getColumns().clear();
@@ -331,8 +371,50 @@ public class SuppliersListController {
 
         if(DC.Language.equals("en")){
             Suppliers1Title.setText(LS.il8n("supplier1","en"));
+            suppname.setText("Supplier Name");
+            supcode.setText("Supplier Code");
+            phone.setText("Phone");
+            currentbalance.setText("Current Balance");
+            address.setText("Address");
+            translimit.setText("Transaction Limit");
+            notes.setText("Notes");
+            returnpolicy.setText("Return Policy");
+            parentcompany.setText("Parent Company");
+            entercode.setText("Enter Supplier Code");
+            tab1.setText("Search");
+            tab2.setText("Add and Edit");
+            print.setText("Print Supplier Info");
+            title.setText("Add and Edit Suppliers Info");
+            supemail.setText("Email");
+            deleteButton.setText("Delete");
+            saveButton.setText("Save");
+            saveEditButton.setText("Save Edit");
+            NewButton.setText("New");
+
         } else if(DC.Language.equals("ar")){
             Suppliers1Title.setText(LS.il8n("supplier1","ar"));
+
+            suppname.setText("اسم المورد");
+            supcode.setText("كود المورد");
+            phone.setText("الهاتف");
+            currentbalance.setText("الرصيد الحالي");
+            address.setText("العنوان");
+            translimit.setText("حد العمليات");
+            notes.setText("ملاحظات");
+            returnpolicy.setText("سياسة الاسترجاع");
+            parentcompany.setText("الشركة الأم");
+            entercode.setText("ادخل كود المورد");
+            tab1.setText("بحث");
+            tab2.setText("اضافة وتعديل");
+            print.setText("طباعة بيانات المورد");
+            title.setText("اضافة وتعديل بيانات الموردين");
+            supemail.setText("البريد الالكتروني");
+            deleteButton.setText("حذف");
+            saveButton.setText("حفظ");
+            saveEditButton.setText("حفظ التعديل");
+            NewButton.setText("جديد");
+
+
         }
     }
 
