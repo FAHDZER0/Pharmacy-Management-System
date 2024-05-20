@@ -397,7 +397,7 @@
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
             </Button>
-            <Button fx:id="AddItemButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="AddItemButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addNewItem" prefHeight="90.0" prefWidth="90.0" style="-fx-background-color: #1996aa; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-background-radius: 100px; -fx-border-width: 3px;" textAlignment="CENTER" wrapText="true">
                <font>
                   <Font size="14.0" />
                </font>
