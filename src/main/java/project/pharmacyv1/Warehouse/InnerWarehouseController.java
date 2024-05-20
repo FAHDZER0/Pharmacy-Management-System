@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.geometry.Insets;
 import javafx.util.Duration;
+import project.pharmacyv1.DashboardController;
 
 import java.sql.SQLException;
 import java.util.Map;
@@ -22,12 +23,24 @@ public class InnerWarehouseController {
 
     private DB db = new DB();
     private GridPane gridPane;
+    DashboardController DC = new DashboardController();
 
     @FXML
     public void initialize() {
         setupGridPane();
         populateGridPane();
-        SecondaryBordaerPane.setCenter(gridPane);
+        VBox vBox = new VBox();
+        vBox.setPadding(new Insets(10));
+        vBox.setAlignment(javafx.geometry.Pos.TOP_CENTER);
+        Label title = new Label("Inner Warehouse");
+        if(DC.Language.equals("en")) {
+            title.setText("Inner Warehouse");
+        } else if (DC.Language.equals("ar")) {
+            title.setText("المخازن الداخلية");
+        }
+        title.setStyle("-fx-font-size: 50pt; -fx-text-fill: #000; -fx-font-weight:bold;"); // Larger font and blue color
+        vBox.getChildren().addAll(title , gridPane);
+        SecondaryBordaerPane.setCenter(vBox);
     }
 
     // Array of calm colors
@@ -64,7 +77,14 @@ public class InnerWarehouseController {
             for (Map.Entry<String, Integer> entry : stocks.entrySet()) {
                 Label l1 = new Label("Stock Type: " + entry.getKey());
                 Label l2 = new Label("Quantity: " + entry.getValue());
-                l1.setStyle("-fx-font-size: 16pt; -fx-text-fill: #336699; -fx-font-weight:bold;"); // Larger font and blue color
+                if(DC.Language.equals("en")) {
+                    l1.setText("Stock Type: " + entry.getKey());
+                    l2.setText("Quantity: " + entry.getValue());
+                } else if (DC.Language.equals("ar")) {
+                    l1.setText("نوع المخزون: " + entry.getKey());
+                    l2.setText("الكمية: " + entry.getValue());
+                }
+                    l1.setStyle("-fx-font-size: 16pt; -fx-text-fill: #336699; -fx-font-weight:bold;"); // Larger font and blue color
                 l2.setStyle("-fx-font-size: 16pt; -fx-text-fill: #336699; -fx-font-weight:bold;"); // Larger font and blue color
                 VBox vBox = new VBox();
                 vBox.setPadding(new Insets(10));
@@ -98,7 +118,10 @@ public class InnerWarehouseController {
             for (int i = 0; i <= percentage; i++) {
                 int finalI = i;
                 KeyFrame keyFrame = new KeyFrame(Duration.millis(50 * i), e -> {
-                    l2.setText("Quantity: " + finalI + "%");
+                    if (DC.Language.equals("en"))
+                        l2.setText("Quantity: " + finalI + "%");
+                    else if (DC.Language.equals("ar"))
+                        l2.setText("الكمية: " + finalI + "%");
                 });
                 timeline.getKeyFrames().add(keyFrame);
             }
@@ -116,8 +139,6 @@ public class InnerWarehouseController {
                 timeline1.getKeyFrames().add(keyFrame);
             }
             timeline1.setOnFinished(event2 -> {
-                Tooltip tooltip = new Tooltip("Quantity: " + quantity + "\nPercentage: " + percentage + "%");
-                Tooltip.install(pieChart, tooltip);
                 pieChart.getData().get(0).setPieValue(quantity);
                 pieChart.getData().get(1).setPieValue(totalQuantity - quantity);
             });

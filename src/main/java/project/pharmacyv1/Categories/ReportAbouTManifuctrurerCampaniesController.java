@@ -1,6 +1,7 @@
 package project.pharmacyv1.Categories;
 
 import Config.LanguageSetter;
+import Config.PDFprinterController;
 import Database.DB;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -116,6 +117,8 @@ public class ReportAbouTManifuctrurerCampaniesController {
     // printing the report onto a pdf file
     public void PrintButtonAction() {
 
+        PDFprinterController pdfPrinter = new PDFprinterController();
+        pdfPrinter.printTableIntoPDF(ItemListTableView.getItems());
     }
 
     public void initialize() {
@@ -144,8 +147,10 @@ public class ReportAbouTManifuctrurerCampaniesController {
 
         if(DC.Language.equals("en")){
             Categories1Title.setText(LS.il8n("Categories7","en"));
+            PrintButton.setText("Print");
         } else if(DC.Language.equals("ar")){
             Categories1Title.setText(LS.il8n("Categories7","ar"));
+            PrintButton.setText("طباعة");
         }
 
     }

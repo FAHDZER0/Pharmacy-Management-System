@@ -1,17 +1,27 @@
 package Config;
 
+import javafx.collections.ObservableList;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.common.PDRectangle;
+import org.apache.pdfbox.pdmodel.font.PDType0Font;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
 import org.apache.pdfbox.pdmodel.font.Standard14Fonts;
 import org.apache.pdfbox.pdmodel.graphics.image.PDImageXObject;
+import com.ibm.icu.text.Bidi;
+import com.ibm.icu.text.ArabicShaping;
+import com.ibm.icu.text.ArabicShapingException;
+import tray.animations.AnimationType;
+import tray.notification.NotificationType;
+import tray.notification.TrayNotification;
 
+import java.io.File;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Map;
 
 public class PDFprinterController {
 
@@ -207,38 +217,108 @@ public class PDFprinterController {
             contentStream.close();
 
             //saving the document in directory named "Sales Invoices" in the project directory
-            document.save("Pharmacy-Management-System/Sales Invoices/" + invoiceNumber + ".pdf");
+            document.save("Pharmacy-Management-System/PDFs/Sales Invoices/" + invoiceNumber + ".pdf");
+            tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            tray.setTitle("Success");
+            tray.setMessage("PDF created successfully");
+            tray.setNotificationType(NotificationType.SUCCESS);
+            tray.showAndDismiss(javafx.util.Duration.seconds(2));
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // Main method to test the class
-//    public static void main(String[] args) {
-//        PDFprinterController pdfprinterController = new PDFprinterController();
-//
-//        List<InvoiceItem> items = List.of(
-//                new InvoiceItem("Penadol", "$200", "1", "$200"),
-//                new InvoiceItem("Cough Medicine", "$500", "1", "$500"),
-//                new InvoiceItem("Seyrum", "$500", "2", "$1000"),
-//                new InvoiceItem("Plasters", "$200", "1", "$200"),
-//                new InvoiceItem("Hair Brush", "$500", "1", "$500")
-//        );
-//
-//        pdfprinterController.PrintSalesIntoPDF(
-//                "Delivery",
-//                "Fahd Ahmed",
-//                "00000001",
-//                "1",
-//                "Flora Osama",
-//                "District 30 Karor, Bedaya Tower 2, 3rd Floor, Flat 6, Cairo, Egypt",
-//                "Please deliver the items as soon as possible. Thank you!",
-//                items,
-//                "$2400",
-//                "0%",
-//                "$50",
-//                "$2400"
-//        );
-//    }
+    public void printTableIntoPDF(ObservableList<Map<String, Object>> dataList) {
+        try (PDDocument document = new PDDocument()) {
+            PDPage page = new PDPage(PDRectangle.A4);
+            document.addPage(page);
+
+
+
+            // Load the font
+            PDType0Font font = PDType0Font.load(document, new File("F:\\Pharmacy Backup\\Pharmacy-Management-System\\Lib\\alfont_com_arial-1.ttf"));
+
+            PDPageContentStream contentStream = new PDPageContentStream(document, page);
+
+            // Add header image
+            PDImageXObject pdImage = PDImageXObject.createFromFile("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\Images\\loginright2.png", document);
+            contentStream.drawImage(pdImage, 470, 770, 50, 50); // Adjust as per your image size
+
+            // Define the table structure
+            float margin = 50;
+            float imageheight = 50;
+            float yStart = page.getMediaBox().getHeight() - margin - imageheight;
+            float yPosition = yStart;
+            float tableWidth = page.getMediaBox().getWidth() - 2 * margin;
+
+            // Define the space between rows
+            float rowSpacing = 20;
+            // Define the number of columns (assuming all maps have the same keys)
+            int numberOfColumns = !dataList.isEmpty() ? dataList.get(0).keySet().size() : 0;
+            float columnWidth = tableWidth / numberOfColumns;
+
+            // Write table column headers
+            contentStream.setFont(font, 12);
+            contentStream.beginText();
+            contentStream.newLineAtOffset(margin, yPosition);
+
+            // Assuming that all maps in the dataList have the same keySet
+            if (!dataList.isEmpty()) {
+                for (String column : dataList.get(0).keySet()) {
+                    contentStream.showText(String.format("%-20s", column));
+                }
+            }
+            contentStream.endText();
+
+            // Write table rows
+            contentStream.setFont(font, 12);
+            for (Map<String, Object> data : dataList) {
+                yPosition -= rowSpacing;
+                contentStream.beginText();
+                contentStream.newLineAtOffset(margin, yPosition);
+                for (Object value : data.values()) {
+                    String text = value != null ? value.toString() : "";
+                    text = processText(text);
+                    contentStream.showText(String.format("%-20s", text));
+                }
+                contentStream.endText();
+            }
+
+            contentStream.close();
+
+            // Generate a unique filename by appending a timestamp
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyyMMddHHmmss");
+            LocalDateTime now = LocalDateTime.now();
+            String fileName = "table_" + dtf.format(now);
+
+            document.save("Pharmacy-Management-System/PDFs/tables/" + fileName + ".pdf");
+            System.out.println("PDF created successfully");
+
+            TrayNotification tray = new TrayNotification();
+            tray.setAnimationType(AnimationType.POPUP);
+            tray.setTitle("Success");
+            tray.setMessage("PDF created successfully");
+            tray.setNotificationType(NotificationType.SUCCESS);
+            tray.showAndDismiss(javafx.util.Duration.seconds(2));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static String processText(String text) {
+        try {
+            ArabicShaping arabicShaping = new ArabicShaping(ArabicShaping.LETTERS_SHAPE);
+            text = arabicShaping.shape(text);
+            Bidi bidi = new Bidi(text, Bidi.LTR);
+            text = bidi.writeReordered(Bidi.DO_MIRRORING);
+        } catch (ArabicShapingException e) {
+            e.printStackTrace();
+        }
+        return text;
+    }
+
 }

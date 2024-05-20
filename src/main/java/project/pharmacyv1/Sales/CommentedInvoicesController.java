@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 import project.pharmacyv1.Purchase.PurchaseInvoiceController;
 
 import java.util.List;
@@ -20,24 +21,19 @@ public class CommentedInvoicesController {
     @FXML
     private TextField SearchTextField;
 
-    @FXML
-    private ComboBox<?> choice1;
-
-    @FXML
-    private Button confirm;
-
-    @FXML
-    private Button confirm1;
-
     DB db = new DB();
+    private SalesInvoiceController salesInvoiceController;
+
 
     @FXML
-    void CloseCurrentStage(ActionEvent event) {
-
+    void CloseCurrentStage() {
+        // Close the current stage
+        Stage stage = (Stage) FindTable.getScene().getWindow();
+        stage.close();
     }
 
     public void setSalesInvoiceController(SalesInvoiceController salesInvoiceController) {
-
+        this.salesInvoiceController = salesInvoiceController;
     }
 
     //create a method to fill the table FindTable with the data from the database in table PurchaseInvoices where the InvoiceStatus is equal to on hold
@@ -64,6 +60,30 @@ public class CommentedInvoicesController {
 
         // Set the items property of the FindTable to the data
         FindTable.setItems(data);
+    }
+
+    @FXML
+    public void openButtonAction() {
+        // Get the selected invoice
+        Map<String, Object> selectedInvoice = (Map<String, Object>) FindTable.getSelectionModel().getSelectedItem();
+
+        // If no invoice is selected, show an error message
+        if (selectedInvoice == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("No invoice selected");
+            alert.setContentText("Please select an invoice to add");
+            alert.showAndWait();
+            return;
+        }
+
+        // Get the invoice ID
+        int invoiceID = (int) selectedInvoice.get("SalesInvoiceID");
+
+        salesInvoiceController.addCommentedInvoice(invoiceID);
+
+        // Refresh the table
+        fillTable();
     }
 
     @FXML

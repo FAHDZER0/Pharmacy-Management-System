@@ -58,17 +58,11 @@
                     </font>
                 </Button>
                 <Region layoutX="308.0" layoutY="10.0" prefHeight="39.0" prefWidth="40.0" HBox.hgrow="ALWAYS" />
-                <Button fx:id="confirm" layoutX="210.0" layoutY="10.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Open">
+                <Button fx:id="open" layoutX="210.0" layoutY="10.0" mnemonicParsing="false" onAction="#openButtonAction" prefHeight="38.0" prefWidth="109.0" text="Open">
                     <font>
                         <Font name="System Bold" size="17.0" />
                     </font>
                 </Button>
-                <Region layoutX="522.0" layoutY="10.0" prefHeight="100.0" prefWidth="54.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="confirm1" layoutX="442.0" layoutY="41.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="109.0" text="Add">
-               <font>
-                  <Font name="System Bold" size="17.0" />
-               </font>
-            </Button>
             <Region layoutX="559.0" layoutY="10.0" prefHeight="100.0" prefWidth="54.0" HBox.hgrow="ALWAYS" />
             </children>
         </HBox>

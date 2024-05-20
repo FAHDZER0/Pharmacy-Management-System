@@ -51,12 +51,12 @@
             </VBox>
             <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="1128.0" spacing="10.0" style="-fx-border-color: Grey; -fx-border-width: 0.5px;">
                <children>
-                  <Button mnemonicParsing="false" onAction="#setInCenter" text="Add">
+                  <Button fx:id="addbutton" mnemonicParsing="false" onAction="#setInCenter" text="Add">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
                   </Button>
-                  <Button layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#EditSelectedRow" text="Save Edit">
+                  <Button fx:id="saveeditbutton" layoutX="87.0" layoutY="23.0" mnemonicParsing="false" onAction="#EditSelectedRow" text="Save Edit">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>
@@ -76,7 +76,7 @@
                      </padding>
                   </Label>
                   <Region layoutX="346.0" layoutY="21.0" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Button layoutX="157.0" layoutY="23.0" mnemonicParsing="false" onAction="#DeleteSelectedRow" text="Delete">
+                  <Button fx:id="deletebutton" layoutX="157.0" layoutY="23.0" mnemonicParsing="false" onAction="#DeleteSelectedRow" text="Delete">
                      <font>
                         <Font name="System Bold" size="17.0" />
                      </font>

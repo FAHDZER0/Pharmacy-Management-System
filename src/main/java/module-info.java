@@ -6,6 +6,7 @@ module project.pharmacyv1 {
     requires TrayTester;
     requires jdk.compiler;
     requires pdfbox.app;
+    requires com.ibm.icu;
 
     exports project.pharmacyv1.Customers to javafx.fxml;
     opens project.pharmacyv1.Customers to javafx.fxml;

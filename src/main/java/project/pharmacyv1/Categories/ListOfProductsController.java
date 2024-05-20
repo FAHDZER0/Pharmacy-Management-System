@@ -28,6 +28,8 @@ public class ListOfProductsController {
     @FXML
     private Label Categories2Title;
     @FXML
+    private Label Categories1Title1;
+    @FXML
     private ComboBox choice1;
     @FXML
     private BorderPane SecondaryMainBorderPane;
@@ -37,6 +39,13 @@ public class ListOfProductsController {
     private TextField SearchTextField;
     @FXML
     private Label NumberOfItems;
+    @FXML
+    private Button deletebutton;
+    @FXML
+    private Button saveeditbutton;
+    @FXML
+    private Button addbutton;
+
 
     DB db = new DB();
     LogWriter log = new LogWriter();
@@ -212,11 +221,20 @@ public class ListOfProductsController {
 
         if(DC.Language.equals("en")){
             Categories2Title.setText(LS.il8n("Categories2","en"));
+            deletebutton.setText("Delete");
+            saveeditbutton.setText("Save Edit");
+            addbutton.setText("Add");
+            Categories1Title1.setText("Number of Items:");
+            choice1.setItems(FXCollections.observableArrayList("Product English Name", "Product Arabic Name" ,"Manufacturing Company"));
         } else if(DC.Language.equals("ar")){
             Categories2Title.setText(LS.il8n("Categories2","ar"));
+            deletebutton.setText("حذف");
+            saveeditbutton.setText("حفظ التعديل");
+            addbutton.setText("إضافة");
+            Categories1Title1.setText("عدد العناصر:");
+            choice1.setItems(FXCollections.observableArrayList("اسم المنتج بالإنجليزية", "اسم المنتج بالعربية" ,"شركة التصنيع"));
         }
 
-        choice1.setItems(FXCollections.observableArrayList("Product English Name", "Product Arabic Name" ,"Manufacturing Company"));
         choice1.getSelectionModel().select(0);
 
     }

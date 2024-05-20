@@ -36,6 +36,10 @@ public class ModifyItemSNameController {
     private TextField SearchTextField;
     @FXML
     private TextField SearchTextField2;
+    @FXML
+    private Button saveedit1;
+    @FXML
+    private Button saveedit2;
 
     DB db = new DB();
     LogWriter log = new LogWriter();
@@ -253,13 +257,20 @@ public void fillTable(TableView<Map<String, Object>> tableView, ObservableList<M
 
         if(DC.Language.equals("en")){
             Categories3Title.setText(LS.il8n("Categories5","en"));
+            choice1.setItems(FXCollections.observableArrayList("Product English Name", "Product Arabic Name" ,"Manufacturing Company"));
+            choice2.setItems(FXCollections.observableArrayList("Medication English Name", "Medication Arabic Name" ,"Manufacturing Company","Active Ingredient"));
+            saveedit1.setText("Save Edit");
+            saveedit2.setText("Save Edit");
+
         } else if(DC.Language.equals("ar")){
             Categories3Title.setText(LS.il8n("Categories5","ar"));
+            choice1.setItems(FXCollections.observableArrayList("اسم المنتج بالانجليزي", "اسم المنتج بالعربي" ,"شركة التصنيع"));
+            choice2.setItems(FXCollections.observableArrayList("اسم الدواء بالانجليزي", "اسم الدواء بالعربي" ,"شركة التصنيع","المادة الفعالة"));
+            saveedit1.setText("حفظ التعديل");
+            saveedit2.setText("حفظ التعديل");
         }
 
-        choice1.setItems(FXCollections.observableArrayList("Product English Name", "Product Arabic Name" ,"Manufacturing Company"));
         choice1.getSelectionModel().select(0);
-        choice2.setItems(FXCollections.observableArrayList("Medication English Name", "Medication Arabic Name" ,"Manufacturing Company","Active Ingredient"));
         choice2.getSelectionModel().select(0);
 
     }

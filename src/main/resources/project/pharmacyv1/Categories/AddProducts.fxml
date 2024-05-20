@@ -16,9 +16,9 @@
 <BorderPane fx:id="SecondaryMainBorderPane" prefWidth="1264.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.pharmacyv1.Categories.AddProductsController">
     <center>
 
-        <VBox alignment="TOP_CENTER" prefHeight="761.0" prefWidth="1264.0" style="-fx-background-color: beige;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+        <VBox alignment="TOP_CENTER" prefHeight="761.0" prefWidth="1264.0" style="-fx-background-color: #f1f1f2;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
             <children>
-                <Label alignment="CENTER" maxWidth="1.7976931348623157E308" text="Add new Item - اضافة صنف جديد" textAlignment="CENTER">
+                <Label fx:id="bigtitle" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Add new Item - اضافة صنف جديد" textAlignment="CENTER">
                     <font>
                         <Font name="System Bold" size="50.0" />
                     </font>
@@ -28,7 +28,7 @@
                         <children>
                             <HBox prefHeight="50.0" prefWidth="1244.0">
                                 <children>
-                                    <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="1494.0" text="Add New Product" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                    <Label fx:id="title" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="1494.0" text="Add New Product" textAlignment="CENTER" HBox.hgrow="ALWAYS">
                                         <font>
                                             <Font name="System Bold" size="30.0" />
                                         </font>
@@ -41,7 +41,7 @@
                                         <children>
                                             <HBox alignment="CENTER_LEFT">
                                                 <children>
-                                                    <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="242.0" text="Product's Code" textAlignment="CENTER">
+                                                    <Label fx:id="productcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="242.0" text="Product's Code" textAlignment="CENTER">
                                                         <font>
                                                             <Font name="System Bold" size="20.0" />
                                                         </font>
@@ -63,7 +63,7 @@
                                             </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" prefHeight="14.0" prefWidth="1242.0">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="242.0" text="Product Barcode" textAlignment="CENTER">
+                                    <Label fx:id="barcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="242.0" text="Product Barcode" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -85,7 +85,7 @@
                               </HBox>
                                             <HBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="1242.0">
                                                 <children>
-                                                    <Label maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="242.0" text="Product's Arabic Name" textAlignment="CENTER">
+                                                    <Label fx:id="arabicname" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="242.0" text="Product's Arabic Name" textAlignment="CENTER">
                                                         <font>
                                                             <Font name="System Bold" size="20.0" />
                                                         </font>
@@ -107,7 +107,7 @@
                                             </HBox>
                                             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0">
                                                 <children>
-                                                    <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Product's English Name" textAlignment="CENTER">
+                                                    <Label fx:id="englishname" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Product's English Name" textAlignment="CENTER">
                                                         <font>
                                                             <Font name="System Bold" size="20.0" />
                                                         </font>
@@ -128,7 +128,7 @@
                               <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="238.0">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Manufacturer" textAlignment="CENTER">
+                                    <Label fx:id="manu" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Manufacturer" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -148,7 +148,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="283.0">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Expiry Date" textAlignment="CENTER">
+                                    <Label fx:id="expdate" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Expiry Date" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -165,7 +165,7 @@
                               <Separator layoutX="10.0" layoutY="235.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="353.0">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Selling Price" textAlignment="CENTER">
+                                    <Label fx:id="sellingprice" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Selling Price" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -185,7 +185,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="393.0">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Purchase Price" textAlignment="CENTER">
+                                    <Label fx:id="purchaseprice" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Purchase Price" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -205,7 +205,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="433.0">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Reorder Level" textAlignment="CENTER">
+                                    <Label fx:id="reorderlevel" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Reorder Level" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -225,7 +225,7 @@
                               </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="468.0">
                                  <children>
-                                    <Label maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Product Type" textAlignment="CENTER">
+                                    <Label fx:id="producttype" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="242.0" text="Product Type" textAlignment="CENTER">
                                        <font>
                                           <Font name="System Bold" size="20.0" />
                                        </font>
@@ -251,12 +251,12 @@
                     </VBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="1128.0" spacing="10.0" style="-fx-border-color: Grey; -fx-border-width: 0.5px;">
                     <children>
-                        <Button mnemonicParsing="false" onAction="#resetFields" text="New">
+                        <Button fx:id="newbutton" mnemonicParsing="false" onAction="#resetFields" text="New">
                             <font>
                                 <Font name="System Bold" size="17.0" />
                             </font>
                         </Button>
-                        <Button layoutX="21.0" layoutY="23.0" mnemonicParsing="false" onAction="#AddItemButtonAction" text="Save">
+                        <Button fx:id="savebutton" layoutX="21.0" layoutY="23.0" mnemonicParsing="false" onAction="#AddItemButtonAction" text="Save">
                             <font>
                                 <Font name="System Bold" size="17.0" />
                             </font>

@@ -281,12 +281,11 @@
         Map<String, Object> data = new HashMap<>();
         data.put("CustomerID", CustomerCode.getText());
         data.put("TotalSaleAmount", InvoiceTotalValue.getText());
-        if (((RadioButton) patmentMethod.getSelectedToggle()).getText().equalsIgnoreCase("Onhold")) {
+        if (((RadioButton) patmentMethod.getSelectedToggle()).getText().equalsIgnoreCase("On Hold")) {
             data.put("SaleStatus", "On hold");
         } else {
             data.put("SaleStatus", "Complete");
         }
-        data.put("SaleStatus", "Complete");
         data.put("SalesDate", date );
         data.put("DiscountAmount", DiscountAmount.getText());
         data.put("TotalProfit", invoiceProfitValue.getText());
@@ -405,6 +404,31 @@
             controller.setSalesInvoiceController(this);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void addCommentedInvoice(int InvoiceNumber){
+        // Fetch the commented invoice from the database
+        ObservableList<Map<String, Object>> invoice = db.SelectQuery("salesinvoices", "SalesInvoiceID", String.valueOf(InvoiceNumber));
+
+        // Set the data in the invoice to the fields in the SalesInvoiceController
+        CustomerCode.setText(invoice.get(0).get("CustomerID") != null ? invoice.get(0).get("CustomerID").toString() : "");
+        CustomerPhone.setText(db.SelectQuery("customers", "CustomerID", CustomerCode.getText()).get(0).get("PersonalPhoneNumber") != null ? db.SelectQuery("customers", "CustomerID", CustomerCode.getText()).get(0).get("PersonalPhoneNumber").toString() : "");
+        CustomerName.setText(db.SelectQuery("customers", "CustomerID", CustomerCode.getText()).get(0).get("CustomerName") != null ? db.SelectQuery("customers", "CustomerID", CustomerCode.getText()).get(0).get("CustomerName").toString() : "");
+        CustomerBalance.setText(db.SelectQuery("customers", "CustomerID", CustomerCode.getText()).get(0).get("CustomerDebt") != null ? db.SelectQuery("customers", "CustomerID", CustomerCode.getText()).get(0).get("CustomerDebt").toString() : "");
+        DiscountAmount.setText(invoice.get(0).get("DiscountAmount") != null ? invoice.get(0).get("DiscountAmount").toString() : "");
+        DiscountPrecent.setText(invoice.get(0).get("DiscountAmount") != null ? invoice.get(0).get("DiscountAmount").toString() : "");
+        Notes.setText(invoice.get(0).get("Notes") != null ? invoice.get(0).get("Notes").toString() : "");
+        InvoiceCostLabel.setText(invoice.get(0).get("TotalSaleAmount") != null ? invoice.get(0).get("TotalSaleAmount").toString() : "");
+        invoiceProfitValue.setText(invoice.get(0).get("TotalProfit") != null ? invoice.get(0).get("TotalProfit").toString() : "");
+        InvoiceTotalValue.setText(invoice.get(0).get("TotalSaleAmount") != null ? invoice.get(0).get("TotalSaleAmount").toString() : "");
+
+        // Fetch the sales invoice details from the database
+        ObservableList<Map<String, Object>> salesInvoiceDetails = db.SelectQuery("salesinvoicedetails", "SalesInvoiceID", String.valueOf(InvoiceNumber));
+
+        // Add the sales invoice details to the Sales1BigTable
+        for (Map<String, Object> item : salesInvoiceDetails) {
+            setSales1BigTable(item);
         }
     }
 

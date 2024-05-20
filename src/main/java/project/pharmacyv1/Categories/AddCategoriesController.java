@@ -3,10 +3,9 @@ package project.pharmacyv1.Categories;
 import Database.DB;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
+import project.pharmacyv1.DashboardController;
 import project.pharmacyv1.LogWriter;
 
 import java.io.IOException;
@@ -44,6 +43,43 @@ public class AddCategoriesController {
     private TextField MedicationType;
     @FXML
     private BorderPane SecondaryMainBorderPane;
+    @FXML
+    private Label itemscodelabel;
+    @FXML
+    private Label internationalcode;
+    @FXML
+    private Label barcode;
+    @FXML
+    private Label arabicname;
+    @FXML
+    private Label englishname;
+    @FXML
+    private Label activeingrid;
+    @FXML
+    private Label manu;
+    @FXML
+    private Label expdate;
+    @FXML
+    private Label unit;
+    @FXML
+    private Label sellingprice;
+    @FXML
+    private Label purchaseprice;
+    @FXML
+    private Label reorderlevel;
+    @FXML
+    private Label medtype;
+    @FXML
+    private Label addnewmed;
+    @FXML
+    private Label bigtitle;
+    @FXML
+    private Button newbutton;
+    @FXML
+    private Button savebutton;
+    @FXML
+    private Button canceladd;
+
 
     DB db = new DB();
     LogWriter log = new LogWriter();
@@ -118,6 +154,50 @@ public class AddCategoriesController {
         List<Map<String, Object>> allItems = db.SelectQuery("medications");
         int lastItemId = allItems.isEmpty() ? 0 : Integer.parseInt(allItems.get(allItems.size() - 1).get("MedicationID").toString());
         ItemCode.setText(Integer.toString(lastItemId + 1));
+
+        DashboardController DC = new DashboardController();
+
+        if (DC.Language.equals("en")) {
+            itemscodelabel.setText("Item Code");
+            internationalcode.setText("International Code");
+            barcode.setText("Barcode");
+            arabicname.setText("Arabic Name");
+            englishname.setText("English Name");
+            activeingrid.setText("Active Ingredient");
+            manu.setText("Manufacturer");
+            expdate.setText("Expiry Date");
+            unit.setText("Unit");
+            sellingprice.setText("Selling Price");
+            purchaseprice.setText("Purchase Price");
+            reorderlevel.setText("Reorder Level");
+            medtype.setText("Medication Type");
+            addnewmed.setText("Add New Medication");
+            bigtitle.setText("Add New Medication");
+            canceladd.setText("Cancel");
+            savebutton.setText("Save");
+            newbutton.setText("New");
+        } else if (DC.Language.equals("ar")) {
+            itemscodelabel.setText("كود الصنف");
+            internationalcode.setText("الكود الدولي");
+            barcode.setText("الباركود");
+            arabicname.setText("الاسم بالعربي");
+            englishname.setText("الاسم بالانجليزي");
+            activeingrid.setText("المادة الفعالة");
+            manu.setText("الشركة المصنعة");
+            expdate.setText("تاريخ الانتهاء");
+            unit.setText("الوحدة");
+            sellingprice.setText("سعر البيع");
+            purchaseprice.setText("سعر الشراء");
+            reorderlevel.setText("الحد الادنى");
+            medtype.setText("نوع الدواء");
+            addnewmed.setText("اضافة دواء جديد");
+            bigtitle.setText("اضافة صنف جديد");
+            canceladd.setText("الغاء");
+            savebutton.setText("حفظ");
+            newbutton.setText("جديد");
+        }
+
+
     }
 
 }

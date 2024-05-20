@@ -80,8 +80,11 @@ public class EditCountQuantityController {
         for (Map<String, Object> row : data) {
             total += Integer.parseInt(row.get("Quantity").toString());
         }
-        ProductTotal.setText("Total: " + total);
-        fillTable(ItemListTableView, data);
+        if (DC.Language.equals("en")) {
+            ProductTotal.setText("Total: " + total);
+        } else if (DC.Language.equals("ar")) {
+            ProductTotal.setText("المجموع: " + total);
+        }        fillTable(ItemListTableView, data);
     }
     public void RefreshButtonAction2() {
         // Refresh the table
@@ -116,7 +119,11 @@ public class EditCountQuantityController {
         for (Map<String, Object> row : data) {
             total += Integer.parseInt(row.get("Quantity").toString());
         }
-        MedicationTotal.setText("Total: " + total);
+        if (DC.Language.equals("en")) {
+            MedicationTotal.setText("Total: " + total);
+        } else if (DC.Language.equals("ar")) {
+            MedicationTotal.setText("المجموع: " + total);
+        }
         fillTable(ItemListTableView1, data);
 
     }
@@ -273,13 +280,15 @@ public class EditCountQuantityController {
 
         if(DC.Language.equals("en")){
             Warehouse3Title.setText(LS.il8n("Warehouse3","en"));
+            choice1.setItems(FXCollections.observableArrayList("Product English Name", "Product Arabic Name" ,"Manufacturing Company"));
+            choice2.setItems(FXCollections.observableArrayList("Medication English Name", "Medication Arabic Name" ,"Manufacturing Company","Active Ingredient"));
         } else if(DC.Language.equals("ar")){
             Warehouse3Title.setText(LS.il8n("Warehouse3","ar"));
+            choice1.setItems(FXCollections.observableArrayList("اسم المنتج بالانجليزي", "اسم المنتج بالعربي" ,"شركة التصنيع"));
+            choice2.setItems(FXCollections.observableArrayList("اسم الدواء بالانجليزي", "اسم الدواء بالعربي" ,"شركة التصنيع","المادة الفعالة"));
         }
 
-        choice1.setItems(FXCollections.observableArrayList("Product English Name", "Product Arabic Name" ,"Manufacturing Company"));
         choice1.getSelectionModel().select(0);
-        choice2.setItems(FXCollections.observableArrayList("Medication English Name", "Medication Arabic Name" ,"Manufacturing Company","Active Ingredient"));
         choice2.getSelectionModel().select(0);
 
     }

@@ -37,6 +37,15 @@ public class ListOfItemController {
     private TextField SearchTextField;
     @FXML
     private Label NumberOfItems;
+    @FXML
+    private Label Categories1Title1;
+    @FXML
+    private Button saveeditbutton;
+    @FXML
+    private Button deletebutton;
+    @FXML
+    private Button addbutton;
+
 
     DB db = new DB();
     LogWriter log = new LogWriter();
@@ -217,11 +226,21 @@ public class ListOfItemController {
 
         if(DC.Language.equals("en")){
             Categories1Title.setText(LS.il8n("Categories1","en"));
+            deletebutton.setText("Delete");
+            saveeditbutton.setText("Save Edit");
+            addbutton.setText("Add");
+            Categories1Title1.setText("Number of Items:");
+            choice1.setItems(FXCollections.observableArrayList("Medication English Name", "Medication Arabic Name" ,"Manufacturing Company","Active Ingredient"));
         } else if(DC.Language.equals("ar")){
             Categories1Title.setText(LS.il8n("Categories1","ar"));
+            deletebutton.setText("حذف");
+            saveeditbutton.setText("حفظ التعديل");
+            addbutton.setText("إضافة");
+            Categories1Title1.setText("عدد العناصر:");
+            choice1.setItems(FXCollections.observableArrayList("اسم الدواء بالإنجليزية", "اسم الدواء بالعربية" ,"شركة التصنيع","المادة الفعالة"));
+
         }
 
-        choice1.setItems(FXCollections.observableArrayList("Medication English Name", "Medication Arabic Name" ,"Manufacturing Company","Active Ingredient"));
         choice1.getSelectionModel().select(0);
 
     }

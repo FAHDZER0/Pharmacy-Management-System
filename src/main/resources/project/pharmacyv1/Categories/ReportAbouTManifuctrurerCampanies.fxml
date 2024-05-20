@@ -30,7 +30,7 @@
                      <children>
                         <HBox alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="0.0" spacing="15.0">
                            <children>
-                              <Button fx:id="PrintButton" mnemonicParsing="false" prefHeight="51.0" prefWidth="110.0" text="Print">
+                              <Button fx:id="PrintButton" mnemonicParsing="false" onAction="#PrintButtonAction" prefHeight="51.0" prefWidth="110.0" text="Print">
                                  <font>
                                     <Font name="System Bold" size="18.0" />
                                  </font>
