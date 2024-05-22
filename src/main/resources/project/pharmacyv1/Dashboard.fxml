@@ -23,7 +23,7 @@
 
 <BorderPane fx:id="MainBoarderPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1455.0" style="-fx-background-color: #f5f4f6;" styleClass="bigmain" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.pharmacyv1.DashboardController">
   <top>
-    <HBox prefWidth="200.0" spacing="1.0" styleClass="bg1" stylesheets="@Style.css" BorderPane.alignment="CENTER">
+    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="1.0" styleClass="bg1" stylesheets="@Style.css" BorderPane.alignment="CENTER">
       <padding>
         <Insets bottom="1.0" top="1.0" />
       </padding>
@@ -196,6 +196,22 @@
                <Font name="System Bold" size="13.0" />
             </font>
          </MenuButton>
+         <Region prefHeight="27.0" prefWidth="0.0" HBox.hgrow="ALWAYS" />
+         <Button fx:id="Notification" layoutX="10.0" layoutY="11.0" mnemonicParsing="false" onAction="#openNotification" prefHeight="43.0" prefWidth="45.0" styleClass="button1">
+            <font>
+               <Font name="System Bold" size="13.0" />
+            </font>
+            <graphic>
+               <ImageView fitHeight="31.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
+                  <image>
+                     <Image url="@../../Images/notification-bell-svgrepo-com.png" />
+                  </image>
+               </ImageView>
+            </graphic>
+            <padding>
+               <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
+            </padding>
+         </Button>
     </HBox>
   </top>
   <bottom>
@@ -364,17 +380,6 @@
           <Insets left="10.0" right="10.0" top="2.0" />
         </padding>
       </Separator>
-
-      <Button fx:id="Deficiencies_side" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" styleClass="button1" textAlignment="CENTER" wrapText="true">
-        <font>
-          <Font size="11.0" />
-        </font>
-        <graphic>
-          <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../Images/Deficiencies.png" />
-          </ImageView>
-        </graphic>
-      </Button>
       <Button fx:id="ListOfItem_side" alignment="CENTER" layoutX="20.0" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#setInCenter" prefHeight="90.0" prefWidth="90.0" styleClass="button1" textAlignment="CENTER" wrapText="true">
         <font>
           <Font size="11.0" />
@@ -402,16 +407,6 @@
         <graphic>
           <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
             <Image url="@../../Images/Sales.png" />
-          </ImageView>
-        </graphic>
-      </Button>
-      <Button fx:id="cashSupplay_side" alignment="CENTER" layoutX="20.0" layoutY="335.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="90.0" prefWidth="90.0" styleClass="button1" textAlignment="CENTER" wrapText="true">
-        <font>
-          <Font size="11.0" />
-        </font>
-        <graphic>
-          <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
-            <Image url="@../../Images/cashSupplay.png" />
           </ImageView>
         </graphic>
       </Button>

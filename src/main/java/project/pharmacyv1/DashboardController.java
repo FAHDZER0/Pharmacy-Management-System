@@ -63,8 +63,6 @@ public class DashboardController {
     private MenuButton currentButton; //Reference to the currently pressed button
 
     @FXML
-    private Button Deficiencies_side;
-    @FXML
     private Button ListOfItem_side;
     @FXML
     private Button PurchaseInvoice_side;
@@ -72,8 +70,6 @@ public class DashboardController {
     private Button SalesInvoice_side;
     @FXML
     private Button ListOfCustomer_side;
-    @FXML
-    private Button cashSupplay_side;
 
     private void setHoverEffect(Control control) {
 
@@ -244,6 +240,37 @@ public class DashboardController {
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle("Shortcuts");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @FXML
+    public void openNotification(){
+        //this method is used to show a stage with fxml Notification
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/project/pharmacyv1/Notification/Notification.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            // Variables for storing initial position of the stage at the beginning of drag
+            final double[] xOffset = new double[1];
+            final double[] yOffset = new double[1];
+
+            // Event handler for mouse pressed event on the stage (pressing the left mouse button)
+            root.setOnMousePressed(event -> {
+                xOffset[0] = event.getSceneX();
+                yOffset[0] = event.getSceneY();
+            });
+
+            // Event handler for mouse drag event on the stage (dragging with left mouse button)
+            root.setOnMouseDragged(event -> {
+                stage.setX(event.getScreenX() - xOffset[0]);
+                stage.setY(event.getScreenY() - yOffset[0]);
+            });
+            stage.setScene(scene);
+            stage.setTitle("Notification");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
@@ -483,6 +510,8 @@ public class DashboardController {
     @FXML
     private MenuItem shortcutsbutton;
     @FXML
+    private Button Notification;
+    @FXML
     private Label miniUserName;
 
 
@@ -492,12 +521,10 @@ public class DashboardController {
         if (language.equals("ar")) {
             MainBoarderPane.setNodeOrientation(javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
 
-            Deficiencies_side.setTooltip(createCustomTooltip("كشكول النواقص"));
             ListOfItem_side.setTooltip(createCustomTooltip("الأصناف"));
             PurchaseInvoice_side.setTooltip(createCustomTooltip("فاتورة شراء"));
             SalesInvoice_side.setTooltip(createCustomTooltip("فاتورة بيع"));
             ListOfCustomer_side.setTooltip(createCustomTooltip("العملاء"));
-            cashSupplay_side.setTooltip(createCustomTooltip("توريد نقدية"));
             Language = "ar";
 
         }
@@ -505,12 +532,10 @@ public class DashboardController {
             MainBoarderPane.setNodeOrientation(javafx.geometry.NodeOrientation.LEFT_TO_RIGHT);
 
             //setting tooltips for side buttons
-            Deficiencies_side.setTooltip(createCustomTooltip("Deficiencies"));
             ListOfItem_side.setTooltip(createCustomTooltip("Categories"));
             PurchaseInvoice_side.setTooltip(createCustomTooltip("Purchase Invoice"));
             SalesInvoice_side.setTooltip(createCustomTooltip("Sales Invoice"));
             ListOfCustomer_side.setTooltip(createCustomTooltip("Customers"));
-            cashSupplay_side.setTooltip(createCustomTooltip("Cash Supply"));
             Language = "en";
         }
         LanguageSetter LS = new LanguageSetter();
@@ -659,15 +684,14 @@ public class DashboardController {
         Platform.runLater(() -> {
             setPieChartValues();
             setAnimationDashboard();
+            openNotification();
         });
 
         //setting tooltips for side buttons
-        Deficiencies_side.setTooltip(createCustomTooltip("Deficiencies"));
         ListOfItem_side.setTooltip(createCustomTooltip("Categories"));
         PurchaseInvoice_side.setTooltip(createCustomTooltip("Purchase Invoice"));
         SalesInvoice_side.setTooltip(createCustomTooltip("Sales Invoice"));
         ListOfCustomer_side.setTooltip(createCustomTooltip("Customers"));
-        cashSupplay_side.setTooltip(createCustomTooltip("Cash Supply"));
 
         // Set hover effect for all buttons
         setHoverEffect(CategoriesMain);
@@ -682,12 +706,11 @@ public class DashboardController {
         setHoverEffect(FrameworkMain);
         setHoverEffect(GeneralInformation);
         setHoverEffect(HelpMain);
-        setSideHoverEffect(Deficiencies_side);
         setSideHoverEffect(PurchaseInvoice_side);
         setSideHoverEffect(SalesInvoice_side);
         setSideHoverEffect(ListOfCustomer_side);
-        setSideHoverEffect(cashSupplay_side);
         setSideHoverEffect(ListOfItem_side);
+        setSideHoverEffect(Notification);
 
         setLanguage("ar");
 
