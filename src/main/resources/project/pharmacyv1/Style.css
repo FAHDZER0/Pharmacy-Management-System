@@ -1,4 +1,70 @@
-#choice1,#choice2{
-    -fx-font-size: 16px ;
-    -fx-font-weight: bold ;
+@import "Colors.css";
+
+/*.root {
+    -fx-bg-color-1: #1996aa;
+    -fx-bg-color-2: #a1d6e2;
+    -fx-bg-color-3: #f1f1f2;
+    -fx-textcolor1: #ffffff;
+    -fx-main-grid-pane-bg-color: #f1f1f2;
+    -fx-topGrid: #147de2;
+    -fx-grid-1: #147de2;
+    -fx-grid-2: #3c9247;
+    -fx-grid-3: #f54934;
+    -fx-grid-4: #f48800;
+    -fx-grid-5: #9635af;
+    -fx-grid-6: #ff0f87;
+}*/
+
+.button1{
+    -fx-border-width: 3px;
+    -fx-border-radius: 100px;
+    -fx-border-color: -fx-bg-color-3;
+    -fx-background-radius: 100px;
+    -fx-background-color: -fx-bg-color-1;
+}
+
+.MainGridPane{
+    -fx-background-color: -fx-main-grid-pane-bg-color;
+}
+
+.topdashboard{
+    -fx-background-color: -fx-bg-color-1;
+    -fx-background-radius: 0 0 20 20;
+}
+.grid1{
+    -fx-background-color: -fx-grid-1;
+    -fx-background-radius: 20 0 0 0;
+}
+.grid2{
+    -fx-background-color: -fx-grid-2;
+}
+.grid3{
+    -fx-background-color: -fx-grid-3;
+    -fx-background-radius: 0 20 0 0;
+}
+.grid4{
+    -fx-background-color: -fx-grid-4;
+    -fx-background-radius: 0 0 0 20;
+}
+.grid5{
+    -fx-background-color: -fx-grid-5;
+}
+.grid6{
+    -fx-background-color: -fx-grid-6;
+    -fx-background-radius: 0 0 20 0;
+}
+
+
+
+.dashboardText{
+    -fx-text-fill: -fx-textcolor1;
+}
+
+.bg1 {
+     -fx-background-color: -fx-bg-color-2;
+}
+
+#choice1, #choice2 {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
 }

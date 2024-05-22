@@ -1,0 +1,14 @@
+.root {
+    -fx-bg-color-1: #1996AA;
+    -fx-bg-color-2: #A1D6E2;
+    -fx-bg-color-3: #F1F1F2;
+    -fx-textcolor1: #FFFFFF;
+    -fx-main-grid-pane-bg-color: #F1F1F2;
+    -fx-topGrid: #147DE2;
+    -fx-grid-1: #147DE2;
+    -fx-grid-2: #3C9247;
+    -fx-grid-3: #F54934;
+    -fx-grid-4: #F48800;
+    -fx-grid-5: #9635AF;
+    -fx-grid-6: #FF0F87;
+}

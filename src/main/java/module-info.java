@@ -22,4 +22,6 @@ module project.pharmacyv1 {
     opens project.pharmacyv1.Suppliers to javafx.fxml;
     exports project.pharmacyv1.Warehouse;
     opens project.pharmacyv1.Warehouse to javafx.fxml;
+    exports project.pharmacyv1.GeneralAccounts;
+    opens project.pharmacyv1.GeneralAccounts to javafx.fxml;
 }

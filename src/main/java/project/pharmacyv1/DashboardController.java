@@ -23,6 +23,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
@@ -56,6 +57,8 @@ public class DashboardController {
     private MenuButton EmployeesAffairsMain;
     @FXML
     private MenuButton FrameworkMain;
+    @FXML
+    private MenuButton HelpMain;
 
     private MenuButton currentButton; //Reference to the currently pressed button
 
@@ -198,14 +201,53 @@ public class DashboardController {
         setDashboardData();
     }
 
-    // method to change the style from light to dark
+    // method let the user choose the color of the application
     @FXML
-    public void setStyleToDark(){
-        MainBoarderPane.setStyle("-fx-background-color: #000000;");
+    public void Choosecolors(){
+        //this method is used to show a stage with fxml shortcuts
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/colorpicker/ColorPicker.fxml"));
+            Parent root = loader.load();
+
+            // Get the controller instance
+            ColorPickerController controller = loader.getController();
+            // Pass the reference of the dashboard stage to the controller
+            Stage dashboardStage = (Stage) MainBoarderPane.getScene().getWindow();
+            controller.setDashboardStage(dashboardStage);
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Color Picker");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    public void openUserManual(){
+        //this method is used to open the documentation file in the desired location
+        try {
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\Documentation\\User Manual.pdf");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
-    public void setStyleToLight(){
-        MainBoarderPane.setStyle("-fx-background-color: #ffffff;");
+    public void openShortcuts(){
+        //this method is used to show a stage with fxml shortcuts
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/project/pharmacyv1/Shortcut/Shortcut.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Shortcuts");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -238,6 +280,8 @@ public class DashboardController {
             MenuItemName = "Warehouses/" + MenuItemName;
         } else if(MenuItemName.equalsIgnoreCase("ListOfCustomer")){
             MenuItemName = "Customer/" + MenuItemName;
+        } else if(MenuItemName.equalsIgnoreCase("AddCreditCard")){
+            MenuItemName = "GeneralAccounts/" + MenuItemName;
         }
 
         removeFromCenter();
@@ -257,16 +301,15 @@ public class DashboardController {
 
     private void setSideHoverEffect(Control control){
         control.setOnMouseEntered(event -> {
-            control.setStyle("-fx-background-color:  #a1d6e2; -fx-background-radius: 100px; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-border-width: 3px;");
+            control.setStyle("-fx-background-color:  -fx-bg-color-2; -fx-background-radius: 100px; -fx-border-color: -fx-bg-color-3; -fx-border-radius: 100px; -fx-border-width: 3px;");
         });
 
         control.setOnMouseExited(event -> {
             // If the button is not currently pressed, keep it blue and big
             if (control != currentButton) {
-                control.setStyle("-fx-background-color:  #1996aa; -fx-background-radius: 100px; -fx-border-color: #f1f1f2; -fx-border-radius: 100px; -fx-border-width: 3px;");
+                control.setStyle("-fx-background-color:  -fx-bg-color-1; -fx-background-radius: 100px; -fx-border-color: -fx-bg-color-3; -fx-border-radius: 100px; -fx-border-width: 3px;");
             }
         });
-
     }
 
     private Tooltip createCustomTooltip(String text) {
@@ -368,7 +411,7 @@ public class DashboardController {
     @FXML
     private MenuItem accounts3;
     @FXML
-    private MenuItem accounts4;
+    private MenuItem AddCreditCard;
     @FXML
     private MenuItem accounts5;
     @FXML
@@ -435,6 +478,10 @@ public class DashboardController {
     private MenuItem EmployeesAffairs17;
     @FXML
     private MenuItem EmployeesAffairs18;
+    @FXML
+    private MenuItem Docbutton;
+    @FXML
+    private MenuItem shortcutsbutton;
     @FXML
     private Label miniUserName;
 
@@ -519,7 +566,7 @@ public class DashboardController {
         sales8.setText(LS.il8n("sales8",language));
         accounts2.setText(LS.il8n("accounts2",language));
         accounts3.setText(LS.il8n("accounts3",language));
-        accounts4.setText(LS.il8n("accounts4",language));
+        AddCreditCard.setText(LS.il8n("accounts4",language));
         accounts5.setText(LS.il8n("accounts5",language));
         accounts6.setText(LS.il8n("accounts6",language));
         accounts7.setText(LS.il8n("accounts7",language));
@@ -553,6 +600,9 @@ public class DashboardController {
         EmployeesAffairs16.setText(LS.il8n("EmployeesAffairs16",language));
         EmployeesAffairs17.setText(LS.il8n("EmployeesAffairs17",language));
         EmployeesAffairs18.setText(LS.il8n("EmployeesAffairs18",language));
+        Docbutton.setText(LS.il8n("UserManual",language));
+        shortcutsbutton.setText(LS.il8n("Shortcuts",language));
+        HelpMain.setText(LS.il8n("Help",language));
 
 
         removeFromCenter();
@@ -631,6 +681,7 @@ public class DashboardController {
         setHoverEffect(EmployeesAffairsMain);
         setHoverEffect(FrameworkMain);
         setHoverEffect(GeneralInformation);
+        setHoverEffect(HelpMain);
         setSideHoverEffect(Deficiencies_side);
         setSideHoverEffect(PurchaseInvoice_side);
         setSideHoverEffect(SalesInvoice_side);

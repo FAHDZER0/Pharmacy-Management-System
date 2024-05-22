@@ -47,6 +47,11 @@
                     </ImageView>
                 </graphic>
             </Button>
+         <Label layoutX="152.0" layoutY="466.0" text="Version 1.0.0">
+            <font>
+               <Font name="Arial" size="17.0" />
+            </font>
+         </Label>
         </AnchorPane>
     </center>
 </BorderPane>
