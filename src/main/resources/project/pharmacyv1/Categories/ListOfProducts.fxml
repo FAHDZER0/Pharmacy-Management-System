@@ -62,7 +62,7 @@
                      </font>
                   </Button>
                   <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                  <Label fx:id="Categories1Title1" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Number of Items" textAlignment="CENTER">
+                  <Label fx:id="Categories1Title1" alignment="CENTER" maxWidth="1.7976931348623157E308" text="Categories" textAlignment="CENTER">
                      <font>
                         <Font name="System Bold" size="20.0" />
                      </font>

@@ -3,8 +3,8 @@ package Classes;
 
 import java.time.LocalDate;
 
-public class Medicine {
-    private final int id;                   // immutable primary key
+public class Medicine implements BasicProduct {
+    private final int id;
     private String barcode;
     private String arabicName;
     private String englishName;
@@ -74,114 +74,42 @@ public class Medicine {
     public int getId() { return id; }
     /* getters & setters (omitted for brevity) */
 
-    @Override public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Medicine medicine = (Medicine) o;
-        return id == medicine.id;
-    }
+    public String getBarcode() {return barcode;}
+    public void setBarcode(String barcode) {this.barcode = barcode;}
 
-    public String getBarcode() {
-        return barcode;
-    }
+    public String getArabicName() {return arabicName;}
+    public void setArabicName(String arabicName) {this.arabicName = arabicName;}
 
-    public void setBarcode(String barcode) {
-        this.barcode = barcode;
-    }
+    public String getEnglishName() {return englishName;}
+    public void setEnglishName(String englishName) {this.englishName = englishName;}
 
-    public String getArabicName() {
-        return arabicName;
-    }
+    public String getInternationalCode() {return internationalCode;}
+    public void setInternationalCode(String internationalCode) {this.internationalCode = internationalCode;}
 
-    public void setArabicName(String arabicName) {
-        this.arabicName = arabicName;
-    }
+    public String getActiveIngredient() {return activeIngredient;}
+    public void setActiveIngredient(String activeIngredient) {this.activeIngredient = activeIngredient;}
 
-    public String getEnglishName() {
-        return englishName;
-    }
+    public String getManufacturer() {return manufacturer;}
+    public void setManufacturer(String manufacturer) {this.manufacturer = manufacturer;}
 
-    public void setEnglishName(String englishName) {
-        this.englishName = englishName;
-    }
+    public LocalDate getExpiryDate() {return expiryDate;}
+    public void setExpiryDate(LocalDate expiryDate) {this.expiryDate = expiryDate;}
 
-    public String getInternationalCode() {
-        return internationalCode;
-    }
+    public String getUnit() {return unit;}
+    public void setUnit(String unit) {this.unit = unit;}
 
-    public void setInternationalCode(String internationalCode) {
-        this.internationalCode = internationalCode;
-    }
+    public double getQuantity() {return quantity;}
+    public void setQuantity(double quantity) {this.quantity = quantity;}
 
-    public String getActiveIngredient() {
-        return activeIngredient;
-    }
+    public double getSellingPrice() {return sellingPrice;}
+    public void setSellingPrice(double sellingPrice) {this.sellingPrice = sellingPrice;}
 
-    public void setActiveIngredient(String activeIngredient) {
-        this.activeIngredient = activeIngredient;
-    }
+    public double getPurchasePrice() {return purchasePrice;}
+    public void setPurchasePrice(double purchasePrice) {this.purchasePrice = purchasePrice;}
 
-    public String getManufacturer() {
-        return manufacturer;
-    }
+    public double getReorderLevel() {return reorderLevel;}
+    public void setReorderLevel(double reorderLevel) {this.reorderLevel = reorderLevel;}
 
-    public void setManufacturer(String manufacturer) {
-        this.manufacturer = manufacturer;
-    }
-
-    public LocalDate getExpiryDate() {
-        return expiryDate;
-    }
-
-    public void setExpiryDate(LocalDate expiryDate) {
-        this.expiryDate = expiryDate;
-    }
-
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    public double getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(double quantity) {
-        this.quantity = quantity;
-    }
-
-    public double getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setSellingPrice(double sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
-
-    public double getPurchasePrice() {
-        return purchasePrice;
-    }
-
-    public void setPurchasePrice(double purchasePrice) {
-        this.purchasePrice = purchasePrice;
-    }
-
-    public double getReorderLevel() {
-        return reorderLevel;
-    }
-
-    public void setReorderLevel(double reorderLevel) {
-        this.reorderLevel = reorderLevel;
-    }
-
-    public String getMedicationType() {
-        return medicationType;
-    }
-
-    public void setMedicationType(String medicationType) {
-        this.medicationType = medicationType;
-    }
+    public String getMedicationType() {return medicationType;}
+    public void setMedicationType(String medicationType) {this.medicationType = medicationType;}
 }
