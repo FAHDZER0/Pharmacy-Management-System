@@ -185,7 +185,7 @@ public class ListOfProductsController {
     @FXML
     public void setInCenter(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/Categories/AddCategories.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/Categories/AddProducts.fxml"));
             BorderPane secondaryContent = loader.load();
             SecondaryMainBorderPane.setCenter(secondaryContent);
         } catch (IOException e) {

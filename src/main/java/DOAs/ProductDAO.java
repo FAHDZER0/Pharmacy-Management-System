@@ -46,10 +46,10 @@ public class ProductDAO {
 
     public void save(Product product) {
         String query = "INSERT INTO " + TABLE_NAME + " (" +
-                "ProductBarcode, ArabicName, EnglishName, InternationalCode, " +
-                "ActiveIngredient, Manufacturer, ExpiryDate, Unit, Quantity, " +
+                "ProductBarcode, ArabicName, EnglishName," +
+                "Manufacturer, ExpiryDate, Quantity, " +
                 "SellingPrice, PurchasePrice, ReorderLevel, ProductType) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
@@ -57,13 +57,13 @@ public class ProductDAO {
             stmt.setString(1, product.getBarcode());
             stmt.setString(2, product.getArabicName());
             stmt.setString(3, product.getEnglishName());
-            stmt.setString(6, product.getManufacturer());
-            stmt.setDate(7, java.sql.Date.valueOf(product.getExpiryDate()));
-            stmt.setDouble(9, product.getQuantity());
-            stmt.setDouble(10, product.getSellingPrice());
-            stmt.setDouble(11, product.getPurchasePrice());
-            stmt.setDouble(12, product.getReorderLevel());
-            stmt.setString(13, product.getProductType());
+            stmt.setString(4, product.getManufacturer());
+            stmt.setDate(5, java.sql.Date.valueOf(product.getExpiryDate()));
+            stmt.setDouble(6, product.getQuantity());
+            stmt.setDouble(7, product.getSellingPrice());
+            stmt.setDouble(8, product.getPurchasePrice());
+            stmt.setDouble(9, product.getReorderLevel());
+            stmt.setString(10, product.getProductType());
 
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
@@ -75,6 +75,13 @@ public class ProductDAO {
                 if (generatedKeys.next()) {
                     int id = generatedKeys.getInt(1);
                     System.out.println("Inserted Product ID: " + id);
+                    tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
+                    AnimationType type = AnimationType.POPUP;
+                    tray.setAnimationType(type);
+                    tray.setTitle("Success");
+                    tray.setMessage("Product Added Successfully");
+                    tray.setNotificationType(NotificationType.SUCCESS);
+                    tray.showAndDismiss(javafx.util.Duration.seconds(2));
                 }
             }
         } catch (SQLException e) {

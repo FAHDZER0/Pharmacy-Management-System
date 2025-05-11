@@ -39,28 +39,6 @@
                                 <content>
                                     <VBox prefHeight="770.0" prefWidth="1227.0">
                                         <children>
-                                            <HBox alignment="CENTER_LEFT">
-                                                <children>
-                                                    <Label fx:id="productcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="242.0" text="Product's Code" textAlignment="CENTER">
-                                                        <font>
-                                                            <Font name="System Bold" size="20.0" />
-                                                        </font>
-                                                        <padding>
-                                                            <Insets left="5.0" />
-                                                        </padding>
-                                                    </Label>
-                                                    <TextField fx:id="ItemCode" disable="true" prefHeight="30.0" prefWidth="137.0">
-                                                        <font>
-                                                            <Font name="System Bold" size="14.0" />
-                                                        </font>
-                                                    </TextField>
-                                                    <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="0.0" text="*" textAlignment="CENTER" textFill="RED">
-                                                        <font>
-                                                            <Font name="System Bold" size="30.0" />
-                                                        </font>
-                                                    </Label>
-                                                </children>
-                                            </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" prefHeight="14.0" prefWidth="1242.0">
                                  <children>
                                     <Label fx:id="barcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="242.0" text="Product Barcode" textAlignment="CENTER">
