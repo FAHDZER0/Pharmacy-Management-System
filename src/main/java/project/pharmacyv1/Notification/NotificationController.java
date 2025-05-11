@@ -3,8 +3,11 @@ package project.pharmacyv1.Notification;
 import Database.DB;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -13,10 +16,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import project.pharmacyv1.DashboardController;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -131,7 +138,10 @@ public class NotificationController {
     public String loadColorsFromCSS() {
         String[] colorParts = null;
         try {
-            File file = new File("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\project\\pharmacyv1\\Colors.css");
+            // Load the file using a relative path
+            File file = new File(Objects.requireNonNull(getClass().getResource("/project/pharmacyv1/Colors.css")).toURI());
+
+            // Read file content
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
@@ -139,15 +149,50 @@ public class NotificationController {
                     String[] parts = line.split(":");
                     colorParts = parts[1].split(";");
                     try {
-                        Color color = Color.web(colorParts[0]);
+                        Color color = Color.web(colorParts[0]); // Validate the color
                     } catch (IllegalArgumentException e) {
+                        System.out.println("Invalid color format in CSS file: " + e.getMessage());
                     }
                 }
             }
-        } catch (FileNotFoundException e) {
+            scanner.close();
+        } catch (Exception e) {
             e.printStackTrace();
+            System.out.println("Failed to load Colors.css. Ensure the file is present in the resources folder.");
         }
-        return colorParts[0];
+        return (colorParts != null && colorParts.length > 0) ? colorParts[0] : "#ffffff"; // Default color if missing
+    }
+
+    @FXML
+    public void openNotification() {
+        try {
+            // Load the FXML file using the relative path
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/project/pharmacyv1/Notification/Notification.fxml")));
+            Scene scene = new Scene(root);
+            Stage stage = new Stage();
+
+            // Add window dragging functionality
+            final double[] xOffset = new double[1];
+            final double[] yOffset = new double[1];
+            root.setOnMousePressed(event -> {
+                xOffset[0] = event.getSceneX();
+                yOffset[0] = event.getSceneY();
+            });
+            root.setOnMouseDragged(event -> {
+                stage.setX(event.getScreenX() - xOffset[0]);
+                stage.setY(event.getScreenY() - yOffset[0]);
+            });
+
+            // Configure stage and show
+            stage.setScene(scene);
+            stage.setTitle("Notification");
+            stage.initStyle(StageStyle.UNDECORATED);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.show();
+        } catch (IOException | NullPointerException e) {
+            e.printStackTrace();
+            System.out.println("Failed to load Notification.fxml. Ensure the file is present in the resources folder.");
+        }
     }
 
     public Pane createNotificationItem(String title, String message) {

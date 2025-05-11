@@ -1,22 +1,17 @@
 package project.pharmacyv1.Categories;
 
-import Database.DB;
+import Classes.Medicine;
+import DOAs.MedicineDAO;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import project.pharmacyv1.DashboardController;
 import project.pharmacyv1.LogWriter;
+import tray.notification.NotificationType;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class AddCategoriesController {
 
-    @FXML
-    private TextField ItemCode;
     @FXML
     private TextField internationalCode;
     @FXML
@@ -74,91 +69,115 @@ public class AddCategoriesController {
     @FXML
     private Label bigtitle;
     @FXML
-    private Button newbutton;
+    private Button canceladd;
     @FXML
     private Button savebutton;
     @FXML
-    private Button canceladd;
+    private Button newbutton;
 
-
-    DB db = new DB();
     LogWriter log = new LogWriter();
+    private final MedicineDAO medicineDAO = new MedicineDAO(); // DAO instance for database interaction
 
-    public void AddItemButtonAction() {
-        // Add a new item to the database
-        if (ItemCode.getText().isEmpty() || internationalCode.getText().isEmpty() || medicationBarcode.getText().isEmpty() || itemNameArabic.getText().isEmpty() || itemNameEnglish.getText().isEmpty() || ActiveIngrid.getText().isEmpty() || Manufacturer.getText().isEmpty() || ExpDate.getValue() == null || Unit.getText().isEmpty() || SellingPrice.getText().isEmpty() || PurchasePrice.getText().isEmpty() || ReorderLevel.getText().isEmpty() || MedicationType.getText().isEmpty()) {
-            // Show error message
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error");
-            alert.setHeaderText("Invalid Data");
-            alert.setContentText("Please enter needed data correctly");
-            alert.showAndWait();
-        } else {
-            Map<String, Object> values = new HashMap<>();
-            values.put("MedicationID", ItemCode.getText());
-            values.put("InternationalCode", internationalCode.getText());
-            values.put("MedicationBarcode", medicationBarcode.getText());
-            values.put("ArabicName", itemNameArabic.getText());
-            values.put("EnglishName", itemNameEnglish.getText());
-            values.put("ActiveIngredient", ActiveIngrid.getText());
-            values.put("Manufacturer", Manufacturer.getText());
-            values.put("ExpiryDate", ExpDate.getValue().toString());
-            values.put("Unit", Unit.getText());
-            values.put("SellingPrice", SellingPrice.getText());
-            values.put("PurchasePrice", PurchasePrice.getText());
-            values.put("ReorderLevel", ReorderLevel.getText());
-            values.put("MedicationType", MedicationType.getText());
-            values.put("Quantity", "0");
-
-            db.InsertQuery("medications", values);
-            log.AddItem(db.logedInID, itemNameEnglish.getText());
-            setInCenter();
-        }
-    }
-
+    /**
+     * Handles the action when the "Add New Item" button is clicked.
+     */
     @FXML
-    public void setInCenter() {
-        System.out.println("Add Categories");
-        SecondaryMainBorderPane.setCenter(null);
-        // Extract substring before the underscore character, if exists
+    public void AddItemButtonAction() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/Categories/ListOfItem.fxml"));
+            // Validate the required fields
+            if (!validateInputs()) {
+                showAlert(Alert.AlertType.WARNING, "Validation Error", "Please fill out all required fields.");
+                return;
+            }
 
-            BorderPane secondaryContent = loader.load();
-            SecondaryMainBorderPane.setCenter(secondaryContent);
-        } catch (IOException e) {
+            // Build a new Medicine object using the Builder pattern
+            Medicine newMedicine = new Medicine.MedicineBuilder()
+                    .barcode(medicationBarcode.getText())
+                    .englishName(itemNameEnglish.getText())
+                    .arabicName(itemNameArabic.getText())
+                    .internationalCode(internationalCode.getText())
+                    .activeIngredient(ActiveIngrid.getText())
+                    .manufacturer(Manufacturer.getText())
+                    .expiryDate(ExpDate.getValue())
+                    .unit(Unit.getText())
+                    .sellingPrice(Double.parseDouble(SellingPrice.getText()))
+                    .purchasePrice(Double.parseDouble(PurchasePrice.getText()))
+                    .reorderLevel(Double.parseDouble(ReorderLevel.getText()))
+                    .medicationType(MedicationType.getText())
+                    .build();
+
+            // Save the new medicine to the database using MedicineDAO
+            medicineDAO.save(newMedicine);
+
+            // Show success notification
+            showAlert(Alert.AlertType.INFORMATION, "Success", "New medicine added successfully.");
+            resetFields();
+
+        } catch (Exception e) {
             e.printStackTrace();
-            // Handle error
-
+            showAlert(Alert.AlertType.ERROR, "Error", "An error occurred while adding the new medicine. Please try again.");
         }
     }
 
+    /**
+     * Resets all input fields to their default state.
+     */
     @FXML
     private void resetFields() {
-        internationalCode.setText("");
-        medicationBarcode.setText("");
-        itemNameArabic.setText("");
-        itemNameEnglish.setText("");
-        ActiveIngrid.setText("");
-        Manufacturer.setText("");
+        internationalCode.clear();
+        medicationBarcode.clear();
+        itemNameArabic.clear();
+        itemNameEnglish.clear();
+        ActiveIngrid.clear();
+        Manufacturer.clear();
         ExpDate.setValue(null);
-        Unit.setText("");
-        SellingPrice.setText("");
-        PurchasePrice.setText("");
-        ReorderLevel.setText("");
-        MedicationType.setText("");
+        Unit.clear();
+        SellingPrice.clear();
+        PurchasePrice.clear();
+        ReorderLevel.clear();
+        MedicationType.clear();
+    }
+
+    /**
+     * Validates the input fields to ensure no required field is empty.
+     *
+     * @return true if all required fields are filled, false otherwise.
+     */
+    private boolean validateInputs() {
+        return !(
+                medicationBarcode.getText().isEmpty() ||
+                        itemNameEnglish.getText().isEmpty() ||
+                        itemNameArabic.getText().isEmpty() ||
+                        ActiveIngrid.getText().isEmpty() ||
+                        Manufacturer.getText().isEmpty() ||
+                        ExpDate.getValue() == null ||
+                        Unit.getText().isEmpty() ||
+                        SellingPrice.getText().isEmpty() ||
+                        PurchasePrice.getText().isEmpty() ||
+                        ReorderLevel.getText().isEmpty() ||
+                        MedicationType.getText().isEmpty()
+        );
+    }
+
+    /**
+     * Displays an alert dialog.
+     *
+     * @param alertType The type of alert to display (e.g., INFORMATION, WARNING, ERROR).
+     * @param title     The title of the alert dialog.
+     * @param content   The content message of the alert.
+     */
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
     }
 
     public void initialize() {
 
-        List<Map<String, Object>> allItems = db.SelectQuery("medications");
-        int lastItemId = allItems.isEmpty() ? 0 : Integer.parseInt(allItems.get(allItems.size() - 1).get("MedicationID").toString());
-        ItemCode.setText(Integer.toString(lastItemId + 1));
-
         DashboardController DC = new DashboardController();
 
         if (DC.Language.equals("en")) {
-            itemscodelabel.setText("Item Code");
             internationalcode.setText("International Code");
             barcode.setText("Barcode");
             arabicname.setText("Arabic Name");
@@ -177,7 +196,6 @@ public class AddCategoriesController {
             savebutton.setText("Save");
             newbutton.setText("New");
         } else if (DC.Language.equals("ar")) {
-            itemscodelabel.setText("كود الصنف");
             internationalcode.setText("الكود الدولي");
             barcode.setText("الباركود");
             arabicname.setText("الاسم بالعربي");
@@ -196,8 +214,5 @@ public class AddCategoriesController {
             savebutton.setText("حفظ");
             newbutton.setText("جديد");
         }
-
-
     }
-
 }

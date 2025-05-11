@@ -1,8 +1,9 @@
 package project.pharmacyv1.Categories;
 
 import Config.LanguageSetter;
-import Database.DB;
-import javafx.beans.property.SimpleObjectProperty;
+import Classes.Medicine;
+import DOAs.MedicineDAO;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,7 +11,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.control.skin.TableHeaderRow;
 import javafx.scene.layout.BorderPane;
 import project.pharmacyv1.DashboardController;
 import project.pharmacyv1.LogWriter;
@@ -18,21 +18,19 @@ import tray.animations.AnimationType;
 import tray.notification.NotificationType;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ListOfItemController {
 
     @FXML
     private Label Categories1Title;
     @FXML
-    private ComboBox choice1;
+    private ComboBox<String> choice1;
     @FXML
     private BorderPane SecondaryMainBorderPane;
     @FXML
-    private TableView<Map<String, Object>> ItemListTableView;
+    private TableView<Medicine> ItemListTableView;
     @FXML
     private TextField SearchTextField;
     @FXML
@@ -46,183 +44,26 @@ public class ListOfItemController {
     @FXML
     private Button addbutton;
 
-
-    DB db = new DB();
     LogWriter log = new LogWriter();
+    DashboardController DC = new DashboardController();
+    LanguageSetter LS = new LanguageSetter();
 
     private String getSearchTextField() {
         return SearchTextField.getText();
     }
 
-    public void RefreshButtonAction() {
-        // Refresh the table
-        ObservableList<Map<String, Object>> data = null;
-        if (getSearchTextField().isEmpty()) {
-            data = (ObservableList<Map<String, Object>>) db.SelectQuery("medications");
-        } else {
-            if (choice1.getSelectionModel().getSelectedIndex() == 0) { // Medication English Name
-                data = (ObservableList<Map<String, Object>>) db.SelectQuery("medications", "EnglishName", getSearchTextField());
-            } else if (choice1.getSelectionModel().getSelectedIndex() == 1) { // Medication Arabic Name
-                data = (ObservableList<Map<String, Object>>) db.SelectQuery("medications", "ArabicName", getSearchTextField());
-            } else if (choice1.getSelectionModel().getSelectedIndex() == 2) { // Manufacturing Company
-                data = (ObservableList<Map<String, Object>>) db.SelectQuery("medications", "Manufacturer", getSearchTextField());
-            } else if (choice1.getSelectionModel().getSelectedIndex() == 3) { // Active Ingredient
-                data = (ObservableList<Map<String, Object>>) db.SelectQuery("medications", "ActiveIngredient", getSearchTextField());
-            }
-        }
-
-        // Count the number of items
-        int numberOfItems = (data != null) ? data.size() : 0;
-        NumberOfItems.setText(String.valueOf(numberOfItems));
-
-        // removing the quantity column from the table
-        data.forEach(row -> row.remove("Quantity"));
-        fillTable(ItemListTableView, data);
-    }
-
-    public void fillTable(TableView<Map<String, Object>> tableView, ObservableList<Map<String, Object>> dataList) {
-        // Clear existing columns
-        tableView.getColumns().clear();
-
-        // Define the list of editable columns
-        List<String> editableColumns = Arrays.asList("MedicationBarcode", "ArabicName", "EnglishName" , "InternationalCode" , "Unit" , "ReorderLevel" ); // replace with your actual column names
-
-        // Add columns dynamically based on the keys of the first map in the list
-        if (!dataList.isEmpty()) {
-            Map<String, Object> firstRow = dataList.get(0);
-            for (String columnName : firstRow.keySet()) {
-                TableColumn<Map<String, Object>, String> column = new TableColumn<>(columnName);
-                column.setCellValueFactory(data -> {
-                    Object value = data.getValue().get(columnName);
-                    return new SimpleObjectProperty<>(value != null ? value.toString() : null);
-                });
-
-                // Set the cell factory to TextFieldTableCell for editing only if the column is in the list of editable columns
-                if (editableColumns.contains(columnName)) {
-                    column.setCellFactory(TextFieldTableCell.forTableColumn());
-
-                    // Handle onEditCommit event
-                    column.setOnEditCommit(event -> {
-                        Map<String, Object> selectedRow = event.getTableView().getItems().get(event.getTablePosition().getRow());
-                        selectedRow.put(columnName, event.getNewValue());
-                    });
-                }
-
-                tableView.getColumns().add(column);
-            }
-        }
-
-        // Set the data to the table
-        tableView.setItems(dataList);
-
-        // Make the TableView editable
-        tableView.setEditable(true);
-    }
-
-    @FXML
-    private void DeleteSelectedRow() {
-        // Delete the selected row from the database
-        Map<String, Object> selectedItem = ItemListTableView.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
-            db.DeleteQuery("medications", "MedicationID", selectedItem.get("MedicationID").toString());
-            tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
-            AnimationType type = AnimationType.POPUP;
-            tray.setAnimationType(type);
-            tray.setTitle("Success");
-            tray.setMessage("Medication Deleted Successfully");
-            tray.setNotificationType(NotificationType.SUCCESS);
-            tray.showAndDismiss(javafx.util.Duration.seconds(2));
-
-            RefreshButtonAction();
-            log.RemoveItem(db.logedInUser,selectedItem.get("EnglishName").toString());
-        }else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setHeaderText("No Row Selected");
-            alert.setContentText("Please select a row to delete");
-            alert.showAndWait();
-        }
-    }
-
-    DashboardController DC = new DashboardController();
-
-    @FXML
-    public void setInCenter(ActionEvent event) {
-
-        String MenuItemName = null;
-        String temp = null;
-
-        SecondaryMainBorderPane.setCenter(null);
-        // Extract substring before the underscore character, if exists
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/Categories/AddCategories.fxml"));
-
-            BorderPane secondaryContent = loader.load();
-            SecondaryMainBorderPane.setCenter(secondaryContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle error
-
-        }
-    }
-
-    private void searchEvents(){
-        RefreshButtonAction();
-        SearchTextField.textProperty().addListener((observable, oldValue, newValue) -> {
-            RefreshButtonAction();
-        });
-        choice1.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> {
-            RefreshButtonAction();
-        });
-    }
-
-    @FXML
-    private void EditSelectedRow() {
-        // Edit the selected row from the database
-        Map<String, Object> selectedItem = ItemListTableView.getSelectionModel().getSelectedItem();
-        if (selectedItem != null) {
-            // Create a copy of the selected item map
-            Map<String, Object> updateItem = new HashMap<>(selectedItem);
-            // Remove the ID from the update item map
-            updateItem.remove("MedicationID");
-
-            // Update the selected row
-            db.UpdateQuery("medications", updateItem, "MedicationID", selectedItem.get("MedicationID").toString());
-            RefreshButtonAction();
-            log.EditItem(db.logedInUser,selectedItem.get("EnglishName").toString());
-
-        } else {
-            Alert alert = new Alert(Alert.AlertType.WARNING);
-            alert.setTitle("Warning Dialog");
-            alert.setHeaderText("No Row Selected");
-            alert.setContentText("Please select a row to edit");
-            alert.showAndWait();
-        }
-    }
+    private final MedicineDAO medicineDAO = new MedicineDAO(); // Use DAO for database interactions
+    private ObservableList<Medicine> medicineObservableList = FXCollections.observableArrayList();
 
     public void initialize() {
+        // Set up table columns
+        setupTableColumns();
 
-        ItemListTableView.widthProperty().addListener((source, oldWidth, newWidth) -> {
-            TableHeaderRow header = (TableHeaderRow) ItemListTableView.lookup("TableHeaderRow");
-            header.reorderingProperty().addListener((observable, oldValue, newValue) -> header.setReordering(false));
-        });
-
+        // Add listeners to search field and filters
         searchEvents();
 
-        LanguageSetter LS = new LanguageSetter();
-
-        ItemListTableView.setOnMouseClicked(event -> {
-            if (ItemListTableView.getSelectionModel().getSelectedIndex() != -1) {
-                if (ItemListTableView.getSelectionModel().getSelectedCells().get(0).getColumn() != 1 && ItemListTableView.getSelectionModel().getSelectedCells().get(0).getColumn() != 2 && ItemListTableView.getSelectionModel().getSelectedCells().get(0).getColumn() != 3 && ItemListTableView.getSelectionModel().getSelectedCells().get(0).getColumn() != 5 && ItemListTableView.getSelectionModel().getSelectedCells().get(0).getColumn() != 8 && ItemListTableView.getSelectionModel().getSelectedCells().get(0).getColumn() != 11) {
-                    Alert alert = new Alert(Alert.AlertType.WARNING);
-                    alert.setTitle("Warning Dialog");
-                    alert.setHeaderText("ID Column");
-                    alert.setContentText("You can't edit this column");
-                    alert.showAndWait();
-                    ItemListTableView.getSelectionModel().clearSelection();
-                }
-            }
-        });
+        // Load initial data
+        loadMedicines();
 
         if(DC.Language.equals("en")){
             Categories1Title.setText(LS.il8n("Categories1","en"));
@@ -241,8 +82,158 @@ public class ListOfItemController {
 
         }
 
-        choice1.getSelectionModel().select(0);
-
     }
 
+    private void setupTableColumns() {
+        ItemListTableView.getColumns().clear();
+
+        String[] columnNames = {
+                "Barcode", "English Name", "Arabic Name", "International Code",
+                "Active Ingredient", "Manufacturer", "Expiry Date", "Unit",
+                "Quantity", "Selling Price", "Purchase Price", "Reorder Level",
+                "Medication Type"
+        };
+
+        for (String columnName : columnNames) {
+            TableColumn<Medicine, String> column = new TableColumn<>(columnName);
+
+            column.setCellValueFactory(data -> {
+                Medicine medicine = data.getValue();
+                return switch (columnName) {
+                    case "Barcode" -> new SimpleStringProperty(medicine.getBarcode());
+                    case "English Name" -> new SimpleStringProperty(medicine.getEnglishName());
+                    case "Arabic Name" -> new SimpleStringProperty(medicine.getArabicName());
+                    case "International Code" -> new SimpleStringProperty(medicine.getInternationalCode());
+                    case "Active Ingredient" -> new SimpleStringProperty(medicine.getActiveIngredient());
+                    case "Manufacturer" -> new SimpleStringProperty(medicine.getManufacturer());
+                    case "Expiry Date" -> new SimpleStringProperty(medicine.getExpiryDate().toString());
+                    case "Unit" -> new SimpleStringProperty(medicine.getUnit());
+                    case "Quantity" -> new SimpleStringProperty(String.valueOf(medicine.getQuantity()));
+                    case "Selling Price" -> new SimpleStringProperty(String.valueOf(medicine.getSellingPrice()));
+                    case "Purchase Price" -> new SimpleStringProperty(String.valueOf(medicine.getPurchasePrice()));
+                    case "Reorder Level" -> new SimpleStringProperty(String.valueOf(medicine.getReorderLevel()));
+                    case "Medication Type" -> new SimpleStringProperty(medicine.getMedicationType());
+                    default -> null;
+                };
+            });
+
+            if (columnName.equals("English Name") || columnName.equals("Arabic Name")) {
+                column.setCellFactory(TextFieldTableCell.forTableColumn());
+                column.setOnEditCommit(event -> {
+                    Medicine selectedMedicine = event.getRowValue();
+                    if (columnName.equals("English Name")) {
+                        selectedMedicine.setEnglishName(event.getNewValue());
+                    } else if (columnName.equals("Arabic Name")) {
+                        selectedMedicine.setArabicName(event.getNewValue());
+                    }
+                    medicineDAO.update(selectedMedicine);
+                });
+            }
+
+            ItemListTableView.getColumns().add(column);
+        }
+
+        // Enable table editing
+        ItemListTableView.setEditable(true);
+    }
+
+    private void loadMedicines() {
+        // Fetch all medicines from the database using MedicineDAO
+        List<Medicine> medicines = medicineDAO.findAll();
+        medicineObservableList.setAll(medicines);
+        ItemListTableView.setItems(medicineObservableList);
+
+        // Update the number of items label
+        NumberOfItems.setText(String.valueOf(medicineObservableList.size()));
+    }
+
+    @FXML
+    private void RefreshButtonAction() {
+        // Refresh the table by reloading data
+        loadMedicines();
+    }
+
+    @FXML
+    private void EditSelectedRow() {
+        Medicine selectedMedicine = ItemListTableView.getSelectionModel().getSelectedItem();
+        if (selectedMedicine != null) {
+            // Save edited medicine to the database
+            medicineDAO.update(selectedMedicine);
+            RefreshButtonAction();
+        } else {
+            showAlert(Alert.AlertType.WARNING, "No Row Selected", "Please select a row to edit.");
+        }
+    }
+
+    @FXML
+    private void DeleteSelectedRow() {
+        Medicine selectedMedicine = ItemListTableView.getSelectionModel().getSelectedItem();
+        if (selectedMedicine != null) {
+            // Delete the medicine from the database
+            medicineDAO.delete(selectedMedicine.getId());
+            RefreshButtonAction();
+            tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
+            AnimationType type = AnimationType.POPUP;
+            tray.setAnimationType(type);
+            tray.setTitle("Success");
+            tray.setMessage("Medication Deleted Successfully");
+            tray.setNotificationType(NotificationType.SUCCESS);
+            tray.showAndDismiss(javafx.util.Duration.seconds(2));
+
+        } else {
+            showAlert(Alert.AlertType.WARNING, "No Row Selected", "Please select a row to delete.");
+        }
+    }
+
+    @FXML
+    public void setInCenter(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/Categories/AddCategories.fxml"));
+            BorderPane secondaryContent = loader.load();
+            SecondaryMainBorderPane.setCenter(secondaryContent);
+        } catch (IOException e) {
+            e.printStackTrace();
+            showAlert(Alert.AlertType.ERROR, "Error", "Unable to load the Add Categories screen.");
+        }
+    }
+
+    private void searchEvents() {
+        SearchTextField.textProperty().addListener((observable, oldValue, newValue) -> filterMedicines());
+        choice1.getSelectionModel().selectedItemProperty().addListener((observable, oldValue, newValue) -> filterMedicines());
+    }
+
+    private void filterMedicines() {
+        String searchText = SearchTextField.getText().toLowerCase();
+        String filterOption = choice1.getValue();
+
+        List<Medicine> filteredList = medicineDAO.findAll().stream()
+                .filter(medicine -> {
+                    if (filterOption == null || searchText.isEmpty()) {
+                        return true;
+                    }
+                    switch (filterOption) {
+                        case "Medication English Name":
+                            return medicine.getEnglishName().toLowerCase().contains(searchText);
+                        case "Medication Arabic Name":
+                            return medicine.getArabicName().toLowerCase().contains(searchText);
+                        case "Manufacturing Company":
+                            return medicine.getManufacturer().toLowerCase().contains(searchText);
+                        case "Active Ingredient":
+                            return medicine.getActiveIngredient().toLowerCase().contains(searchText);
+                        default:
+                            return true;
+                    }
+                }).collect(Collectors.toList());
+
+        medicineObservableList.setAll(filteredList);
+        NumberOfItems.setText(String.valueOf(filteredList.size()));
+    }
+
+    private void showAlert(Alert.AlertType alertType, String title, String content) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
 }

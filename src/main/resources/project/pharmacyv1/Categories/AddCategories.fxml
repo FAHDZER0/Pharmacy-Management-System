@@ -39,28 +39,6 @@
                                 <content>
                                     <VBox prefHeight="770.0" prefWidth="1227.0">
                                         <children>
-                                            <HBox alignment="CENTER_LEFT">
-                                                <children>
-                                                    <Label fx:id="itemscodelabel" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="215.0" text="Item's Code" textAlignment="CENTER">
-                                                        <font>
-                                                            <Font name="System Bold" size="20.0" />
-                                                        </font>
-                                                        <padding>
-                                                            <Insets left="5.0" />
-                                                        </padding>
-                                                    </Label>
-                                                    <TextField fx:id="ItemCode" disable="true" prefHeight="30.0" prefWidth="137.0">
-                                                        <font>
-                                                            <Font name="System Bold" size="14.0" />
-                                                        </font>
-                                                    </TextField>
-                                                    <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="0.0" text="*" textAlignment="CENTER" textFill="RED">
-                                                        <font>
-                                                            <Font name="System Bold" size="30.0" />
-                                                        </font>
-                                                    </Label>
-                                                </children>
-                                            </HBox>
                               <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" prefHeight="14.0" prefWidth="1242.0">
                                  <children>
                                     <Label fx:id="internationalcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="217.0" text="International Code" textAlignment="CENTER">
@@ -321,7 +299,7 @@
                             </font>
                         </Button>
                         <Region prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" />
-                        <Button fx:id="canceladd" layoutX="262.0" layoutY="23.0" mnemonicParsing="false" onAction="#setInCenter" text="Cancel">
+                        <Button fx:id="canceladd" layoutX="262.0" layoutY="23.0" mnemonicParsing="false" text="Cancel">
                             <font>
                                 <Font name="System Bold" size="17.0" />
                             </font>
