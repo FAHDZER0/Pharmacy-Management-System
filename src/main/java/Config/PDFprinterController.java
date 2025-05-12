@@ -231,28 +231,26 @@ public class PDFprinterController {
         }
     }
 
-    public void printTableIntoPDF(ObservableList<Map<String, Object>> dataList , Boolean Landascape) {
+    public void printTableIntoPDF(ObservableList<Map<String, Object>> dataList, Boolean Landascape) {
         try (PDDocument document = new PDDocument()) {
 
-            PDPage page ;
+            PDPage page;
 
-            if (Landascape){
+            if (Landascape) {
                 page = new PDPage(new PDRectangle(1200, 612)); // Standard A4 size
-            }else{
+            } else {
                 page = new PDPage(PDRectangle.A4);
             }
 
             document.addPage(page);
 
-
-
             // Load the font
-            PDType0Font font = PDType0Font.load(document, new File("F:\\Pharmacy Backup\\Pharmacy-Management-System\\Lib\\alfont_com_arial-1.ttf"));
+            PDType0Font font = PDType0Font.load(document, new File("Lib\\alfont_com_arial-1.ttf"));
 
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
             // Add header image
-            PDImageXObject pdImage = PDImageXObject.createFromFile("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\Images\\loginright2.png", document);
+            PDImageXObject pdImage = PDImageXObject.createFromFile("src\\main\\resources\\Images\\loginright2.png", document);
             contentStream.drawImage(pdImage, 470, 770, 50, 50); // Adjust as per your image size
 
             // Define the table structure
@@ -302,9 +300,20 @@ public class PDFprinterController {
             LocalDateTime now = LocalDateTime.now();
             String fileName = "table_" + dtf.format(now);
 
-            document.save("Pharmacy-Management-System/PDFs/tables/" + fileName + ".pdf");
+            // Ensure the directory exists
+            File outputDirectory = new File("Pharmacy-Management-System/PDFs/tables/");
+            if (!outputDirectory.exists()) {
+                if (!outputDirectory.mkdirs()) {
+                    System.err.println("Failed to create directories: " + outputDirectory.getAbsolutePath());
+                    return;
+                }
+            }
+
+            // Save the document
+            document.save(new File(outputDirectory, fileName + ".pdf"));
             System.out.println("PDF created successfully");
 
+            // Show success notification
             TrayNotification tray = new TrayNotification();
             tray.setAnimationType(AnimationType.POPUP);
             tray.setTitle("Success");

@@ -165,6 +165,22 @@ public class ProductDAO {
         }
     }
 
+    public List<Product> findByManufacturer(String manufacturer) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE Manufacturer = ?";
+        List<Product> products = new ArrayList<>();
+        try (Connection conn = DBConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, manufacturer);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                products.add(mapResultSetToProduct(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
     // Helper method to map ResultSet to a Product object
     private Product mapResultSetToProduct(ResultSet rs) throws SQLException {
         return new Product.ProductBuilder()

@@ -90,8 +90,7 @@ public class ColorPickerController {
             }
         });
 
-        Map<String, Color> colorMap = loadColorsFromCSS("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\project\\pharmacyv1\\Colors.css");
-        if (colorMap != null) {
+        Map<String, Color> colorMap = loadColorsFromCSS(getClass().getResource("/project/pharmacyv1/Colors.css").getPath());        if (colorMap != null) {
             bgColor1Picker.setValue(colorMap.get("-fx-bg-color-1"));
             bgColor2Picker.setValue(colorMap.get("-fx-bg-color-2"));
             bgColor3Picker.setValue(colorMap.get("-fx-bg-color-3"));

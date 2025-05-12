@@ -165,6 +165,25 @@ public class MedicineDAO {
         }
     }
 
+    // Method to filter medicines by manufacturer
+    public List<Medicine> findByManufacturer(String manufacturer) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE Manufacturer = ?";
+        List<Medicine> medicines = new ArrayList<>();
+        try (Connection conn = DBConfig.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+
+            stmt.setString(1, manufacturer);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                medicines.add(mapResultSetToMedicine(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return medicines;
+    }
+
+
     // Helper method to map ResultSet to a Medicine object
     private Medicine mapResultSetToMedicine(ResultSet rs) throws SQLException {
         return new Medicine.MedicineBuilder()
