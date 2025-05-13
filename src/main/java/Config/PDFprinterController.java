@@ -49,7 +49,7 @@ public class PDFprinterController {
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
             // Add header image
-            PDImageXObject pdImage = PDImageXObject.createFromFile("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\Images\\loginright2.png", document);
+            PDImageXObject pdImage = PDImageXObject.createFromFile("src\\main\\resources\\Images\\loginright2.png", document);
             contentStream.drawImage(pdImage, 450, 730, 50, 50); // Adjust as per your image size
 
             // Add pharmacy information
@@ -217,7 +217,7 @@ public class PDFprinterController {
             contentStream.close();
 
             //saving the document in directory named "Sales Invoices" in the project directory
-            document.save("Pharmacy-Management-System/PDFs/Sales Invoices/" + invoiceNumber + ".pdf");
+            document.save("PDFs/Sales Invoices/" + invoiceNumber + ".pdf");
             tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
             AnimationType type = AnimationType.POPUP;
             tray.setAnimationType(type);
@@ -301,7 +301,7 @@ public class PDFprinterController {
             String fileName = "table_" + dtf.format(now);
 
             // Ensure the directory exists
-            File outputDirectory = new File("Pharmacy-Management-System/PDFs/tables/");
+            File outputDirectory = new File("PDFs/tables/");
             if (!outputDirectory.exists()) {
                 if (!outputDirectory.mkdirs()) {
                     System.err.println("Failed to create directories: " + outputDirectory.getAbsolutePath());
@@ -344,12 +344,12 @@ public class PDFprinterController {
             document.addPage(page);
 
             // Load the font
-            PDType0Font font = PDType0Font.load(document, new File("F:\\Pharmacy Backup\\Pharmacy-Management-System\\Lib\\alfont_com_arial-1.ttf"));
+            PDType0Font font = PDType0Font.load(document, new File("Lib\\alfont_com_arial-1.ttf"));
 
             PDPageContentStream contentStream = new PDPageContentStream(document, page);
 
             // Add header image
-            PDImageXObject pdImage = PDImageXObject.createFromFile("F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\resources\\Images\\loginright2.png", document);
+            PDImageXObject pdImage = PDImageXObject.createFromFile("src\\main\\resources\\Images\\loginright2.png", document);
             contentStream.drawImage(pdImage, 470, 770, 50, 50); // Adjust as per your image size
 
             // Define the table structure
@@ -384,7 +384,7 @@ public class PDFprinterController {
             LocalDateTime now = LocalDateTime.now();
             String fileName = "supplier_info_" + dtf.format(now);
 
-            document.save("Pharmacy-Management-System/PDFs/Supplier Info/" + fileName + ".pdf");
+            document.save("PDFs/Supplier Info/" + fileName + ".pdf");
             System.out.println("PDF created successfully");
 
             TrayNotification tray = new TrayNotification();

@@ -1,6 +1,6 @@
-package DOAs;
+package DAOs;
 
-import Classes.Medicine;
+import Classes.Product;
 import Database.DBConfig;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;
@@ -9,75 +9,79 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MedicineDAO {
-    private static final String TABLE_NAME = "medications";
+public class ProductDAO {
+    private static final String TABLE_NAME = "products";
 
-    public Medicine findById(int id) {
-        String query = "SELECT * FROM " + TABLE_NAME + " WHERE MedicationID = ?";
+    public Product findById(int id) {
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE ProductID = ?";
         try (Connection conn = DBConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                return mapResultSetToMedicine(rs);
+                return mapResultSetToProduct(rs);
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
     }
-    
-    public List<Medicine> findAll() {
+
+    public List<Product> findAll() {
         String query = "SELECT * FROM " + TABLE_NAME;
-        List<Medicine> medicines = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         try (Connection conn = DBConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
-                medicines.add(mapResultSetToMedicine(rs));
+                products.add(mapResultSetToProduct(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return medicines;
+        return products;
     }
 
-    public void save(Medicine medicine) {
+    public void save(Product product) {
         String query = "INSERT INTO " + TABLE_NAME + " (" +
-                "MedicationBarcode, ArabicName, EnglishName, InternationalCode, " +
-                "ActiveIngredient, Manufacturer, ExpiryDate, Unit, Quantity, " +
-                "SellingPrice, PurchasePrice, ReorderLevel, MedicationType) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "ProductBarcode, ArabicName, EnglishName," +
+                "Manufacturer, ExpiryDate, Quantity, " +
+                "SellingPrice, PurchasePrice, ReorderLevel, ProductType) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
-            stmt.setString(1, medicine.getBarcode());
-            stmt.setString(2, medicine.getArabicName());
-            stmt.setString(3, medicine.getEnglishName());
-            stmt.setString(4, medicine.getInternationalCode());
-            stmt.setString(5, medicine.getActiveIngredient());
-            stmt.setString(6, medicine.getManufacturer());
-            stmt.setDate(7, java.sql.Date.valueOf(medicine.getExpiryDate()));
-            stmt.setString(8, medicine.getUnit());
-            stmt.setDouble(9, medicine.getQuantity());
-            stmt.setDouble(10, medicine.getSellingPrice());
-            stmt.setDouble(11, medicine.getPurchasePrice());
-            stmt.setDouble(12, medicine.getReorderLevel());
-            stmt.setString(13, medicine.getMedicationType());
+            stmt.setString(1, product.getBarcode());
+            stmt.setString(2, product.getArabicName());
+            stmt.setString(3, product.getEnglishName());
+            stmt.setString(4, product.getManufacturer());
+            stmt.setDate(5, java.sql.Date.valueOf(product.getExpiryDate()));
+            stmt.setDouble(6, product.getQuantity());
+            stmt.setDouble(7, product.getSellingPrice());
+            stmt.setDouble(8, product.getPurchasePrice());
+            stmt.setDouble(9, product.getReorderLevel());
+            stmt.setString(10, product.getProductType());
 
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
-                throw new SQLException("Creating medicine failed, no rows affected.");
+                throw new SQLException("Creating product failed, no rows affected.");
             }
 
             // Retrieve auto-generated ID
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int id = generatedKeys.getInt(1);
-                    System.out.println("Inserted Medicine ID: " + id);
+                    System.out.println("Inserted Product ID: " + id);
+                    tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
+                    AnimationType type = AnimationType.POPUP;
+                    tray.setAnimationType(type);
+                    tray.setTitle("Success");
+                    tray.setMessage("Product Added Successfully");
+                    tray.setNotificationType(NotificationType.SUCCESS);
+                    tray.showAndDismiss(javafx.util.Duration.seconds(2));
                 }
             }
         } catch (SQLException e) {
@@ -85,48 +89,44 @@ public class MedicineDAO {
         }
     }
 
-    public void update(Medicine medicine) {
+    public void update(Product product) {
         String query = "UPDATE " + TABLE_NAME + " SET " +
-                "MedicationBarcode = ?, ArabicName = ?, EnglishName = ?, InternationalCode = ?, " +
-                "ActiveIngredient = ?, Manufacturer = ?, ExpiryDate = ?, Unit = ?, Quantity = ?, " +
-                "SellingPrice = ?, PurchasePrice = ?, ReorderLevel = ?, MedicationType = ? " +
-                "WHERE MedicationID = ?";
+                "ProductBarcode = ?, ArabicName = ?, EnglishName = ?, Manufacturer = ?, " +
+                "ExpiryDate = ?, Quantity = ?, SellingPrice = ?, PurchasePrice = ?, " +
+                "ReorderLevel = ?, ProductType = ? WHERE ProductID = ?";
 
         try (Connection conn = DBConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
-            stmt.setString(1, medicine.getBarcode());
-            stmt.setString(2, medicine.getArabicName());
-            stmt.setString(3, medicine.getEnglishName());
-            stmt.setString(4, medicine.getInternationalCode());
-            stmt.setString(5, medicine.getActiveIngredient());
-            stmt.setString(6, medicine.getManufacturer());
-            stmt.setDate(7, java.sql.Date.valueOf(medicine.getExpiryDate()));
-            stmt.setString(8, medicine.getUnit());
-            stmt.setDouble(9, medicine.getQuantity());
-            stmt.setDouble(10, medicine.getSellingPrice());
-            stmt.setDouble(11, medicine.getPurchasePrice());
-            stmt.setDouble(12, medicine.getReorderLevel());
-            stmt.setString(13, medicine.getMedicationType());
-            stmt.setInt(14, medicine.getId());
+            stmt.setString(1, product.getBarcode());
+            stmt.setString(2, product.getArabicName());
+            stmt.setString(3, product.getEnglishName());
+            stmt.setString(4, product.getManufacturer());
+            stmt.setDate(5, java.sql.Date.valueOf(product.getExpiryDate()));
+            stmt.setDouble(6, product.getQuantity());
+            stmt.setDouble(7, product.getSellingPrice());
+            stmt.setDouble(8, product.getPurchasePrice());
+            stmt.setDouble(9, product.getReorderLevel());
+            stmt.setString(10, product.getProductType());
+            stmt.setInt(11, product.getId());
 
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
-                System.out.println("Update failed: No medicine found with ID: " + medicine.getId());
+                System.out.println("Update failed: No product found with ID: " + product.getId());
                 tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
                 AnimationType type = AnimationType.POPUP;
                 tray.setAnimationType(type);
                 tray.setTitle("Failed");
-                tray.setMessage("Medication Update Failed. No Medication Found With ID: " + medicine.getId() + ". Please Try Again Later.");
+                tray.setMessage("Product Update Failed. No Product Found With ID: " + product.getId() + ". Please Try Again Later.");
                 tray.setNotificationType(NotificationType.ERROR);
                 tray.showAndDismiss(javafx.util.Duration.seconds(2));
             } else {
-                System.out.println("Medicine with ID " + medicine.getId() + " updated successfully.");
+                System.out.println("Product with ID " + product.getId() + " updated successfully.");
                 tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
                 AnimationType type = AnimationType.POPUP;
                 tray.setAnimationType(type);
                 tray.setTitle("Success");
-                tray.setMessage("Medication Updated Successfully");
+                tray.setMessage("Product Updated Successfully");
                 tray.setNotificationType(NotificationType.SUCCESS);
                 tray.showAndDismiss(javafx.util.Duration.seconds(2));
             }
@@ -136,27 +136,27 @@ public class MedicineDAO {
     }
 
     public void delete(int id) {
-        String query = "DELETE FROM " + TABLE_NAME + " WHERE MedicationID = ?";
+        String query = "DELETE FROM " + TABLE_NAME + " WHERE ProductID = ?";
         try (Connection conn = DBConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
-                System.out.println("No medicine found with ID: " + id);
+                System.out.println("No product found with ID: " + id);
                 tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
                 AnimationType type = AnimationType.POPUP;
                 tray.setAnimationType(type);
                 tray.setTitle("Failed");
-                tray.setMessage("Error Deleting Medication. No Medication Found With ID: " + id + ". Please Try Again Later.");
+                tray.setMessage("Error Deleting Product. No Product Found With ID: " + id + ". Please Try Again Later.");
                 tray.setNotificationType(NotificationType.ERROR);
                 tray.showAndDismiss(javafx.util.Duration.seconds(2));
             } else {
-                System.out.println("Medicine with ID " + id + " has been deleted.");
+                System.out.println("Product with ID " + id + " has been deleted.");
                 tray.notification.TrayNotification tray = new tray.notification.TrayNotification();
                 AnimationType type = AnimationType.POPUP;
                 tray.setAnimationType(type);
                 tray.setTitle("Success");
-                tray.setMessage("Medication Deleted Successfully");
+                tray.setMessage("Product Deleted Successfully");
                 tray.setNotificationType(NotificationType.SUCCESS);
                 tray.showAndDismiss(javafx.util.Duration.seconds(2));
             }
@@ -165,41 +165,35 @@ public class MedicineDAO {
         }
     }
 
-    // Method to filter medicines by manufacturer
-    public List<Medicine> findByManufacturer(String manufacturer) {
+    public List<Product> findByManufacturer(String manufacturer) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE Manufacturer = ?";
-        List<Medicine> medicines = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         try (Connection conn = DBConfig.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-
             stmt.setString(1, manufacturer);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                medicines.add(mapResultSetToMedicine(rs));
+                products.add(mapResultSetToProduct(rs));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return medicines;
+        return products;
     }
 
-
-    // Helper method to map ResultSet to a Medicine object
-    private Medicine mapResultSetToMedicine(ResultSet rs) throws SQLException {
-        return new Medicine.MedicineBuilder()
-                .id(rs.getInt("MedicationID")) // Map the 'id' column from the database to the object
-                .barcode(rs.getString("MedicationBarcode"))
+    // Helper method to map ResultSet to a Product object
+    private Product mapResultSetToProduct(ResultSet rs) throws SQLException {
+        return new Product.ProductBuilder()
+                .id(rs.getInt("ProductID")) // Map the 'id' column from the database to the object
+                .barcode(rs.getString("ProductBarcode"))
                 .arabicName(rs.getString("ArabicName"))
                 .englishName(rs.getString("EnglishName"))
-                .internationalCode(rs.getString("InternationalCode"))
-                .activeIngredient(rs.getString("ActiveIngredient"))
                 .manufacturer(rs.getString("Manufacturer"))
                 .expiryDate(rs.getDate("ExpiryDate").toLocalDate())
-                .unit(rs.getString("Unit"))
                 .quantity(rs.getDouble("Quantity"))
                 .sellingPrice(rs.getDouble("SellingPrice"))
                 .purchasePrice(rs.getDouble("PurchasePrice"))
                 .reorderLevel(rs.getDouble("ReorderLevel"))
-                .medicationType(rs.getString("MedicationType"))
+                .productType(rs.getString("ProductType"))
                 .build();
     }}

@@ -1,13 +1,12 @@
 package project.pharmacyv1.Categories;
 
 import Classes.Medicine;
-import DOAs.MedicineDAO;
+import DAOs.MedicineDAO;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import project.pharmacyv1.DashboardController;
 import project.pharmacyv1.LogWriter;
-import tray.notification.NotificationType;
 
 
 public class AddCategoriesController {

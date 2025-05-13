@@ -2,7 +2,7 @@ package project.pharmacyv1.Categories;
 
 import Config.LanguageSetter;
 import Classes.Medicine;
-import DOAs.MedicineDAO;
+import DAOs.MedicineDAO;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

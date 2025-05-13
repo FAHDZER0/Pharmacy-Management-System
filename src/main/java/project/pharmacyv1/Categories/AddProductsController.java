@@ -1,8 +1,7 @@
 package project.pharmacyv1.Categories;
 
 import Classes.Product;
-import DOAs.ProductDAO;
-import Database.DB;
+import DAOs.ProductDAO;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
@@ -14,9 +13,6 @@ import tray.notification.NotificationType;
 
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class AddProductsController {
 

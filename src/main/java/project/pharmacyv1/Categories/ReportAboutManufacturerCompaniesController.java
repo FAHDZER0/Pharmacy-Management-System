@@ -2,8 +2,8 @@ package project.pharmacyv1.Categories;
 
 import Config.LanguageSetter;
 import Config.PDFprinterController;
-import DOAs.MedicineDAO;
-import DOAs.ProductDAO;
+import DAOs.MedicineDAO;
+import DAOs.ProductDAO;
 import Classes.Medicine;
 import Classes.Product;
 import javafx.beans.property.SimpleObjectProperty;
