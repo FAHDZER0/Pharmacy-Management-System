@@ -340,38 +340,6 @@
 
     @FXML
     public void printInvoice(int InvoiceNumber){
-        // Print the invoice
-
-        ObservableList<Map<String, Object>> invoice = db.SelectQuery("salesinvoices", "SalesInvoiceID", String.valueOf(InvoiceNumber));
-
-        String orderType = "";
-
-        switch (((RadioButton) patmentMethod.getSelectedToggle()).getText()) {
-            case "Cash":
-                orderType = "In place";
-                break;
-            case "Visa":
-                orderType = "In place";
-                break;
-            case "Credit":
-                orderType = "In place";
-                break;
-            case "Onhold":
-                orderType = "On hold";
-                break;
-            case "Home Delivery":
-                orderType = "Home delivery";
-                break;
-        }
-
-//        String ChasierName = invoice.get(0).get("CashairName").toString();
-//        String CustomerNumber = invoice.get(0).get("CustomerID").toString();
-//        String CustomerName = db.SelectQuery("customers", "CustomerID", CustomerNumber).get(0).get("CustomerName").toString();
-//        String CustomerAddress = db.SelectQuery("customers", "CustomerID", CustomerNumber).get(0).get("CustomerAddress").toString();
-//        String InvoiceNotes = invoice.get(0).get("notes").toString();
-//        String InvoiceTotal = invoice.get(0).get("TotalSaleAmount").toString();
-//        String discountPercentage = invoice.get(0).get("DiscountAmount").toString();
-//        String finaltotalPrice = invoice.get(0).get("TotalSaleAmount").toString();
 
         SalesInvoiceBuilder builder = SalesInvoiceBuilder.Builder.fromDatabase(InvoiceNumber,patmentMethod);
 
@@ -394,7 +362,7 @@
             items.add(invoiceItem);
         }
 
-        pdf.PrintSalesIntoPDF(orderType , builder.getCashairName(), String.valueOf(InvoiceNumber), builder.getCustomerNumber(), builder.getCustomerName(),  builder.getCustomerAddress(), builder.getInvoiceNotes(),  items , builder.getInvoiceTotal(), builder.getDiscountPercentage(),  "20" , builder.getFinalTotalPrice()  );
+        pdf.PrintSalesIntoPDF(builder.getOrderType() , builder.getCashairName(), String.valueOf(InvoiceNumber), builder.getCustomerNumber(), builder.getCustomerName(),  builder.getCustomerAddress(), builder.getInvoiceNotes(),  items , builder.getInvoiceTotal(), builder.getDiscountPercentage(),  "20" , builder.getFinalTotalPrice()  );
     }
 
     //this method is for displaying the commented Invoices in a separate stage

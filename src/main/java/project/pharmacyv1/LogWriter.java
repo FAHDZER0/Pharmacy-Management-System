@@ -8,7 +8,7 @@ import java.util.Date;
 
 public class LogWriter {
 
-    String filename = "F:\\Pharmacy Backup\\Pharmacy-Management-System\\src\\main\\java\\Database\\Log";
+    String filename = "src\\main\\java\\Database\\Log";
 
     public void LoginSuccess(String name, String time) {
         System.out.println("User " + name + " logged in at " + time);
