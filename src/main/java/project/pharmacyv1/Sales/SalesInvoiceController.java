@@ -3,6 +3,8 @@
     import java.io.IOException;
     import java.util.*;
 
+    import Classes.Command;
+    import Classes.SalesCommand;
     import Classes.SalesInvoiceBuilder;
     import Config.LanguageSetter;
     import Config.PDFprinterController;
@@ -81,36 +83,14 @@
 
     DB db = new DB();
     LogWriter log = LogWriter.getInstance();
+    private final Command addItemToInvoice = new SalesCommand(this);
 
     public void doublClick(MouseEvent event){
         if(event.getButton().equals(MouseButton.PRIMARY)){
             if(event.getClickCount() == 2){
-                openfind();
+                addItemToInvoice.openFind();
             }
         }
-    }
-
-    private void openfind(){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/Sales/FindItem_PopUp.fxml"));
-            VBox secondaryContent = loader.load();
-
-            // Get the controller and set the SalesInvoiceController instance
-            FindItem_PopUpController controller = loader.getController();
-            controller.setSalesInvoiceController(this);
-
-            Scene FindScene = new Scene(secondaryContent,830,666);
-
-            Stage FindStage = new Stage();
-            FindStage.setResizable(false);
-            FindStage.setTitle("Search An Item");
-            FindStage.setScene(FindScene);
-            FindStage.initModality(Modality.APPLICATION_MODAL);
-            FindStage.showAndWait();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     double totalcost = 0;
@@ -409,7 +389,7 @@
 
     @FXML
     public void addNewItem(){
-        openfind();
+        addItemToInvoice.openFind();
     }
 
     @FXML
