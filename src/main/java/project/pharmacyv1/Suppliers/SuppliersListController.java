@@ -1,5 +1,6 @@
 package project.pharmacyv1.Suppliers;
 
+import Classes.SupplierUiBuilder;
 import Config.LanguageSetter;
 import Config.PDFprinterController;
 import Database.DB;
@@ -9,8 +10,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import project.pharmacyv1.DashboardController;
 import project.pharmacyv1.LogWriter;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import tray.notification.TrayNotification;
 
 
@@ -311,50 +310,28 @@ public class SuppliersListController {
             RefreshButtonAction();
         });
 
-        // Add a listener to the selected index property of the tab pane
-        tabPane.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                // Check if the first tab is selected
-                if (newValue.intValue() == 0) {
-                    // Disable the buttons
-                    deleteButton.setDisable(true);
-                    saveButton.setDisable(true);
-                    saveEditButton.setDisable(true);
-                    NewButton.setDisable(true);
-                } else {
-                    // Enable the buttons
-                    deleteButton.setDisable(false);
-                    saveButton.setDisable(false);
-                    saveEditButton.setDisable(false);
-                    NewButton.setDisable(false);
-                }
-            }
-        });
 
-        // Add a listener to the selected item property of the table view
-        SuppliersTableView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Map<String, Object>>() {
-            @Override
-            public void changed(ObservableValue<? extends Map<String, Object>> observable, Map<String, Object> oldValue, Map<String, Object> newValue) {
-                // Check if a row is selected
-                if (newValue != null) {
-                    // Switch to the second tab
-                    tabPane.getSelectionModel().select(1);
+        // Changed Supplier Tabs Filling to Facade Design Pattern
+        SupplierUiBuilder ui = new SupplierUiBuilder.Builder()
+                .tabPane(tabPane)
+                .deleteButton(deleteButton)
+                .saveButton(saveButton)
+                .saveEditButton(saveEditButton)
+                .newButton(NewButton)
+                .suppliersTable(SuppliersTableView)
+                .supplierName(SupplierName)
+                .supplierCode(SupplierCode)
+                .supplierAddress(SupplierAddress)
+                .phone(Phone)
+                .maximumLimit(MaximumLimit)
+                .currentBalance(SuppliersCurrentBalance)
+                .notes(Notes)
+                .returnPolicy(ReturnPolicy)
+                .supplierEmail(SupplierEmail)
+                .parentCompany(ParentCompany)
+                .build();
 
-                    // Fill the text fields with the supplier data
-                    SupplierName.setText(newValue.get("SupplierName").toString());
-                    SupplierCode.setText(newValue.get("SupplierID").toString());
-                    SupplierAddress.setText(newValue.get("SupplierAddress").toString());
-                    Phone.setText(newValue.get("SupplierPhone").toString());
-                    MaximumLimit.setText(newValue.get("MaximumLimit").toString());
-                    SuppliersCurrentBalance.setText(newValue.get("CurrentBalance").toString());
-                    Notes.setText(newValue.get("Notes").toString());
-                    ReturnPolicy.setText(newValue.get("ReturnsPolicy").toString());
-                    SupplierEmail.setText(newValue.get("SupplierEmail").toString());
-                    ParentCompany.setText(newValue.get("ParentCompany").toString());
-                }
-            }
-        });
+        ui.fillSupplierDetails();
 
         NewButton.setOnAction(event -> {
             NewButtonAction();
