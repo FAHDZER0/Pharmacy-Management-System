@@ -88,7 +88,7 @@ public class SalesInvoiceBuilder {
                 WHERE si.SalesInvoiceID = ?
                 """;
 
-            try (Connection conn = DBConfig.getConnection();
+            try (Connection conn = DBConfig.getInstance().getConnection();
                  PreparedStatement ps = conn.prepareStatement(sql)) {
 
                 ps.setInt(1, invoiceNumber);

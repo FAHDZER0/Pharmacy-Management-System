@@ -89,7 +89,7 @@ public class SuppliersListController {
 
 
     DB db = new DB();
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
     DashboardController DC = new DashboardController();
     LanguageSetter LS = new LanguageSetter();
 
@@ -165,7 +165,7 @@ public class SuppliersListController {
         String text = "Supplier " + supplierCode;
 
         // Log the action
-        log.AddItem(DB.logedInUser, text);
+        log.addItem(DB.logedInUser, text);
 
         // Refresh the table
         RefreshButtonAction();
@@ -229,7 +229,7 @@ public class SuppliersListController {
 
         String text = "Supplier " + supplierCode;
         // Log the action
-        log.EditItem(DB.logedInUser, text);
+        log.editItem(DB.logedInUser, text);
 
         // Refresh the table
         RefreshButtonAction();
@@ -255,7 +255,7 @@ public class SuppliersListController {
 
         String text = "Supplier " + supplierCode;
         // Log the action
-        log.RemoveItem(DB.logedInUser, text);
+        log.removeItem(DB.logedInUser, text);
 
         // Refresh the table
         RefreshButtonAction();

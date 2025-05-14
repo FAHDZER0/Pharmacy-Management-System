@@ -46,25 +46,25 @@
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                     <toggleGroup>
-                                        <ToggleGroup fx:id="patmentMethod" />
+                                        <ToggleGroup fx:id="paymentMethod" />
                                     </toggleGroup>
                                 </RadioButton>
-                                <RadioButton fx:id="Visa" mnemonicParsing="false" text="Visa" toggleGroup="$patmentMethod">
+                                <RadioButton fx:id="Visa" mnemonicParsing="false" text="Visa" toggleGroup="$paymentMethod">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </RadioButton>
-                                <RadioButton fx:id="Credit" layoutX="16.0" layoutY="65.0" mnemonicParsing="false" text="Credit" toggleGroup="$patmentMethod">
+                                <RadioButton fx:id="Credit" layoutX="16.0" layoutY="65.0" mnemonicParsing="false" text="Credit" toggleGroup="$paymentMethod">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </RadioButton>
-                                <RadioButton fx:id="Onhold" layoutX="16.0" layoutY="185.0" mnemonicParsing="false" text="On Hold" toggleGroup="$patmentMethod">
+                                <RadioButton fx:id="Onhold" layoutX="16.0" layoutY="185.0" mnemonicParsing="false" text="On Hold" toggleGroup="$paymentMethod">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>
                                 </RadioButton>
-                                <RadioButton fx:id="HomeDelivery" layoutX="16.0" layoutY="215.0" mnemonicParsing="false" text="Home Delivery" toggleGroup="$patmentMethod">
+                                <RadioButton fx:id="HomeDelivery" layoutX="16.0" layoutY="215.0" mnemonicParsing="false" text="Home Delivery" toggleGroup="$paymentMethod">
                                     <font>
                                         <Font name="System Bold" size="20.0" />
                                     </font>

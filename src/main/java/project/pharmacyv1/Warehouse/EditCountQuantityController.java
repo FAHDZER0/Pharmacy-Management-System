@@ -46,7 +46,7 @@ public class EditCountQuantityController {
     private Button saveedit2;
 
     DB db = new DB();
-    LogWriter LW = new LogWriter();
+    LogWriter LW = LogWriter.getInstance();
 
     private String getSearchTextField() {
         return SearchTextField.getText();
@@ -204,7 +204,7 @@ public class EditCountQuantityController {
             db.UpdateQuery("products", updateItem, "ProductID", selectedItem.get("ProductID").toString());
 
             RefreshButtonAction();
-            LW.EditItem(db.logedInUser,selectedItem.get("EnglishName").toString());
+            LW.editItem(db.logedInUser,selectedItem.get("EnglishName").toString());
 
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -231,7 +231,7 @@ public class EditCountQuantityController {
 
             RefreshButtonAction2();
 
-            LW.EditItem(db.logedInUser,selectedItem.get("EnglishName").toString());
+            LW.editItem(db.logedInUser,selectedItem.get("EnglishName").toString());
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");

@@ -23,7 +23,6 @@
     import javafx.util.Duration;
     import project.pharmacyv1.DashboardController;
     import project.pharmacyv1.LogWriter;
-    import project.pharmacyv1.Sales.CommentedInvoicesController;
 
     public class SalesInvoiceController {
 
@@ -68,7 +67,7 @@
     @FXML
     public Button DeleteRowButton;
     @FXML
-    public ToggleGroup patmentMethod;
+    public ToggleGroup paymentMethod;
     @FXML
     public RadioButton cash;
     @FXML
@@ -81,7 +80,7 @@
     public RadioButton HomeDelivery;
 
     DB db = new DB();
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
 
     public void doublClick(MouseEvent event){
         if(event.getButton().equals(MouseButton.PRIMARY)){
@@ -287,7 +286,7 @@
         Map<String, Object> data = new HashMap<>();
         data.put("CustomerID", CustomerCode.getText());
         data.put("TotalSaleAmount", InvoiceTotalValue.getText());
-        if (((RadioButton) patmentMethod.getSelectedToggle()).getText().equalsIgnoreCase("On Hold")) {
+        if (((RadioButton) paymentMethod.getSelectedToggle()).getText().equalsIgnoreCase("On Hold")) {
             data.put("SaleStatus", "On hold");
         } else {
             data.put("SaleStatus", "Complete");
@@ -296,7 +295,7 @@
         data.put("DiscountAmount", DiscountAmount.getText());
         data.put("TotalProfit", invoiceProfitValue.getText());
         data.put("Notes", Notes.getText());
-        data.put("PaymentMethod", ((RadioButton) patmentMethod.getSelectedToggle()).getText());
+        data.put("PaymentMethod", ((RadioButton) paymentMethod.getSelectedToggle()).getText());
         data.put("CashairName", db.logedInUser);
 
         int salesInvoiceID = db.InsertQuery("salesinvoices", data);
@@ -317,7 +316,7 @@
         }
 
         // Log the selling of the items
-        log.SoldItem(db.logedInUser, String.valueOf(salesInvoiceID));
+        log.soldItem(db.logedInUser, String.valueOf(salesInvoiceID));
 
         //showing a message to ask the employee if he wants to print the invoice
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -341,7 +340,7 @@
     @FXML
     public void printInvoice(int InvoiceNumber){
 
-        SalesInvoiceBuilder builder = SalesInvoiceBuilder.Builder.fromDatabase(InvoiceNumber,patmentMethod);
+        SalesInvoiceBuilder builder = SalesInvoiceBuilder.Builder.fromDatabase(InvoiceNumber, paymentMethod);
 
         PDFprinterController pdf = new PDFprinterController();
 
@@ -426,7 +425,7 @@
         InvoiceCostLabel.setText("0");
         invoiceProfitValue.setText("0");
         InvoiceTotalValue.setText("0");
-        patmentMethod.selectToggle(cash);
+        paymentMethod.selectToggle(cash);
     }
 
     public void initialize() {

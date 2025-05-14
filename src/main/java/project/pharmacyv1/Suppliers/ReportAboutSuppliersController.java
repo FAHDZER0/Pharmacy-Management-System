@@ -32,7 +32,7 @@ public class ReportAboutSuppliersController {
 
 
     DB db = new DB();
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
     DashboardController DC = new DashboardController();
     LanguageSetter LS = new LanguageSetter();
 

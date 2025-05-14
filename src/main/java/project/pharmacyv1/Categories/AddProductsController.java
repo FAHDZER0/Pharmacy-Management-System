@@ -68,7 +68,7 @@ public class AddProductsController {
     private Label producttype;
 
     private final ProductDAO productDAO = new ProductDAO(); // Add ProductDAO instance
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
     DashboardController DC = new DashboardController();
 
     @FXML

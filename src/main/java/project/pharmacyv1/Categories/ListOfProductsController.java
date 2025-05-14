@@ -44,7 +44,7 @@ public class ListOfProductsController {
     @FXML
     private Button addbutton;
 
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
     DashboardController DC = new DashboardController();
     LanguageSetter LS = new LanguageSetter();
 

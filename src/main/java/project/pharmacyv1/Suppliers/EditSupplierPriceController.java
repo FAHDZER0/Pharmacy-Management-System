@@ -33,7 +33,7 @@ public class EditSupplierPriceController {
     private Button saveedit;
 
     DB db = new DB();
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
 
     private String getSearchTextField() {
         return SearchTextField.getText();
@@ -121,7 +121,7 @@ public class EditSupplierPriceController {
 
             String text = "Medication " + selectedItem.get("MedicationID").toString() ;
 
-            log.EditItem(db.logedInUser, text);
+            log.editItem(db.logedInUser, text);
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");

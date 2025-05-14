@@ -74,7 +74,7 @@ public class AddCategoriesController {
     @FXML
     private Button newbutton;
 
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
     private final MedicineDAO medicineDAO = new MedicineDAO(); // DAO instance for database interaction
 
     /**

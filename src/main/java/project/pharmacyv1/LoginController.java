@@ -28,7 +28,7 @@ public class LoginController {
     @FXML
     private TextField Password;
 
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
 
     @FXML
     public void CloseButtonAction() {
@@ -53,7 +53,7 @@ public class LoginController {
             db.logedInID = getEmployeePassword();
             db.isLogedIn = true;
             //write in Log file that user "name" logged in at "time"
-            log.LoginSuccess(getEmployeeName(), getLoginDate());
+            log.loginSuccess(getEmployeeName(), getLoginDate());
             openDashboard();
 
         }else{
@@ -64,7 +64,7 @@ public class LoginController {
             alert.setHeaderText("Invalid Username or Password");
             alert.setContentText("Please enter correct username and password");
             alert.showAndWait();
-            log.LoginFailure(getEmployeeName(), getLoginDate());
+            log.loginFailure(getEmployeeName(), getLoginDate());
         }
 
 

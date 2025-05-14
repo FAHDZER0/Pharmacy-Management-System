@@ -39,7 +39,7 @@ public class ListOfCustomerController {
     private Label NumberOfItems;
 
     DB db = new DB();
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
 
     private String getSearchTextField() {
         return SearchTextField.getText();
@@ -124,7 +124,7 @@ public class ListOfCustomerController {
             tray.showAndDismiss(javafx.util.Duration.seconds(2));
 
             RefreshButtonAction();
-            log.RemoveItem(db.logedInUser,selectedItem.get("CustomerName").toString());
+            log.removeItem(db.logedInUser,selectedItem.get("CustomerName").toString());
         }else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
@@ -179,7 +179,7 @@ public class ListOfCustomerController {
             // Update the selected row
             db.UpdateQuery("customers", updateItem, "CustomerID", selectedItem.get("CustomerID").toString());
             RefreshButtonAction();
-            log.EditItem(db.logedInUser,selectedItem.get("CustomerName").toString());
+            log.editItem(db.logedInUser,selectedItem.get("CustomerName").toString());
 
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);

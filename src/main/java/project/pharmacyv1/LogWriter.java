@@ -4,103 +4,73 @@ import Database.DB;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.BufferedWriter;
 import java.util.Date;
 
 public class LogWriter {
+    // 1. Single private static instance (volatile for safe publication)
+    private static volatile LogWriter instance;
+    // 2. Log file path
+    private final String filename = "src/main/java/Database/Log";
 
-    String filename = "src\\main\\java\\Database\\Log";
+    // 3. Private constructor prevents external instantiation
+    private LogWriter() { }
 
-    public void LoginSuccess(String name, String time) {
-        System.out.println("User " + name + " logged in at " + time);
-        LoginController LC = new LoginController();
-        try {
-            FileWriter writer = new FileWriter(filename, true);
-            writer.write("User " + name + " logged in at " + time + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
-            e.printStackTrace();
+    // 4. Public accessor with double‑checked locking for lazy init
+    public static LogWriter getInstance() {
+        if (instance == null) {
+            synchronized (LogWriter.class) {
+                if (instance == null) {
+                    instance = new LogWriter();
+                }
+            }
         }
-
+        return instance;
     }
 
-    public void LoginFailure(String name, String time) {
-        System.out.println("User " + name + " failed to log in at " + time);
-        LoginController LC = new LoginController();
-        try {
-            FileWriter writer = new FileWriter(filename, true);
-            writer.write("User " + name + " failed to log in at " + time + "\n");
-            writer.close();
+    // 5. Generalized private helper to reduce repetition
+    private void writeLog(String message) {
+        System.out.println(message);
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
+            writer.write(message);
+            writer.newLine();
         } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
+            System.err.println("Error writing to log file:");
             e.printStackTrace();
         }
     }
 
-    public void Logout() {
+    public void loginSuccess(String name, String time) {
+        writeLog("User " + name + " logged in at " + time);
+    }
+
+    public void loginFailure(String name, String time) {
+        writeLog("User " + name + " failed to log in at " + time);
+    }
+
+    public void logout() {
         String name = DB.logedInUser;
         String time = new Date().toString();
-        System.out.println("User " + name + " logged out at " + time);
-        LoginController LC = new LoginController();
-        try {
-            FileWriter writer = new FileWriter(filename, true);
-            writer.write("User " + name + " logged out at " + time + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
-            e.printStackTrace();
-        }
+        writeLog("User " + name + " logged out at " + time);
     }
 
-    public void AddItem(String name , String item) {
+    public void addItem(String name, String item) {
         String time = new Date().toString();
-        System.out.println("User " + name + " added " + item + " at " + time);
-        try {
-            FileWriter writer = new FileWriter(filename, true);
-            writer.write("User " + name + " added " + item + " at " + time + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
-            e.printStackTrace();
-        }
+        writeLog("User " + name + " added " + item + " at " + time);
     }
 
-    public void RemoveItem(String name , String item) {
+    public void removeItem(String name, String item) {
         String time = new Date().toString();
-        System.out.println("User " + name + " removed " + item + " at " + time);
-        try {
-            FileWriter writer = new FileWriter(filename, true);
-            writer.write("User " + name + " removed " + item + " at " + time + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
-            e.printStackTrace();
-        }
+        writeLog("User " + name + " removed " + item + " at " + time);
     }
 
-    public void EditItem(String name , String item) {
+    public void editItem(String name, String item) {
         String time = new Date().toString();
-        System.out.println("User " + name + " edited " + item + " at " + time);
-        try {
-            FileWriter writer = new FileWriter(filename, true);
-            writer.write("User " + name + " edited " + item + " at " + time + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
-            e.printStackTrace();
-        }
+        writeLog("User " + name + " edited " + item + " at " + time);
     }
 
-    public void SoldItem(String name , String id) {
+    public void soldItem(String name, String id) {
         String time = new Date().toString();
-        System.out.println("User " + name + " Sales Invoice ID " + id + " at " + time);
-        try {
-            FileWriter writer = new FileWriter(filename, true);
-            writer.write("User " + name + " Sales Invoice ID " + id + " at " + time + "\n");
-            writer.close();
-        } catch (IOException e) {
-            System.out.println("An error occurred while writing to the file.");
-            e.printStackTrace();
-        }
+        writeLog("User " + name + " Sales Invoice ID " + id + " at " + time);
     }
 }

@@ -728,8 +728,8 @@ public class DashboardController {
             stage.setScene(scene);
             stage.initStyle(StageStyle.UNDECORATED);
             stage.show();
-            LogWriter logWriter = new LogWriter();
-            logWriter.Logout();
+            LogWriter logWriter = LogWriter.getInstance();
+            logWriter.logout();
         } catch (IOException e) {
             e.printStackTrace();
             // Handle error

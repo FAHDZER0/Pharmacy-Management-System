@@ -40,7 +40,7 @@ public class ReportAboutExpiredItemsinStrockController {
     private Label ProductTotal;
 
     DB db = new DB();
-    LogWriter LW = new LogWriter();
+    LogWriter LW = LogWriter.getInstance();
 
     private String getSearchTextField() {
         return SearchTextField.getText();

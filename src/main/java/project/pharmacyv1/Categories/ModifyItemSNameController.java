@@ -42,7 +42,7 @@ public class ModifyItemSNameController {
     private Button saveedit2;
 
     DB db = new DB();
-    LogWriter log = new LogWriter();
+    LogWriter log = LogWriter.getInstance();
 
     private String getSearchTextField() {
         return SearchTextField.getText();
@@ -176,7 +176,7 @@ public void fillTable(TableView<Map<String, Object>> tableView, ObservableList<M
             db.UpdateQuery("products", updateItem, "ProductID", selectedItem.get("ProductID").toString());
 
             RefreshButtonAction();
-            log.EditItem(db.logedInUser, selectedItem.get("EnglishName").toString());
+            log.editItem(db.logedInUser, selectedItem.get("EnglishName").toString());
         } else {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning Dialog");
@@ -201,7 +201,7 @@ public void fillTable(TableView<Map<String, Object>> tableView, ObservableList<M
 
 
             RefreshButtonAction2();
-            log.EditItem(db.logedInUser, selectedItem.get("EnglishName").toString());
+            log.editItem(db.logedInUser, selectedItem.get("EnglishName").toString());
 
             // fixing the id column that it doesn't change its width
             ItemListTableView1.getColumns().get(0).setPrefWidth(50);

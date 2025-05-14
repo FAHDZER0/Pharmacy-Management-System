@@ -14,7 +14,7 @@ public class ProductDAO {
 
     public Product findById(int id) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE ProductID = ?";
-        try (Connection conn = DBConfig.getConnection();
+        try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -31,7 +31,7 @@ public class ProductDAO {
     public List<Product> findAll() {
         String query = "SELECT * FROM " + TABLE_NAME;
         List<Product> products = new ArrayList<>();
-        try (Connection conn = DBConfig.getConnection();
+        try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
 
@@ -51,7 +51,7 @@ public class ProductDAO {
                 "SellingPrice, PurchasePrice, ReorderLevel, ProductType) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-        try (Connection conn = DBConfig.getConnection();
+        try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, product.getBarcode());
@@ -95,7 +95,7 @@ public class ProductDAO {
                 "ExpiryDate = ?, Quantity = ?, SellingPrice = ?, PurchasePrice = ?, " +
                 "ReorderLevel = ?, ProductType = ? WHERE ProductID = ?";
 
-        try (Connection conn = DBConfig.getConnection();
+        try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, product.getBarcode());
@@ -137,7 +137,7 @@ public class ProductDAO {
 
     public void delete(int id) {
         String query = "DELETE FROM " + TABLE_NAME + " WHERE ProductID = ?";
-        try (Connection conn = DBConfig.getConnection();
+        try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
             int affectedRows = stmt.executeUpdate();
@@ -168,7 +168,7 @@ public class ProductDAO {
     public List<Product> findByManufacturer(String manufacturer) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE Manufacturer = ?";
         List<Product> products = new ArrayList<>();
-        try (Connection conn = DBConfig.getConnection();
+        try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, manufacturer);
             ResultSet rs = stmt.executeQuery();
