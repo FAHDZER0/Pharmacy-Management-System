@@ -8,7 +8,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import project.pharmacyv1.DashboardController;
 
@@ -22,9 +21,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import javafx.scene.chart.XYChart;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
-import javafx.util.Duration;
 
 
 public class ReportAboutEditingTablesController {

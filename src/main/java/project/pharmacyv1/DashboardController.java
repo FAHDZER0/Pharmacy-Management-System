@@ -30,46 +30,32 @@ import javafx.util.Duration;
 
 public class DashboardController {
 
+    private MenuButton currentButton;
+
     public MenuItem Sales;
     public MenuItem Purchase;
     //  Identify Buttons and Set hover and click actions______________________________//|
     @FXML
     public GridPane DashboardMain;
     @FXML
-    private Button GeneralInformation;
+    private Button GeneralInformation, ListOfItem_side, PurchaseInvoice_side, SalesInvoice_side, ListOfCustomer_side, Notification, Logout;
     @FXML
-    private MenuButton CategoriesMain;
+    private MenuButton CategoriesMain, WarehousesMain, SuppliersMain, PurchasesMain, CustomersMain, SalesMain, GeneralAccountsMain, OrdersMain, EmployeesAffairsMain, FrameworkMain, HelpMain;
     @FXML
-    private MenuButton WarehousesMain;
+    private Label TotalSalesLabel, purchaseMedicinesLabel, profitThisMonthLabel, totalMedicineValue, expiryThisMonthValue, outOfStockValue, DashboardGreeting, DashboardUserName, DashboardGrid1, DashboardGrid2, DashboardGrid3, DashboardGrid4, DashboardGrid5, DashboardGrid6, LoginTime, LoginTimeValue, CurrentUser, miniUserName;
     @FXML
-    private MenuButton SuppliersMain;
+    private PieChart purchaseMedicinesChart, profitThisMonthChart;
     @FXML
-    private MenuButton PurchasesMain;
+    private MenuItem ArabicLanguageMenu, EnglishLanguageMenu, ListOfItem, ListOfProducts, ModifyItemSName, ReportAbouTManifuctrurerCampanies, innerWarehouse, EditCountQuantity, ReportAboutEditingTables, ReportAboutQuantityOfMedicineinStockExp, Warehouse6, ReportAboutExpiredItemsinStrock, SuppliersList, ReportAboutSuppliers, EditSupplierPrice, supplier4, PurchaseInvoice, Purchase2, Purchase4, Purchase5, Purchase6, ListOfCustomer, Customer2, Customer5, sales2, sales4, sales5, sales7, sales8, SalesInvoice, accounts1, accounts2, accounts3, AddCreditCard, accounts5, accounts6, accounts7, accounts8, accounts9, accounts10, accounts11, accounts12, accounts13, accounts14, accounts15, accounts16, accounts17, accounts18, accounts19, Order1, Order2, Order3, EmployeesAffairs1, EmployeesAffairs2, EmployeesAffairs3, EmployeesAffairs5, EmployeesAffairs7, EmployeesAffairs8, EmployeesAffairs9, EmployeesAffairs11, EmployeesAffairs12, EmployeesAffairs13, EmployeesAffairs14, EmployeesAffairs15, EmployeesAffairs16, EmployeesAffairs17, EmployeesAffairs18, Docbutton, shortcutsbutton;
     @FXML
-    private MenuButton CustomersMain;
-    @FXML
-    private MenuButton SalesMain;
-    @FXML
-    private MenuButton GeneralAccountsMain;
-    @FXML
-    private MenuButton OrdersMain;
-    @FXML
-    private MenuButton EmployeesAffairsMain;
-    @FXML
-    private MenuButton FrameworkMain;
-    @FXML
-    private MenuButton HelpMain;
+    public BorderPane MainBoarderPane;
 
-    private MenuButton currentButton; //Reference to the currently pressed button
+    DB db = new DB();
+    LoginController LC = new LoginController();
+    static public String Language = "en";
 
-    @FXML
-    private Button ListOfItem_side;
-    @FXML
-    private Button PurchaseInvoice_side;
-    @FXML
-    private Button SalesInvoice_side;
-    @FXML
-    private Button ListOfCustomer_side;
+    // Timeline for periodically triggering animations
+    private Timeline animationTimeline;
 
     private void setHoverEffect(Control control) {
 
@@ -85,24 +71,6 @@ public class DashboardController {
         });
     }
 
-    //    __________________________________________________________________________
-    @FXML
-    private Label TotalSalesLabel;
-    @FXML
-    private Label purchaseMedicinesLabel;
-    @FXML
-    private Label profitThisMonthLabel;
-    @FXML
-    private PieChart purchaseMedicinesChart;
-    @FXML
-    private PieChart profitThisMonthChart;
-    @FXML
-    private Label totalMedicineValue;
-    @FXML
-    private Label expiryThisMonthValue;
-    @FXML
-    private Label outOfStockValue;
-
     private FadeTransition purchaseMedicinesLabelFadeInAnimation;
     private FadeTransition purchaseMedicinesLabelFadeOutAnimation;
     private FadeTransition profitThisMonthLabelFadeInAnimation;
@@ -112,8 +80,7 @@ public class DashboardController {
     private FadeTransition profitThisMonthChartFadeInAnimation;
     private FadeTransition profitThisMonthChartFadeOutAnimation;
 
-    // Timeline for periodically triggering animations
-    private Timeline animationTimeline;
+
 
     private void setPieChartValues() {
 
@@ -186,9 +153,6 @@ public class DashboardController {
         fadeTransition.setToValue(toValue);
         return fadeTransition;
     }
-
-    @FXML
-    public BorderPane MainBoarderPane;
 
     @FXML
     public void removeFromCenter() {
@@ -345,178 +309,7 @@ public class DashboardController {
         tooltip.setShowDelay(Duration.millis(100));
         return tooltip;
     }
-
-    @FXML
-    private MenuItem ArabicLanguageMenu;
-    @FXML
-    private MenuItem EnglishLanguageMenu;
-
-    @FXML
-    private Label DashboardGreeting;
-    @FXML
-    private Label DashboardUserName;
-    @FXML
-    private Label DashboardGrid1;
-    @FXML
-    private Label DashboardGrid2;
-    @FXML
-    private Label DashboardGrid3;
-    @FXML
-    private Label DashboardGrid4;
-    @FXML
-    private Label DashboardGrid5;
-    @FXML
-    private Label DashboardGrid6;
-    @FXML
-    private Label LoginTime;
-    @FXML
-    private Label LoginTimeValue;
-    @FXML
-    private Label CurrentUser;
-    @FXML
-    private Button Logout;
-    @FXML
-    private MenuItem ListOfItem;
-    @FXML
-    private MenuItem ListOfProducts;
-    @FXML
-    private MenuItem ModifyItemSName;
-    @FXML
-    private MenuItem ReportAbouTManifuctrurerCampanies;
-    @FXML
-    private MenuItem innerWarehouse;
-    @FXML
-    private MenuItem EditCountQuantity;
-    @FXML
-    private MenuItem ReportAboutEditingTables;
-    @FXML
-    private MenuItem ReportAboutQuantityOfMedicineinStockExp;
-    @FXML
-    private MenuItem Warehouse6;
-    @FXML
-    private MenuItem ReportAboutExpiredItemsinStrock;
-    @FXML
-    private MenuItem SuppliersList;
-    @FXML
-    private MenuItem ReportAboutSuppliers;
-    @FXML
-    private MenuItem EditSupplierPrice;
-    @FXML
-    private MenuItem supplier4;
-    @FXML
-    private MenuItem PurchaseInvoice;
-    @FXML
-    private MenuItem Purchase2;
-    @FXML
-    private MenuItem Purchase4;
-    @FXML
-    private MenuItem Purchase5;
-    @FXML
-    private MenuItem Purchase6;
-    @FXML
-    private MenuItem ListOfCustomer;
-    @FXML
-    private MenuItem Customer2;
-    @FXML
-    private MenuItem Customer5;
-    @FXML
-    private MenuItem sales2;
-    @FXML
-    private MenuItem sales4;
-    @FXML
-    private MenuItem sales5;
-    @FXML
-    private MenuItem sales7;
-    @FXML
-    private MenuItem sales8;
-    @FXML
-    private MenuItem SalesInvoice;
-    @FXML
-    private MenuItem accounts1;
-    @FXML
-    private MenuItem accounts2;
-    @FXML
-    private MenuItem accounts3;
-    @FXML
-    private MenuItem AddCreditCard;
-    @FXML
-    private MenuItem accounts5;
-    @FXML
-    private MenuItem accounts6;
-    @FXML
-    private MenuItem accounts7;
-    @FXML
-    private MenuItem accounts8;
-    @FXML
-    private MenuItem accounts9;
-    @FXML
-    private MenuItem accounts10;
-    @FXML
-    private MenuItem accounts11;
-    @FXML
-    private MenuItem accounts12;
-    @FXML
-    private MenuItem accounts13;
-    @FXML
-    private MenuItem accounts14;
-    @FXML
-    private MenuItem accounts15;
-    @FXML
-    private MenuItem accounts16;
-    @FXML
-    private MenuItem accounts17;
-    @FXML
-    private MenuItem accounts18;
-    @FXML
-    private MenuItem accounts19;
-    @FXML
-    private MenuItem Order1;
-    @FXML
-    private MenuItem Order2;
-    @FXML
-    private MenuItem Order3;
-    @FXML
-    private MenuItem EmployeesAffairs1;
-    @FXML
-    private MenuItem EmployeesAffairs2;
-    @FXML
-    private MenuItem EmployeesAffairs3;
-    @FXML
-    private MenuItem EmployeesAffairs5;
-    @FXML
-    private MenuItem EmployeesAffairs7;
-    @FXML
-    private MenuItem EmployeesAffairs8;
-    @FXML
-    private MenuItem EmployeesAffairs9;
-    @FXML
-    private MenuItem EmployeesAffairs11;
-    @FXML
-    private MenuItem EmployeesAffairs12;
-    @FXML
-    private MenuItem EmployeesAffairs13;
-    @FXML
-    private MenuItem EmployeesAffairs14;
-    @FXML
-    private MenuItem EmployeesAffairs15;
-    @FXML
-    private MenuItem EmployeesAffairs16;
-    @FXML
-    private MenuItem EmployeesAffairs17;
-    @FXML
-    private MenuItem EmployeesAffairs18;
-    @FXML
-    private MenuItem Docbutton;
-    @FXML
-    private MenuItem shortcutsbutton;
-    @FXML
-    private Button Notification;
-    @FXML
-    private Label miniUserName;
-
-
-    static public String Language = "en";
-
+    
     public void setLanguage(String language){
         if (language.equals("ar")) {
             MainBoarderPane.setNodeOrientation(javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
@@ -633,9 +426,6 @@ public class DashboardController {
         removeFromCenter();
     }
 
-    DB db = new DB();
-    LoginController LC = new LoginController();
-
     private void setDashboardData(){
         LoginTimeValue.setText(LC.getLoginDate());
 
@@ -749,6 +539,4 @@ public class DashboardController {
         Stage stage = (Stage) Logout.getScene().getWindow();
         stage.close();
     }
-
-
 }

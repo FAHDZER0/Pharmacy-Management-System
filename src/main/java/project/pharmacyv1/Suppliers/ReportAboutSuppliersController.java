@@ -9,10 +9,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import project.pharmacyv1.DashboardController;
 import project.pharmacyv1.LogWriter;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import tray.notification.TrayNotification;
-import java.util.HashMap;
+
 import java.util.Map;
 
 
