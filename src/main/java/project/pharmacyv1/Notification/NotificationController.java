@@ -18,7 +18,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import project.pharmacyv1.DashboardController;
+import project.pharmacyv1.Dashboard.DashboardController;
 
 import java.io.File;
 import java.io.IOException;

@@ -23,7 +23,7 @@
     import javafx.stage.Modality;
     import javafx.stage.Stage;
     import javafx.util.Duration;
-    import project.pharmacyv1.DashboardController;
+    import project.pharmacyv1.Dashboard.DashboardController;
     import project.pharmacyv1.LogWriter;
 
     public class SalesInvoiceController {

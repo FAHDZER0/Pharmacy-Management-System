@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.TextFieldTableCell;
 import javafx.scene.control.skin.TableHeaderRow;
 import javafx.scene.layout.BorderPane;
-import project.pharmacyv1.DashboardController;
+import project.pharmacyv1.Dashboard.DashboardController;
 import project.pharmacyv1.LogWriter;
 import tray.animations.AnimationType;
 import tray.notification.NotificationType;

@@ -24,7 +24,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.util.StringConverter;
-import project.pharmacyv1.DashboardController;
+import project.pharmacyv1.Dashboard.DashboardController;
 import project.pharmacyv1.Suppliers.FindSupplier_PopUpController;
 import javafx.scene.layout.AnchorPane;
 

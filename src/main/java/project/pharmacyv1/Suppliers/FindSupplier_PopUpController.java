@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import project.pharmacyv1.DashboardController;
+import project.pharmacyv1.Dashboard.DashboardController;
 import project.pharmacyv1.LogWriter;
 import project.pharmacyv1.Purchase.PurchaseInvoiceController;
 

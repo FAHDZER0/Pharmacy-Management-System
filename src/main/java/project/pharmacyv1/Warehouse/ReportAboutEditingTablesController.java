@@ -9,7 +9,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.BarChart;
 import javafx.scene.control.*;
-import project.pharmacyv1.DashboardController;
+import project.pharmacyv1.Dashboard.DashboardController;
 
 import java.io.IOException;
 import java.nio.file.Files;

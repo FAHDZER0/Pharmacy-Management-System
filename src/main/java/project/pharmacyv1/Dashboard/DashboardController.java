@@ -1,4 +1,4 @@
-package project.pharmacyv1;
+package project.pharmacyv1.Dashboard;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -27,6 +27,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
+import project.pharmacyv1.ColorPickerController;
+import project.pharmacyv1.LogWriter;
+import project.pharmacyv1.LoginController;
 
 public class DashboardController {
 
@@ -36,7 +39,7 @@ public class DashboardController {
     public MenuItem Purchase;
     //  Identify Buttons and Set hover and click actions______________________________//|
     @FXML
-    public GridPane DashboardMain;
+    public GridPane DashBorderMain;
     @FXML
     private Button GeneralInformation, ListOfItem_side, PurchaseInvoice_side, SalesInvoice_side, ListOfCustomer_side, Notification, Logout;
     @FXML
@@ -48,7 +51,7 @@ public class DashboardController {
     @FXML
     private MenuItem ArabicLanguageMenu, EnglishLanguageMenu, ListOfItem, ListOfProducts, ModifyItemSName, ReportAbouTManifuctrurerCampanies, innerWarehouse, EditCountQuantity, ReportAboutEditingTables, ReportAboutQuantityOfMedicineinStockExp, Warehouse6, ReportAboutExpiredItemsinStrock, SuppliersList, ReportAboutSuppliers, EditSupplierPrice, supplier4, PurchaseInvoice, Purchase2, Purchase4, Purchase5, Purchase6, ListOfCustomer, Customer2, Customer5, sales2, sales4, sales5, sales7, sales8, SalesInvoice, accounts1, accounts2, accounts3, AddCreditCard, accounts5, accounts6, accounts7, accounts8, accounts9, accounts10, accounts11, accounts12, accounts13, accounts14, accounts15, accounts16, accounts17, accounts18, accounts19, Order1, Order2, Order3, EmployeesAffairs1, EmployeesAffairs2, EmployeesAffairs3, EmployeesAffairs5, EmployeesAffairs7, EmployeesAffairs8, EmployeesAffairs9, EmployeesAffairs11, EmployeesAffairs12, EmployeesAffairs13, EmployeesAffairs14, EmployeesAffairs15, EmployeesAffairs16, EmployeesAffairs17, EmployeesAffairs18, Docbutton, shortcutsbutton;
     @FXML
-    public BorderPane MainBoarderPane;
+    public BorderPane MainBorderPane;
 
     DB db = new DB();
     LoginController LC = new LoginController();
@@ -156,8 +159,8 @@ public class DashboardController {
 
     @FXML
     public void removeFromCenter() {
-        this.MainBoarderPane.setCenter(null);
-        this.MainBoarderPane.setCenter(DashboardMain);
+        this.MainBorderPane.setCenter(null);
+        this.MainBorderPane.setCenter(DashBorderMain);
         setDashboardData();
     }
 
@@ -172,7 +175,7 @@ public class DashboardController {
             // Get the controller instance
             ColorPickerController controller = loader.getController();
             // Pass the reference of the dashboard stage to the controller
-            Stage dashboardStage = (Stage) MainBoarderPane.getScene().getWindow();
+            Stage dashboardStage = (Stage) MainBorderPane.getScene().getWindow();
             controller.setDashboardStage(dashboardStage);
             Scene scene = new Scene(root);
             Stage stage = new Stage();
@@ -282,7 +285,7 @@ public class DashboardController {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/" + MenuItemName +".fxml"));
 
             BorderPane secondaryContent = loader.load();
-            MainBoarderPane.setCenter(secondaryContent);
+            MainBorderPane.setCenter(secondaryContent);
         } catch (IOException e) {
             e.printStackTrace();
             // Handle error
@@ -309,10 +312,10 @@ public class DashboardController {
         tooltip.setShowDelay(Duration.millis(100));
         return tooltip;
     }
-    
+
     public void setLanguage(String language){
         if (language.equals("ar")) {
-            MainBoarderPane.setNodeOrientation(javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
+            MainBorderPane.setNodeOrientation(javafx.geometry.NodeOrientation.RIGHT_TO_LEFT);
 
             ListOfItem_side.setTooltip(createCustomTooltip("الأصناف"));
             PurchaseInvoice_side.setTooltip(createCustomTooltip("فاتورة شراء"));
@@ -322,7 +325,7 @@ public class DashboardController {
 
         }
         else if (language.equals("en")) {
-            MainBoarderPane.setNodeOrientation(javafx.geometry.NodeOrientation.LEFT_TO_RIGHT);
+            MainBorderPane.setNodeOrientation(javafx.geometry.NodeOrientation.LEFT_TO_RIGHT);
 
             //setting tooltips for side buttons
             ListOfItem_side.setTooltip(createCustomTooltip("Categories"));

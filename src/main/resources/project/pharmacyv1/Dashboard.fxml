@@ -21,7 +21,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane fx:id="MainBoarderPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1455.0" style="-fx-background-color: #f5f4f6;" styleClass="bigmain" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.pharmacyv1.DashboardController">
+<BorderPane fx:id="MainBorderPane" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1455.0" style="-fx-background-color: #f5f4f6;" styleClass="bigmain" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="project.pharmacyv1.Dashboard.DashboardController">
   <top>
     <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="1.0" styleClass="bg1" stylesheets="@Style.css" BorderPane.alignment="CENTER">
       <padding>
@@ -245,7 +245,7 @@
     </HBox>
   </bottom>
   <center>
-    <GridPane fx:id="DashboardMain" alignment="CENTER" style="-fx-hgap: 20; -fx-vgap: 20; -fx-padding: 20;" styleClass="MainGridPane" BorderPane.alignment="CENTER">
+    <GridPane fx:id="DashBorderMain" alignment="CENTER" style="-fx-hgap: 20; -fx-vgap: 20; -fx-padding: 20;" styleClass="MainGridPane" BorderPane.alignment="CENTER">
       <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="771.0" minWidth="10.0" prefWidth="648.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="662.0" minWidth="10.0" prefWidth="647.0" />

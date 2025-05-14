@@ -26,4 +26,6 @@ module project.pharmacyv1 {
     opens project.pharmacyv1.GeneralAccounts to javafx.fxml;
     exports project.pharmacyv1.Notification;
     opens project.pharmacyv1.Notification to javafx.fxml;
+    exports project.pharmacyv1.Dashboard;
+    opens project.pharmacyv1.Dashboard to javafx.fxml;
 }

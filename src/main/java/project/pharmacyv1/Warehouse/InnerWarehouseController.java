@@ -5,12 +5,11 @@ import javafx.fxml.FXML;
 import Database.DB;
 import javafx.scene.Node;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Tooltip;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.geometry.Insets;
 import javafx.util.Duration;
-import project.pharmacyv1.DashboardController;
+import project.pharmacyv1.Dashboard.DashboardController;
 
 import java.sql.SQLException;
 import java.util.Map;

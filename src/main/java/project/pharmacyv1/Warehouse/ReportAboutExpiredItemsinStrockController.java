@@ -11,7 +11,7 @@ import javafx.scene.control.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import javafx.scene.layout.BorderPane;
-import project.pharmacyv1.DashboardController;
+import project.pharmacyv1.Dashboard.DashboardController;
 import project.pharmacyv1.LogWriter;
 
 import java.util.Map;
