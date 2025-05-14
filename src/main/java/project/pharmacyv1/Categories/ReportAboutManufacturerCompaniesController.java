@@ -49,7 +49,7 @@ public class ReportAboutManufacturerCompaniesController {
         RefreshButtonAction();
 
         // Localization
-        LanguageSetter LS = new LanguageSetter();
+        LanguageSetter LS = LanguageSetter.getInstance();
         if ("en".equals(DC.Language)) {
             Categories1Title.setText(LS.il8n("Categories7","en"));
             PrintButton.setText("Print");

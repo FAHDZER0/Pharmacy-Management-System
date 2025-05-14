@@ -34,7 +34,7 @@ public class ReportAboutSuppliersController {
     DB db = new DB();
     LogWriter log = LogWriter.getInstance();
     DashboardController DC = new DashboardController();
-    LanguageSetter LS = new LanguageSetter();
+    LanguageSetter LS = LanguageSetter.getInstance();
 
     private String getName_codeTextField() {
         return name_codeTextField.getText();

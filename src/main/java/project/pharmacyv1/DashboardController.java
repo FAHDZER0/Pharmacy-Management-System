@@ -538,7 +538,7 @@ public class DashboardController {
             ListOfCustomer_side.setTooltip(createCustomTooltip("Customers"));
             Language = "en";
         }
-        LanguageSetter LS = new LanguageSetter();
+        LanguageSetter LS = LanguageSetter.getInstance();
         DashboardGreeting.setText(LS.il8n("greeting",language));
         DashboardGrid1.setText(LS.il8n("Grid1",language));
         DashboardGrid2.setText(LS.il8n("Grid2",language));

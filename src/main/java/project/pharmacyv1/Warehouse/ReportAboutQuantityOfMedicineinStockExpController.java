@@ -195,7 +195,7 @@ public class ReportAboutQuantityOfMedicineinStockExpController {
 
         
 
-        LanguageSetter LS = new LanguageSetter();
+        LanguageSetter LS = LanguageSetter.getInstance();
 
         if(DC.Language.equals("en")){
             Warehouse4Title.setText(LS.il8n("Warehouse5","en"));

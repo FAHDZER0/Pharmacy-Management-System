@@ -232,7 +232,7 @@ public class PurchaseInvoiceController implements Initializable {
         });
 
         DashboardController DC = new DashboardController();
-        LanguageSetter LS = new LanguageSetter();
+        LanguageSetter LS = LanguageSetter.getInstance();
 
         if(DC.Language.equals("en")){
             PurchaseTitle.setText(LS.il8n("PurchaseTitle","en"));

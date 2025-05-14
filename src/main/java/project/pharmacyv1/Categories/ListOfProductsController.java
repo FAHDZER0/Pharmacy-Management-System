@@ -46,7 +46,7 @@ public class ListOfProductsController {
 
     LogWriter log = LogWriter.getInstance();
     DashboardController DC = new DashboardController();
-    LanguageSetter LS = new LanguageSetter();
+    LanguageSetter LS =  LanguageSetter.getInstance();
 
     private String getSearchTextField() {
         return SearchTextField.getText();

@@ -430,7 +430,7 @@
 
     public void initialize() {
         DashboardController DC = new DashboardController();
-        LanguageSetter LS = new LanguageSetter();
+        LanguageSetter LS = LanguageSetter.getInstance();
 
         Sales1BigTable.setOnMouseClicked(this::doublClick);
 

@@ -149,7 +149,7 @@ public class ReportAboutEditingTablesController {
         setBarChartData();
         RefreshButtonAction();
 
-        LanguageSetter LS = new LanguageSetter();
+        LanguageSetter LS = LanguageSetter.getInstance();
 
         if(DC.Language.equals("en")){
             Warehouse1Title.setText(LS.il8n("Warehouse4","en"));

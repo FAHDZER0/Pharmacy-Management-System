@@ -135,7 +135,7 @@ public class EditSupplierPriceController {
 
         searchEvents();
 
-        LanguageSetter LS = new LanguageSetter();
+        LanguageSetter LS = LanguageSetter.getInstance();
 
         ItemListTableView.setOnMouseClicked(event -> {
             if (ItemListTableView.getSelectionModel().getSelectedIndex() != -1) {

@@ -33,7 +33,7 @@ public class FindSupplier_PopUpController {
         DB db = new DB();
         LogWriter log = LogWriter.getInstance();
         DashboardController DC = new DashboardController();
-        LanguageSetter LS = new LanguageSetter();
+        LanguageSetter LS = LanguageSetter.getInstance();
 
         private String getSupplierCodeTextField() {
                 return SupplierCodeTextField.getText();
