@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
+import Classes.Command;
+import Classes.LoadFXMLCommand;
 import Config.LanguageSetter;
 import Database.DB;
 import javafx.animation.FadeTransition;
@@ -55,6 +59,7 @@ public class DashboardController {
 
     DB db = new DB();
     LoginController LC = new LoginController();
+    private Map<String, Command> commandMap = new HashMap<String, Command>();
     static public String Language = "en";
 
     // Timeline for periodically triggering animations
@@ -245,6 +250,42 @@ public class DashboardController {
     }
 
     @FXML
+    private void initializeCommands(){
+        // Sales
+        commandMap.put("SalesInvoice", new LoadFXMLCommand("Sales/SalesInvoice", MainBorderPane));
+        commandMap.put("FindItem_PopUp", new LoadFXMLCommand("Sales/FindItem_PopUp", MainBorderPane));
+
+        // Purchase
+        commandMap.put("PurchaseInvoice", new LoadFXMLCommand("Purchase/PurchaseInvoice", MainBorderPane));
+
+        // Suppliers
+        commandMap.put("SuppliersList", new LoadFXMLCommand("Suppliers/SuppliersList", MainBorderPane));
+        commandMap.put("FindSupplier_PopUp", new LoadFXMLCommand("Suppliers/FindSupplier_PopUp", MainBorderPane));
+        commandMap.put("ReportAboutSuppliers", new LoadFXMLCommand("Suppliers/ReportAboutSuppliers", MainBorderPane));
+        commandMap.put("EditSupplierPrice", new LoadFXMLCommand("Suppliers/EditSupplierPrice", MainBorderPane));
+
+        // Categories
+        commandMap.put("ListOfItem", new LoadFXMLCommand("Categories/ListOfItem", MainBorderPane));
+        commandMap.put("ListOfProducts", new LoadFXMLCommand("Categories/ListOfProducts", MainBorderPane));
+        commandMap.put("ModifyItemSName", new LoadFXMLCommand("Categories/ModifyItemSName", MainBorderPane));
+        commandMap.put("ReportAbouTManifuctrurerCampanies", new LoadFXMLCommand("Categories/ReportAbouTManifuctrurerCampanies", MainBorderPane));
+
+        // Warehouses
+        commandMap.put("EditCountQuantity", new LoadFXMLCommand("Warehouses/EditCountQuantity", MainBorderPane));
+        commandMap.put("InnerWarehouse", new LoadFXMLCommand("Warehouses/InnerWarehouse", MainBorderPane));
+        commandMap.put("ReportAboutEditingTables", new LoadFXMLCommand("Warehouses/ReportAboutEditingTables", MainBorderPane));
+        commandMap.put("ReportAboutQuantityOfMedicineinStockExp", new LoadFXMLCommand("Warehouses/ReportAboutQuantityOfMedicineinStockExp", MainBorderPane));
+        commandMap.put("ReportAboutExpiredItemsinStrock", new LoadFXMLCommand("Warehouses/ReportAboutExpiredItemsinStrock", MainBorderPane));
+
+        // Customer
+        commandMap.put("ListOfCustomer", new LoadFXMLCommand("Customer/ListOfCustomer", MainBorderPane));
+
+        // General Accounts
+        commandMap.put("AddCreditCard", new LoadFXMLCommand("GeneralAccounts/AddCreditCard", MainBorderPane));
+
+    }
+
+    @FXML
     public void setInCenter(ActionEvent event) {
 
         String MenuItemName = null;
@@ -262,37 +303,16 @@ public class DashboardController {
             MenuItemName = ((MenuItem) event.getSource()).getId();
         }
 
-        if (MenuItemName.equalsIgnoreCase("SalesInvoice") || MenuItemName.equalsIgnoreCase("FindItem_PopUp") ){
-            MenuItemName = "Sales/" + MenuItemName;
-        } else if (MenuItemName.equalsIgnoreCase("PurchaseInvoice")) {
-            MenuItemName = "Purchase/" + MenuItemName;
-        } else if (MenuItemName.equalsIgnoreCase("SuppliersList") || MenuItemName.equalsIgnoreCase("FindSupplier_PopUp") || MenuItemName.equalsIgnoreCase("ReportAboutSuppliers") || MenuItemName.equalsIgnoreCase("EditSupplierPrice")){
-            MenuItemName = "Suppliers/" + MenuItemName;
-        } else if (MenuItemName.equalsIgnoreCase("ListOfItem") || MenuItemName.equalsIgnoreCase("ListOfProducts") || MenuItemName.equals("ModifyItemSName") || MenuItemName.equals("ReportAbouTManifuctrurerCampanies")) {
-            MenuItemName = "Categories/" + MenuItemName;
-        } else if(MenuItemName.equalsIgnoreCase("EditCountQuantity") || MenuItemName.equalsIgnoreCase("InnerWarehouse") || MenuItemName.equalsIgnoreCase("ReportAboutEditingTables") || MenuItemName.equalsIgnoreCase("ReportAboutQuantityOfMedicineinStockExp") || MenuItemName.equalsIgnoreCase("ReportAboutExpiredItemsinStrock")){
-            MenuItemName = "Warehouses/" + MenuItemName;
-        } else if(MenuItemName.equalsIgnoreCase("ListOfCustomer")){
-            MenuItemName = "Customer/" + MenuItemName;
-        } else if(MenuItemName.equalsIgnoreCase("AddCreditCard")){
-            MenuItemName = "GeneralAccounts/" + MenuItemName;
+        // Use command map to load fxml paths
+        Command command = commandMap.get(MenuItemName);
+        if (command != null) {
+            removeFromCenter();
+            command.execute();
+        } else {
+            System.err.println("No command registered for: " + MenuItemName);
         }
 
-        removeFromCenter();
-
-        // Extract substring before the underscore character, if exists
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/project/pharmacyv1/" + MenuItemName +".fxml"));
-
-            BorderPane secondaryContent = loader.load();
-            MainBorderPane.setCenter(secondaryContent);
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle error
-
-        }
     }
-
     private void setSideHoverEffect(Control control){
         control.setOnMouseEntered(event -> {
             control.setStyle("-fx-background-color:  -fx-bg-color-2; -fx-background-radius: 100px; -fx-border-color: -fx-bg-color-3; -fx-border-radius: 100px; -fx-border-width: 3px;");
@@ -479,6 +499,9 @@ public class DashboardController {
             setAnimationDashboard();
             openNotification();
         });
+
+        // Initialize fxml paths to the command map
+        initializeCommands();
 
         //setting tooltips for side buttons
         ListOfItem_side.setTooltip(createCustomTooltip("Categories"));

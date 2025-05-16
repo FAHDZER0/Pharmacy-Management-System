@@ -88,7 +88,7 @@
     public void doublClick(MouseEvent event){
         if(event.getButton().equals(MouseButton.PRIMARY)){
             if(event.getClickCount() == 2){
-                addItemToInvoice.openFind();
+                addItemToInvoice.execute();
             }
         }
     }
@@ -389,7 +389,7 @@
 
     @FXML
     public void addNewItem(){
-        addItemToInvoice.openFind();
+        addItemToInvoice.execute();
     }
 
     @FXML

@@ -18,7 +18,7 @@ public class SalesCommand implements Command {
     }
 
     @Override
-    public void openFind() {
+    public void execute() {
         try {
             FXMLLoader loader = new FXMLLoader(
                     getClass().getResource("/project/pharmacyv1/Sales/FindItem_PopUp.fxml")
