@@ -36,6 +36,8 @@ public class AddCategoriesController {
     @FXML
     private TextField MedicationType;
     @FXML
+    private TextField Limited;
+    @FXML
     private BorderPane SecondaryMainBorderPane;
     @FXML
     private Label itemscodelabel;
@@ -103,6 +105,8 @@ public class AddCategoriesController {
                     .purchasePrice(Double.parseDouble(PurchasePrice.getText()))
                     .reorderLevel(Double.parseDouble(ReorderLevel.getText()))
                     .medicationType(MedicationType.getText())
+                    .Limited(Integer.parseInt(Limited.getText()))
+
                     .build();
 
             // Save the new medicine to the database using MedicineDAO
@@ -135,6 +139,7 @@ public class AddCategoriesController {
         PurchasePrice.clear();
         ReorderLevel.clear();
         MedicationType.clear();
+        Limited.clear();
     }
 
     /**
@@ -154,7 +159,8 @@ public class AddCategoriesController {
                         SellingPrice.getText().isEmpty() ||
                         PurchasePrice.getText().isEmpty() ||
                         ReorderLevel.getText().isEmpty() ||
-                        MedicationType.getText().isEmpty()
+                        MedicationType.getText().isEmpty() ||
+                        Limited.getText().isEmpty()
         );
     }
 
@@ -189,6 +195,7 @@ public class AddCategoriesController {
             purchaseprice.setText("Purchase Price");
             reorderlevel.setText("Reorder Level");
             medtype.setText("Medication Type");
+            Limited.setText("limited");
             addnewmed.setText("Add New Medication");
             bigtitle.setText("Add New Medication");
             canceladd.setText("Cancel");
@@ -207,6 +214,7 @@ public class AddCategoriesController {
             purchaseprice.setText("سعر الشراء");
             reorderlevel.setText("الحد الادنى");
             medtype.setText("نوع الدواء");
+            Limited.setText("العدد المسموح");
             addnewmed.setText("اضافة دواء جديد");
             bigtitle.setText("اضافة صنف جديد");
             canceladd.setText("الغاء");

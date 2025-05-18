@@ -2,16 +2,19 @@ package project.pharmacyv1.Dashboard;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.NumberFormat;
 import java.text.ParseException;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import Classes.Command;
 import Classes.LoadFXMLCommand;
 import Config.LanguageSetter;
 import Database.DB;
+import Database.DBConfig;
 import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -56,6 +59,87 @@ public class DashboardController {
     private MenuItem ArabicLanguageMenu, EnglishLanguageMenu, ListOfItem, ListOfProducts, ModifyItemSName, ReportAbouTManifuctrurerCampanies, innerWarehouse, EditCountQuantity, ReportAboutEditingTables, ReportAboutQuantityOfMedicineinStockExp, Warehouse6, ReportAboutExpiredItemsinStrock, SuppliersList, ReportAboutSuppliers, EditSupplierPrice, supplier4, PurchaseInvoice, Purchase2, Purchase4, Purchase5, Purchase6, ListOfCustomer, Customer2, Customer5, sales2, sales4, sales5, sales7, sales8, SalesInvoice, accounts1, accounts2, accounts3, AddCreditCard, accounts5, accounts6, accounts7, accounts8, accounts9, accounts10, accounts11, accounts12, accounts13, accounts14, accounts15, accounts16, accounts17, accounts18, accounts19, Order1, Order2, Order3, EmployeesAffairs1, EmployeesAffairs2, EmployeesAffairs3, EmployeesAffairs5, EmployeesAffairs7, EmployeesAffairs8, EmployeesAffairs9, EmployeesAffairs11, EmployeesAffairs12, EmployeesAffairs13, EmployeesAffairs14, EmployeesAffairs15, EmployeesAffairs16, EmployeesAffairs17, EmployeesAffairs18, Docbutton, shortcutsbutton;
     @FXML
     public BorderPane MainBorderPane;
+
+    public static String miniUserNam;
+
+    public static void checkNotificationFromPopup() {
+        System.out.println("Checking notifications for admin... " + miniUserNam);
+
+        if (miniUserNam == null || !miniUserNam.trim().equalsIgnoreCase("admin")) {
+            System.out.println("User is not admin, skipping notification check");
+            return;
+        }
+
+        String query = "SELECT IDa, message FROM admin_notification WHERE seen_by_admin = 1";
+
+        try (Connection conn = DBConfig.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+
+            System.out.println("Executing query: " + query);
+
+            // Collect all notifications
+            List<Notification> notifications = new ArrayList<>();
+            while (rs.next()) {
+                int id = rs.getInt("IDa");
+                String message = rs.getString("message");
+                System.out.println("Queued notification ID=" + id + ": " + message);
+                notifications.add(new Notification(id, message));
+            }
+
+            if (notifications.isEmpty()) {
+                System.out.println("No notifications found with seen_by_admin = 1");
+                return;
+            }
+
+            // Display each one on the JavaFX thread
+            Platform.runLater(() -> {
+                for (Notification n : notifications) {
+                    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                    alert.setTitle("User Request Notification");
+                    alert.setHeaderText("طلب المستخدم:");
+                    alert.setContentText(n.getMessage());
+
+                    // When user closes the dialog, mark it as seen
+                    alert.showAndWait().ifPresent(response -> {
+                        markNotificationAsSeen(n.getId());
+                    });
+                }
+            });
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static void markNotificationAsSeen(int id) {
+        String updateQuery = "UPDATE admin_notification SET seen_by_admin = 0 WHERE IDa = ?";
+        System.out.println("Updating notification ID: " + id + " to seen (seen_by_admin = 0)");
+
+        try (Connection conn = DBConfig.getInstance().getConnection();
+             PreparedStatement stmt = conn.prepareStatement(updateQuery)) {
+
+            stmt.setInt(1, id);
+            int rowsAffected = stmt.executeUpdate();
+            System.out.println("Rows affected by update: " + rowsAffected);
+
+        } catch (SQLException e) {
+            System.err.println("Error updating notification status: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+    // Simple holder class for pairing ID and message
+    private static class Notification {
+        private final int id;
+        private final String message;
+        public Notification(int id, String message) {
+            this.id = id;
+            this.message = message;
+        }
+        public int getId() { return id; }
+        public String getMessage() { return message; }
+    }
 
     DB db = new DB();
     LoginController LC = new LoginController();
@@ -458,6 +542,7 @@ public class DashboardController {
             else {
                 DashboardUserName.setText(db.logedInUser);
                 miniUserName.setText(db.logedInUser);
+                miniUserNam= miniUserName.getText();
             }
         });
 

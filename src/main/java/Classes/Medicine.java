@@ -18,6 +18,7 @@ public class Medicine implements BasicProduct {
     private double purchasePrice;
     private double reorderLevel;
     private String medicationType;
+    private int Limited;
 
     /* Medicine Builder Pattern */
     public static class MedicineBuilder {
@@ -35,6 +36,7 @@ public class Medicine implements BasicProduct {
         private double purchasePrice;
         private double reorderLevel;
         private String medicationType;
+        private int Limited;
 
         public MedicineBuilder id(int v){ this.id = v; return this; }
         public MedicineBuilder barcode(String v){ this.barcode = v; return this; }
@@ -50,6 +52,8 @@ public class Medicine implements BasicProduct {
         public MedicineBuilder purchasePrice(double v){ this.purchasePrice = v; return this; }
         public MedicineBuilder reorderLevel(double v){ this.reorderLevel = v; return this; }
         public MedicineBuilder medicationType(String v){ this.medicationType = v; return this; }
+        public MedicineBuilder Limited(int v){ this.Limited = v; return this; }
+
 
         public Medicine build() { return new Medicine(this); }
     }
@@ -69,6 +73,7 @@ public class Medicine implements BasicProduct {
         this.purchasePrice = b.purchasePrice;
         this.reorderLevel = b.reorderLevel;
         this.medicationType = b.medicationType;
+        this.Limited = b.Limited;
     }
 
     public int getId() { return id; }
@@ -112,4 +117,8 @@ public class Medicine implements BasicProduct {
 
     public String getMedicationType() {return medicationType;}
     public void setMedicationType(String medicationType) {this.medicationType = medicationType;}
+
+    public int getLimited() {return Limited;}
+    public void setLimited(int Limited) {this.Limited = Limited;}
+
 }

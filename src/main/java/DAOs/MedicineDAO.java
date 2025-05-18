@@ -18,7 +18,6 @@ public class MedicineDAO {
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
-
             if (rs.next()) {
                 return mapResultSetToMedicine(rs);
             }
@@ -27,14 +26,13 @@ public class MedicineDAO {
         }
         return null;
     }
-    
+
     public List<Medicine> findAll() {
         String query = "SELECT * FROM " + TABLE_NAME;
         List<Medicine> medicines = new ArrayList<>();
         try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query);
              ResultSet rs = stmt.executeQuery()) {
-
             while (rs.next()) {
                 medicines.add(mapResultSetToMedicine(rs));
             }
@@ -48,12 +46,10 @@ public class MedicineDAO {
         String query = "INSERT INTO " + TABLE_NAME + " (" +
                 "MedicationBarcode, ArabicName, EnglishName, InternationalCode, " +
                 "ActiveIngredient, Manufacturer, ExpiryDate, Unit, Quantity, " +
-                "SellingPrice, PurchasePrice, ReorderLevel, MedicationType) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+                "SellingPrice, PurchasePrice, ReorderLevel, MedicationType, Limited) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
-
             stmt.setString(1, medicine.getBarcode());
             stmt.setString(2, medicine.getArabicName());
             stmt.setString(3, medicine.getEnglishName());
@@ -67,13 +63,11 @@ public class MedicineDAO {
             stmt.setDouble(11, medicine.getPurchasePrice());
             stmt.setDouble(12, medicine.getReorderLevel());
             stmt.setString(13, medicine.getMedicationType());
-
+            stmt.setInt(14, medicine.getLimited()); // حفظ القيمة كما هي بدون تعديل
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
                 throw new SQLException("Creating medicine failed, no rows affected.");
             }
-
-            // Retrieve auto-generated ID
             try (ResultSet generatedKeys = stmt.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     int id = generatedKeys.getInt(1);
@@ -89,12 +83,10 @@ public class MedicineDAO {
         String query = "UPDATE " + TABLE_NAME + " SET " +
                 "MedicationBarcode = ?, ArabicName = ?, EnglishName = ?, InternationalCode = ?, " +
                 "ActiveIngredient = ?, Manufacturer = ?, ExpiryDate = ?, Unit = ?, Quantity = ?, " +
-                "SellingPrice = ?, PurchasePrice = ?, ReorderLevel = ?, MedicationType = ? " +
+                "SellingPrice = ?, PurchasePrice = ?, ReorderLevel = ?, MedicationType = ?, Limited = ? " +
                 "WHERE MedicationID = ?";
-
         try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-
             stmt.setString(1, medicine.getBarcode());
             stmt.setString(2, medicine.getArabicName());
             stmt.setString(3, medicine.getEnglishName());
@@ -108,8 +100,8 @@ public class MedicineDAO {
             stmt.setDouble(11, medicine.getPurchasePrice());
             stmt.setDouble(12, medicine.getReorderLevel());
             stmt.setString(13, medicine.getMedicationType());
-            stmt.setInt(14, medicine.getId());
-
+            stmt.setInt(14, medicine.getLimited()); // حفظ القيمة كما هي بدون تعديل
+            stmt.setInt(15, medicine.getId());
             int affectedRows = stmt.executeUpdate();
             if (affectedRows == 0) {
                 System.out.println("Update failed: No medicine found with ID: " + medicine.getId());
@@ -165,13 +157,11 @@ public class MedicineDAO {
         }
     }
 
-    // Method to filter medicines by manufacturer
     public List<Medicine> findByManufacturer(String manufacturer) {
         String query = "SELECT * FROM " + TABLE_NAME + " WHERE Manufacturer = ?";
         List<Medicine> medicines = new ArrayList<>();
         try (Connection conn = DBConfig.getInstance().getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
-
             stmt.setString(1, manufacturer);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
@@ -183,11 +173,9 @@ public class MedicineDAO {
         return medicines;
     }
 
-
-    // Helper method to map ResultSet to a Medicine object
     private Medicine mapResultSetToMedicine(ResultSet rs) throws SQLException {
         return new Medicine.MedicineBuilder()
-                .id(rs.getInt("MedicationID")) // Map the 'id' column from the database to the object
+                .id(rs.getInt("MedicationID"))
                 .barcode(rs.getString("MedicationBarcode"))
                 .arabicName(rs.getString("ArabicName"))
                 .englishName(rs.getString("EnglishName"))
@@ -201,5 +189,7 @@ public class MedicineDAO {
                 .purchasePrice(rs.getDouble("PurchasePrice"))
                 .reorderLevel(rs.getDouble("ReorderLevel"))
                 .medicationType(rs.getString("MedicationType"))
+                .Limited(rs.getInt("Limited")) // قراءة القيمة كما هي بدون تعديل
                 .build();
-    }}
+    }
+}

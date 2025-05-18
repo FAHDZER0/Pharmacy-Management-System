@@ -24,268 +24,288 @@
                     </font>
                 </Label>
                 <Separator prefWidth="200.0" />
-                    <VBox prefHeight="748.0" prefWidth="1244.0">
-                        <children>
-                            <HBox prefHeight="50.0" prefWidth="1244.0">
-                                <children>
-                                    <Label fx:id="addnewmed" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="1494.0" text="Add New Medication" textAlignment="CENTER" HBox.hgrow="ALWAYS">
-                                        <font>
-                                            <Font name="System Bold" size="30.0" />
-                                        </font>
-                                    </Label>
-                                </children>
-                            </HBox>
-                            <ScrollPane>
-                                <content>
-                                    <VBox prefHeight="770.0" prefWidth="1227.0">
-                                        <children>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" prefHeight="14.0" prefWidth="1242.0">
-                                 <children>
-                                    <Label fx:id="internationalcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="217.0" text="International Code" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="internationalCode" prefHeight="30.0" prefWidth="300.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                    <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="0.0" text="*" textAlignment="CENTER" textFill="RED">
-                                       <font>
-                                          <Font name="System Bold" size="30.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" prefHeight="14.0" prefWidth="1242.0">
-                                 <children>
-                                    <Label fx:id="barcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="217.0" text="Medication Barcode" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="medicationBarcode" prefHeight="30.0" prefWidth="300.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                    <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="0.0" text="*" textAlignment="CENTER" textFill="RED">
-                                       <font>
-                                          <Font name="System Bold" size="30.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </HBox>
-                                            <HBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="1242.0">
-                                                <children>
-                                                    <Label fx:id="arabicname" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="217.0" text="Item's name in Arabic" textAlignment="CENTER">
-                                                        <font>
-                                                            <Font name="System Bold" size="20.0" />
-                                                        </font>
-                                                        <padding>
-                                                            <Insets left="5.0" />
-                                                        </padding>
-                                                    </Label>
-                                                    <TextField fx:id="itemNameArabic" prefHeight="30.0" prefWidth="300.0">
-                                                        <font>
-                                                            <Font size="14.0" />
-                                                        </font>
-                                                    </TextField>
-                                                    <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="0.0" text="*" textAlignment="CENTER" textFill="RED">
-                                                        <font>
-                                                            <Font name="System Bold" size="30.0" />
-                                                        </font>
-                                                    </Label>
-                                                </children>
-                                            </HBox>
-                                            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0">
-                                                <children>
-                                                    <Label fx:id="englishname" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Item's name in English" textAlignment="CENTER">
-                                                        <font>
-                                                            <Font name="System Bold" size="20.0" />
-                                                        </font>
-                                                        <padding>
-                                                            <Insets left="5.0" />
-                                                        </padding>
-                                                    </Label>
-                                                    <TextField fx:id="itemNameEnglish" prefHeight="30.0" prefWidth="300.0">
-                                                        <font>
-                                                            <Font size="14.0" />
-                                                        </font>
-                                                    </TextField>
-                                                </children>
-                                                <VBox.margin>
-                                                    <Insets bottom="10.0" left="-0.0" right="5.0" top="5.0" />
-                                                </VBox.margin>
-                                            </HBox>
-                              <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="195.0">
-                                 <children>
-                                    <Label fx:id="activeingrid" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Active Ingredient" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="ActiveIngrid" prefHeight="30.0" prefWidth="300.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="238.0">
-                                 <children>
-                                    <Label fx:id="manu" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Manufacturer" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="Manufacturer" prefHeight="30.0" prefWidth="300.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="283.0">
-                                 <children>
-                                    <Label fx:id="expdate" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Expiry Date" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <DatePicker fx:id="ExpDate" prefHeight="25.0" prefWidth="299.0" />
-                                 </children>
-                              </HBox>
-                              <Separator layoutX="10.0" layoutY="235.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="283.0">
-                                 <children>
-                                    <Label fx:id="unit" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Unit" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="Unit" prefHeight="30.0" prefWidth="222.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="353.0">
-                                 <children>
-                                    <Label fx:id="sellingprice" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Selling Price" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="SellingPrice" prefHeight="30.0" prefWidth="124.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="393.0">
-                                 <children>
-                                    <Label fx:id="purchaseprice" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Purchase Price" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="PurchasePrice" prefHeight="30.0" prefWidth="122.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="433.0">
-                                 <children>
-                                    <Label fx:id="reorderlevel" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Reorder Level" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="ReorderLevel" prefHeight="30.0" prefWidth="180.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </padding>
-                              </HBox>
-                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="468.0">
-                                 <children>
-                                    <Label fx:id="medtype" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="MedicationType" textAlignment="CENTER">
-                                       <font>
-                                          <Font name="System Bold" size="20.0" />
-                                       </font>
-                                       <padding>
-                                          <Insets left="5.0" />
-                                       </padding>
-                                    </Label>
-                                    <TextField fx:id="MedicationType" prefHeight="30.0" prefWidth="300.0">
-                                       <font>
-                                          <Font size="14.0" />
-                                       </font>
-                                    </TextField>
-                                 </children>
-                                 <padding>
-                                    <Insets bottom="5.0" top="5.0" />
-                                 </padding>
-                              </HBox>
-                                        </children>
-                                    </VBox>
-                                </content>
-                            </ScrollPane>
-                        </children>
-                    </VBox>
+                <VBox prefHeight="748.0" prefWidth="1244.0">
+                    <children>
+                        <HBox prefHeight="50.0" prefWidth="1244.0">
+                            <children>
+                                <Label fx:id="addnewmed" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="1494.0" text="Add New Medication" textAlignment="CENTER" HBox.hgrow="ALWAYS">
+                                    <font>
+                                        <Font name="System Bold" size="30.0" />
+                                    </font>
+                                </Label>
+                            </children>
+                        </HBox>
+                        <ScrollPane>
+                            <content>
+                                <VBox prefHeight="770.0" prefWidth="1227.0">
+                                    <children>
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" prefHeight="14.0" prefWidth="1242.0">
+                                            <children>
+                                                <Label fx:id="internationalcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="217.0" text="International Code" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="internationalCode" prefHeight="30.0" prefWidth="300.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                                <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="0.0" text="*" textAlignment="CENTER" textFill="RED">
+                                                    <font>
+                                                        <Font name="System Bold" size="30.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0" prefHeight="14.0" prefWidth="1242.0">
+                                            <children>
+                                                <Label fx:id="barcode" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="217.0" text="Medication Barcode" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="medicationBarcode" prefHeight="30.0" prefWidth="300.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                                <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="0.0" text="*" textAlignment="CENTER" textFill="RED">
+                                                    <font>
+                                                        <Font name="System Bold" size="30.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" prefHeight="14.0" prefWidth="1242.0">
+                                            <children>
+                                                <Label fx:id="arabicname" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="217.0" text="Item's name in Arabic" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="itemNameArabic" prefHeight="30.0" prefWidth="300.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                                <Label alignment="TOP_LEFT" maxWidth="1.7976931348623157E308" prefHeight="45.0" prefWidth="0.0" text="*" textAlignment="CENTER" textFill="RED">
+                                                    <font>
+                                                        <Font name="System Bold" size="30.0" />
+                                                    </font>
+                                                </Label>
+                                            </children>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="55.0">
+                                            <children>
+                                                <Label fx:id="englishname" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Item's name in English" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="itemNameEnglish" prefHeight="30.0" prefWidth="300.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets bottom="10.0" left="-0.0" right="5.0" top="5.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                        <Separator prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="195.0">
+                                            <children>
+                                                <Label fx:id="activeingrid" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Active Ingredient" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="ActiveIngrid" prefHeight="30.0" prefWidth="300.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="238.0">
+                                            <children>
+                                                <Label fx:id="manu" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Manufacturer" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="Manufacturer" prefHeight="30.0" prefWidth="300.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="283.0">
+                                            <children>
+                                                <Label fx:id="expdate" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Expiry Date" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <DatePicker fx:id="ExpDate" prefHeight="25.0" prefWidth="299.0" />
+                                            </children>
+                                        </HBox>
+                                        <Separator layoutX="10.0" layoutY="235.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="283.0">
+                                            <children>
+                                                <Label fx:id="unit" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Unit" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="Unit" prefHeight="30.0" prefWidth="222.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="353.0">
+                                            <children>
+                                                <Label fx:id="sellingprice" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Selling Price" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="SellingPrice" prefHeight="30.0" prefWidth="124.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="393.0">
+                                            <children>
+                                                <Label fx:id="purchaseprice" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Purchase Price" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="PurchasePrice" prefHeight="30.0" prefWidth="122.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                            </children>
+                                            <VBox.margin>
+                                                <Insets bottom="5.0" top="5.0" />
+                                            </VBox.margin>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="433.0">
+                                            <children>
+                                                <Label fx:id="reorderlevel" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="Reorder Level" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="ReorderLevel" prefHeight="30.0" prefWidth="180.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="5.0" top="5.0" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="468.0">
+                                            <children>
+                                                <Label fx:id="medtype" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="MedicationType" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="MedicationType" prefHeight="30.0" prefWidth="300.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="5.0" top="5.0" />
+                                            </padding>
+                                        </HBox>
+                                        <HBox alignment="CENTER_LEFT">
+                                            <children>
+                                                <Label fx:id="medtype1" maxWidth="1.7976931348623157E308" prefHeight="30.0" prefWidth="217.0" text="    limited" textAlignment="CENTER">
+                                                    <font>
+                                                        <Font name="System Bold" size="20.0" />
+                                                    </font>
+                                                    <padding>
+                                                        <Insets left="5.0" />
+                                                    </padding>
+                                                </Label>
+                                                <TextField fx:id="Limited" prefHeight="30.0" prefWidth="300.0">
+                                                    <font>
+                                                        <Font size="14.0" />
+                                                    </font>
+                                                </TextField>
+                                            </children>
+                                            <padding>
+                                                <Insets bottom="5.0" top="5.0" />
+                                            </padding>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </VBox>
                 <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="1128.0" spacing="10.0" style="-fx-border-color: Grey; -fx-border-width: 0.5px;">
                     <children>
                         <Button fx:id="newbutton" mnemonicParsing="false" onAction="#resetFields" text="New">

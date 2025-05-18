@@ -1,6 +1,7 @@
 package project.pharmacyv1.Notification;
 
 import Database.DB;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -130,8 +131,15 @@ public class NotificationController {
     @FXML
     public void closeNotification() {
         closeButton.getScene().getWindow().hide();
-    }
 
+        Platform.runLater(() -> {
+            try {
+                DashboardController.checkNotificationFromPopup();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+    }
     public String loadColorsFromCSS() {
         String[] colorParts = null;
         try {
