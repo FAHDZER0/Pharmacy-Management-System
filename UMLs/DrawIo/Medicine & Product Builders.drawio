@@ -1,0 +1,47 @@
+<mxGraphModel dx="0" dy="0" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" background="none" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+    <mxCell id="node2" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;i&gt;&amp;lt;&amp;lt;interface&amp;gt;&amp;gt;&lt;/i&gt;&lt;br/&gt;&lt;b&gt;BasicProduct&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; manufacturer: String&lt;br/&gt; purchasePrice: double&lt;br/&gt; arabicName: String&lt;br/&gt; quantity: double&lt;br/&gt; id: int&lt;br/&gt; barcode: String&lt;br/&gt; reorderLevel: double&lt;br/&gt; expiryDate: LocalDate&lt;br/&gt; sellingPrice: double&lt;br/&gt; englishName: String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="141" y="1" width="184" height="279" as="geometry" />
+    </mxCell>
+    <mxCell id="node0" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Medicine&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- Medicine(MedicineBuilder): &lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- arabicName: String&lt;br/&gt;- purchasePrice: double&lt;br/&gt;- id: int&lt;br/&gt;- reorderLevel: double&lt;br/&gt;- activeIngredient: String&lt;br/&gt;- barcode: String&lt;br/&gt;- englishName: String&lt;br/&gt;- quantity: double&lt;br/&gt;- medicationType: String&lt;br/&gt;- Limited: int&lt;br/&gt;- expiryDate: LocalDate&lt;br/&gt;- sellingPrice: double&lt;br/&gt;- manufacturer: String&lt;br/&gt;- internationalCode: String&lt;br/&gt;- unit: String&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; manufacturer: String&lt;br/&gt; purchasePrice: double&lt;br/&gt; internationalCode: String&lt;br/&gt; id: int&lt;br/&gt; barcode: String&lt;br/&gt; Limited: int&lt;br/&gt; expiryDate: LocalDate&lt;br/&gt; sellingPrice: double&lt;br/&gt; englishName: String&lt;br/&gt; unit: String&lt;br/&gt; arabicName: String&lt;br/&gt; quantity: double&lt;br/&gt; reorderLevel: double&lt;br/&gt; activeIngredient: String&lt;br/&gt; medicationType: String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="-40" y="362" width="219" height="785" as="geometry" />
+    </mxCell>
+    <mxCell id="node3" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;MedicineBuilder&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ MedicineBuilder(): &lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ id(int): MedicineBuilder&lt;br/&gt;+ build(): Medicine&lt;br/&gt;+ purchasePrice(double): MedicineBuilder&lt;br/&gt;+ internationalCode(String): MedicineBuilder&lt;br/&gt;+ reorderLevel(double): MedicineBuilder&lt;br/&gt;+ manufacturer(String): MedicineBuilder&lt;br/&gt;+ unit(String): MedicineBuilder&lt;br/&gt;+ sellingPrice(double): MedicineBuilder&lt;br/&gt;+ medicationType(String): MedicineBuilder&lt;br/&gt;+ activeIngredient(String): MedicineBuilder&lt;br/&gt;+ Limited(int): MedicineBuilder&lt;br/&gt;+ englishName(String): MedicineBuilder&lt;br/&gt;+ expiryDate(LocalDate): MedicineBuilder&lt;br/&gt;+ quantity(double): MedicineBuilder&lt;br/&gt;+ arabicName(String): MedicineBuilder&lt;br/&gt;+ barcode(String): MedicineBuilder&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="-86" y="1196" width="310" height="448" as="geometry" />
+    </mxCell>
+    <mxCell id="node1" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;Product&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- Product(ProductBuilder): &lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;- quantity: double&lt;br/&gt;- barcode: String&lt;br/&gt;- id: int&lt;br/&gt;- manufacturer: String&lt;br/&gt;- arabicName: String&lt;br/&gt;- sellingPrice: double&lt;br/&gt;- expiryDate: LocalDate&lt;br/&gt;- englishName: String&lt;br/&gt;- purchasePrice: double&lt;br/&gt;- reorderLevel: double&lt;br/&gt;- productType: String&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ equals(Object): boolean&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt; manufacturer: String&lt;br/&gt; purchasePrice: double&lt;br/&gt; productType: String&lt;br/&gt; arabicName: String&lt;br/&gt; quantity: double&lt;br/&gt; id: int&lt;br/&gt; barcode: String&lt;br/&gt; reorderLevel: double&lt;br/&gt; expiryDate: LocalDate&lt;br/&gt; sellingPrice: double&lt;br/&gt; englishName: String&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="288" y="362" width="203" height="618" as="geometry" />
+    </mxCell>
+    <mxCell id="node4" parent="1" vertex="1" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;ProductBuilder&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ ProductBuilder(): &lt;/p&gt;&lt;hr size=&quot;1&quot;/&gt;&lt;p style=&quot;margin:0 0 0 4px;line-height:1.6;&quot;&gt;+ englishName(String): ProductBuilder&lt;br/&gt;+ purchasePrice(double): ProductBuilder&lt;br/&gt;+ build(): Product&lt;br/&gt;+ manufacturer(String): ProductBuilder&lt;br/&gt;+ arabicName(String): ProductBuilder&lt;br/&gt;+ barcode(String): ProductBuilder&lt;br/&gt;+ expiryDate(LocalDate): ProductBuilder&lt;br/&gt;+ quantity(double): ProductBuilder&lt;br/&gt;+ productType(String): ProductBuilder&lt;br/&gt;+ sellingPrice(double): ProductBuilder&lt;br/&gt;+ id(int): ProductBuilder&lt;br/&gt;+ reorderLevel(double): ProductBuilder&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=14;fontFamily=Helvetica;html=1;rounded=0;shadow=0;comic=0;labelBackgroundColor=none;strokeWidth=1;">
+      <mxGeometry x="246" y="1196" width="286" height="352" as="geometry" />
+    </mxCell>
+    <mxCell id="edge0" edge="1" value="" parent="1" source="node0" target="node2" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=1;startArrow=none;endArrow=block;endSize=12;strokeColor=#008200;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="69" y="326" />
+          <mxPoint x="233" y="326" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge3" edge="1" value="" parent="1" source="node3" target="node0" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=circlePlus;startFill=0;endArrow=none;strokeColor=#820000;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points" />
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge1" edge="1" value="" parent="1" source="node1" target="node2" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=1;startArrow=none;endArrow=block;endSize=12;strokeColor=#008200;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points">
+          <mxPoint x="389" y="326" />
+          <mxPoint x="233" y="326" />
+        </Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="edge2" edge="1" value="" parent="1" source="node4" target="node1" style="html=1;rounded=1;edgeStyle=orthogonalEdgeStyle;dashed=0;startArrow=circlePlus;startFill=0;endArrow=none;strokeColor=#820000;exitX=0.500;exitY=0.000;exitDx=0;exitDy=0;entryX=0.500;entryY=1.000;entryDx=0;entryDy=0;">
+      <mxGeometry width="50" height="50" relative="1" as="geometry">
+        <Array as="points" />
+      </mxGeometry>
+    </mxCell>
+  </root>
+</mxGraphModel>

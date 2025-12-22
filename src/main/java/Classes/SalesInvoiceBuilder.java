@@ -10,8 +10,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+interface SalesInvoiceInterface {
+    String getOrderType();
+    String getCashairName();
+    String getCustomerNumber();
+    String getCustomerName();
+    String getCustomerAddress();
+    String getInvoiceNotes();
+    String getInvoiceTotal();
+    String getDiscountPercentage();
+    String getFinalTotalPrice();
+}
+
 // SalesInvoiceBuilder Class with Builder Pattern
-public class SalesInvoiceBuilder {
+public class SalesInvoiceBuilder implements SalesInvoiceInterface {
     private final String orderType;
     private final String CashairName;
     private final String customerNumber;

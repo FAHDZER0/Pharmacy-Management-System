@@ -8,15 +8,11 @@ import java.io.BufferedWriter;
 import java.util.Date;
 
 public class LogWriter {
-    // 1. Single private static instance (volatile for safe publication)
-    private static volatile LogWriter instance;
-    // 2. Log file path
+    private static LogWriter instance;
     private final String filename = "src/main/java/Database/Log";
 
-    // 3. Private constructor prevents external instantiation
     private LogWriter() { }
 
-    // 4. Public accessor with double‑checked locking for lazy init
     public static LogWriter getInstance() {
         if (instance == null) {
             synchronized (LogWriter.class) {
@@ -28,7 +24,6 @@ public class LogWriter {
         return instance;
     }
 
-    // 5. Generalized private helper to reduce repetition
     private void writeLog(String message) {
         System.out.println(message);
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(filename, true))) {
